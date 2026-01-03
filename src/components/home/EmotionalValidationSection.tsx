@@ -82,8 +82,7 @@ const EmotionalValidationSection = () => {
         once: true
       }} className="mt-16">
           <GlassCard variant="strong" className="mx-auto max-w-3xl p-10 text-center float">
-            
-            
+            <span className="text-muted-foreground">You are not alone in this journey.</span>
           </GlassCard>
         </motion.div>
       </div>
