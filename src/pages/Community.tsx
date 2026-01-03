@@ -5,32 +5,35 @@ import GlassCard from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Heart, CheckCircle2, Users, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
-
 const formSchema = z.object({
   name: z.string().max(100, "Name must be less than 100 characters").optional(),
   gender: z.string().min(1, "Please select your gender"),
-  age: z.number({ required_error: "Age is required", invalid_type_error: "Age is required" }).min(16, "Age must be at least 16").max(120, "Please enter a valid age"),
+  age: z
+    .number({
+      required_error: "Age is required",
+      invalid_type_error: "Age is required",
+    })
+    .min(16, "Age must be at least 16")
+    .max(120, "Please enter a valid age"),
   profession: z.string().min(1, "Profession is required").max(100, "Profession must be less than 100 characters"),
-  yearsOfService: z.number({ required_error: "Years of service is required", invalid_type_error: "Years of service is required" }).min(0, "Years of service cannot be negative").max(60, "Please enter a valid number"),
+  yearsOfService: z
+    .number({
+      required_error: "Years of service is required",
+      invalid_type_error: "Years of service is required",
+    })
+    .min(0, "Years of service cannot be negative")
+    .max(60, "Please enter a valid number"),
   country: z.string().min(1, "Country is required").max(100, "Country must be less than 100 characters"),
   city: z.string().min(1, "City is required").max(100, "City must be less than 100 characters"),
   email: z.string().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
   shareStory: z.boolean(),
 });
-
 type FormData = z.infer<typeof formSchema>;
-
 const Community = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -46,41 +49,57 @@ const Community = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
   const steps = [
-    { label: "Personal", completed: !!(formData.gender) },
-    { label: "Location", completed: !!(formData.country && formData.city) },
-    { label: "Contact", completed: !!(formData.email) },
+    {
+      label: "Personal",
+      completed: !!formData.gender,
+    },
+    {
+      label: "Location",
+      completed: !!(formData.country && formData.city),
+    },
+    {
+      label: "Contact",
+      completed: !!formData.email,
+    },
   ];
-
   const validateField = (field: keyof FormData, value: string | boolean | number | undefined) => {
     try {
-      const partialSchema = z.object({ [field]: formSchema.shape[field] });
-      partialSchema.parse({ [field]: value });
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
+      const partialSchema = z.object({
+        [field]: formSchema.shape[field],
+      });
+      partialSchema.parse({
+        [field]: value,
+      });
+      setErrors((prev) => ({
+        ...prev,
+        [field]: undefined,
+      }));
       return true;
     } catch (err) {
       if (err instanceof z.ZodError) {
-        setErrors((prev) => ({ ...prev, [field]: err.errors[0]?.message }));
+        setErrors((prev) => ({
+          ...prev,
+          [field]: err.errors[0]?.message,
+        }));
       }
       return false;
     }
   };
-
   const handleChange = (field: keyof FormData, value: string | boolean | number | undefined) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
     if (errors[field]) {
       validateField(field, value);
     }
   };
-
   const handleBlur = (field: keyof FormData) => {
     validateField(field, formData[field]);
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     try {
       formSchema.parse(formData);
       setErrors({});
@@ -95,9 +114,7 @@ const Community = () => {
         return;
       }
     }
-
     setIsSubmitting(true);
-
     try {
       const { error } = await supabase.from("community_members").insert({
         name: formData.name || null,
@@ -110,24 +127,31 @@ const Community = () => {
         email: formData.email,
         share_story: formData.shareStory,
       });
-
       if (error) throw error;
       setIsSuccess(true);
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrors({ email: "Something went wrong. Please try again." });
+      setErrors({
+        email: "Something went wrong. Please try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
-
   return (
     <Layout>
       {/* Page background */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
         <motion.div
-          animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          animate={{
+            scale: [1, 1.05, 1],
+            opacity: [0.5, 0.7, 0.5],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
           className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[180%] h-[80vh]"
           style={{
             background: `radial-gradient(ellipse 70% 50% at 50% 100%, 
@@ -145,17 +169,35 @@ const Community = () => {
             {!isSuccess ? (
               <motion.div
                 key="form"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.5 }}
+                initial={{
+                  opacity: 0,
+                  y: 30,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -30,
+                }}
+                transition={{
+                  duration: 0.5,
+                }}
               >
                 {/* Header */}
                 <div className="text-center mb-10">
                   <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", delay: 0.2 }}
+                    initial={{
+                      scale: 0,
+                    }}
+                    animate={{
+                      scale: 1,
+                    }}
+                    transition={{
+                      type: "spring",
+                      delay: 0.2,
+                    }}
                     className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary mb-6"
                   >
                     <Users className="w-8 h-8 text-white" />
@@ -163,38 +205,13 @@ const Community = () => {
                   <h1 className="font-display text-4xl font-bold text-foreground sm:text-5xl mb-4">
                     Join Our <span className="gradient-text">Community</span>
                   </h1>
-                  <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                    Join the force for global initiatives. Contribute to our community statistics. Each one, each voice, each vote - matters.
+                  <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                    Join the force for global initiatives. / Contribute to community statistics. / Each one of you, each
+                    voice, each vote - matters. 
                   </p>
                 </div>
 
                 {/* Progress indicator */}
-                <div className="flex items-center justify-center gap-2 mb-10">
-                  {steps.map((step, index) => (
-                    <div key={step.label} className="flex items-center gap-2">
-                      <motion.div
-                        animate={{
-                          backgroundColor: step.completed
-                            ? "hsl(var(--primary))"
-                            : "hsl(var(--muted))",
-                        }}
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium"
-                      >
-                        {step.completed ? (
-                          <CheckCircle2 className="w-4 h-4 text-primary-foreground" />
-                        ) : (
-                          <span className="text-muted-foreground">{index + 1}</span>
-                        )}
-                      </motion.div>
-                      <span className="text-sm text-muted-foreground hidden sm:inline">
-                        {step.label}
-                      </span>
-                      {index < steps.length - 1 && (
-                        <div className="w-8 h-0.5 bg-muted mx-2" />
-                      )}
-                    </div>
-                  ))}
-                </div>
 
                 {/* Form */}
                 <GlassCard className="p-8 sm:p-10" glow="primary">
@@ -212,9 +229,7 @@ const Community = () => {
                         onBlur={() => handleBlur("name")}
                         className="bg-white/5 border-white/10 focus:border-primary"
                       />
-                      {errors.name && (
-                        <p className="text-sm text-rose-400">{errors.name}</p>
-                      )}
+                      {errors.name && <p className="text-sm text-rose-400">{errors.name}</p>}
                     </div>
 
                     {/* Gender & Age */}
@@ -223,10 +238,7 @@ const Community = () => {
                         <Label htmlFor="gender" className="text-foreground">
                           Gender <span className="text-rose-400">*</span>
                         </Label>
-                        <Select
-                          value={formData.gender}
-                          onValueChange={(value) => handleChange("gender", value)}
-                        >
+                        <Select value={formData.gender} onValueChange={(value) => handleChange("gender", value)}>
                           <SelectTrigger className="bg-white/5 border-white/10 focus:border-primary">
                             <SelectValue placeholder="Select your gender" />
                           </SelectTrigger>
@@ -237,9 +249,7 @@ const Community = () => {
                             <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
                           </SelectContent>
                         </Select>
-                        {errors.gender && (
-                          <p className="text-sm text-rose-400">{errors.gender}</p>
-                        )}
+                        {errors.gender && <p className="text-sm text-rose-400">{errors.gender}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="age" className="text-foreground">
@@ -256,9 +266,7 @@ const Community = () => {
                           min={16}
                           max={120}
                         />
-                        {errors.age && (
-                          <p className="text-sm text-rose-400">{errors.age}</p>
-                        )}
+                        {errors.age && <p className="text-sm text-rose-400">{errors.age}</p>}
                       </div>
                     </div>
 
@@ -276,9 +284,7 @@ const Community = () => {
                           onBlur={() => handleBlur("profession")}
                           className="bg-white/5 border-white/10 focus:border-primary"
                         />
-                        {errors.profession && (
-                          <p className="text-sm text-rose-400">{errors.profession}</p>
-                        )}
+                        {errors.profession && <p className="text-sm text-rose-400">{errors.profession}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="yearsOfService" className="text-foreground">
@@ -289,15 +295,15 @@ const Community = () => {
                           type="number"
                           placeholder="Years worked"
                           value={formData.yearsOfService ?? ""}
-                          onChange={(e) => handleChange("yearsOfService", e.target.value ? parseInt(e.target.value) : undefined)}
+                          onChange={(e) =>
+                            handleChange("yearsOfService", e.target.value ? parseInt(e.target.value) : undefined)
+                          }
                           onBlur={() => handleBlur("yearsOfService")}
                           className="bg-white/5 border-white/10 focus:border-primary"
                           min={0}
                           max={60}
                         />
-                        {errors.yearsOfService && (
-                          <p className="text-sm text-rose-400">{errors.yearsOfService}</p>
-                        )}
+                        {errors.yearsOfService && <p className="text-sm text-rose-400">{errors.yearsOfService}</p>}
                       </div>
                     </div>
 
@@ -315,9 +321,7 @@ const Community = () => {
                           onBlur={() => handleBlur("country")}
                           className="bg-white/5 border-white/10 focus:border-primary"
                         />
-                        {errors.country && (
-                          <p className="text-sm text-rose-400">{errors.country}</p>
-                        )}
+                        {errors.country && <p className="text-sm text-rose-400">{errors.country}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="city" className="text-foreground">
@@ -331,9 +335,7 @@ const Community = () => {
                           onBlur={() => handleBlur("city")}
                           className="bg-white/5 border-white/10 focus:border-primary"
                         />
-                        {errors.city && (
-                          <p className="text-sm text-rose-400">{errors.city}</p>
-                        )}
+                        {errors.city && <p className="text-sm text-rose-400">{errors.city}</p>}
                       </div>
                     </div>
 
@@ -351,16 +353,12 @@ const Community = () => {
                         onBlur={() => handleBlur("email")}
                         className="bg-white/5 border-white/10 focus:border-primary"
                       />
-                      {errors.email && (
-                        <p className="text-sm text-rose-400">{errors.email}</p>
-                      )}
+                      {errors.email && <p className="text-sm text-rose-400">{errors.email}</p>}
                     </div>
 
                     {/* Share Story */}
                     <div className="space-y-3">
-                      <Label className="text-foreground">
-                        Would you like to share your story with our community?
-                      </Label>
+                      <Label className="text-foreground">Would you like to share your story with our community?</Label>
                       <RadioGroup
                         value={formData.shareStory ? "yes" : "no"}
                         onValueChange={(value) => handleChange("shareStory", value === "yes")}
@@ -383,8 +381,12 @@ const Community = () => {
 
                     {/* Submit */}
                     <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{
+                        scale: 1.02,
+                      }}
+                      whileTap={{
+                        scale: 0.98,
+                      }}
                     >
                       <Button
                         type="submit"
@@ -393,8 +395,14 @@ const Community = () => {
                       >
                         {isSubmitting ? (
                           <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            animate={{
+                              rotate: 360,
+                            }}
+                            transition={{
+                              duration: 1,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
                           >
                             <Sparkles className="w-5 h-5" />
                           </motion.div>
@@ -408,7 +416,7 @@ const Community = () => {
                     </motion.div>
 
                     <p className="text-center text-sm text-muted-foreground">
-                      No spam, ever. We respect your privacy.
+                      We respect your privacy. Data is stored securely and only used to build our community.
                     </p>
                   </form>
                 </GlassCard>
@@ -416,44 +424,80 @@ const Community = () => {
             ) : (
               <motion.div
                 key="success"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "spring", duration: 0.6 }}
+                initial={{
+                  opacity: 0,
+                  scale: 0.8,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                transition={{
+                  type: "spring",
+                  duration: 0.6,
+                }}
                 className="text-center py-20"
               >
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", delay: 0.2 }}
+                  initial={{
+                    scale: 0,
+                  }}
+                  animate={{
+                    scale: 1,
+                  }}
+                  transition={{
+                    type: "spring",
+                    delay: 0.2,
+                  }}
                   className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 mb-8"
                 >
                   <CheckCircle2 className="w-12 h-12 text-white" />
                 </motion.div>
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  initial={{
+                    opacity: 0,
+                    y: 20,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    delay: 0.3,
+                  }}
                   className="font-display text-4xl font-bold text-foreground mb-4"
                 >
                   Welcome to the Family!
                 </motion.h2>
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  initial={{
+                    opacity: 0,
+                    y: 20,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    delay: 0.4,
+                  }}
                   className="text-xl text-muted-foreground max-w-md mx-auto mb-8"
                 >
                   You've taken a brave step. We're honored to have you with us on this journey.
                 </motion.p>
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6 }}
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  transition={{
+                    delay: 0.6,
+                  }}
                 >
                   <GlassCard className="p-6 inline-block">
-                    <p className="text-foreground/80 italic">
-                      "Together, we are stronger than any storm."
-                    </p>
+                    <p className="text-foreground/80 italic">"Together, we are stronger than any storm."</p>
                   </GlassCard>
                 </motion.div>
               </motion.div>
@@ -464,5 +508,4 @@ const Community = () => {
     </Layout>
   );
 };
-
 export default Community;
