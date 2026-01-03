@@ -68,6 +68,24 @@ const EmotionalValidationSection = () => {
             </motion.div>)}
         </div>
 
+        {/* Floating quote card */}
+        <motion.div initial={{
+        opacity: 0,
+        scale: 0.9
+      }} whileInView={{
+        opacity: 1,
+        scale: 1
+      }} transition={{
+        duration: 0.8,
+        delay: 0.3
+      }} viewport={{
+        once: true
+      }} className="mt-16">
+          <GlassCard variant="strong" className="mx-auto max-w-3xl p-10 text-center float">
+            
+            
+          </GlassCard>
+        </motion.div>
       </div>
     </section>;
 };
