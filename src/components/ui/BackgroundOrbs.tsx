@@ -3,143 +3,167 @@ import { motion } from "framer-motion";
 const BackgroundOrbs = () => {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Single clean base - very soft gradient */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(160deg, 
-            hsl(220 45% 8%) 0%, 
-            hsl(240 35% 10%) 100%
-          )`,
-        }}
-      />
+      {/* Main gradient background */}
+      <div className="absolute inset-0 bg-background" />
+      
+      {/* Aurora mesh - central rising glow */}
+      <div className="absolute inset-0">
+        {/* Primary aurora wave */}
+        <motion.div
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.7, 0.9, 0.7],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[160%] h-[80vh]"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 50% at 50% 100%, 
+                hsl(190 90% 50% / 0.5) 0%,
+                hsl(270 70% 55% / 0.35) 25%,
+                hsl(20 85% 55% / 0.2) 45%,
+                transparent 65%
+              )
+            `,
+          }}
+        />
+        
+        {/* Secondary wave - offset */}
+        <motion.div
+          animate={{
+            scale: [1.05, 1, 1.05],
+            opacity: [0.5, 0.7, 0.5],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[140%] h-[70vh]"
+          style={{
+            background: `
+              radial-gradient(ellipse 70% 45% at 50% 100%, 
+                hsl(175 80% 45% / 0.45) 0%,
+                hsl(270 60% 55% / 0.25) 35%,
+                transparent 60%
+              )
+            `,
+          }}
+        />
 
-      {/* Main energy orb - positioned off-center to the right */}
+        {/* Third wave - more color variation */}
+        <motion.div
+          animate={{
+            scale: [1, 1.08, 1],
+            opacity: [0.4, 0.6, 0.4],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[120%] h-[55vh]"
+          style={{
+            background: `
+              radial-gradient(ellipse 60% 40% at 50% 100%, 
+                hsl(280 70% 60% / 0.4) 0%,
+                hsl(190 80% 50% / 0.2) 40%,
+                transparent 55%
+              )
+            `,
+          }}
+        />
+
+        {/* Floating mesh particles - more visible */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -40 - i * 5, 0],
+              x: [0, i % 2 === 0 ? 30 : -30, 0],
+              opacity: [0.4, 0.7, 0.4],
+            }}
+            transition={{
+              duration: 5 + i * 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.4,
+            }}
+            className="absolute rounded-full"
+            style={{
+              width: `${80 + i * 40}px`,
+              height: `${80 + i * 40}px`,
+              left: `${8 + i * 11}%`,
+              bottom: `${5 + (i % 4) * 12}%`,
+              background: `radial-gradient(circle, 
+                hsl(${180 + i * 20} ${75 + i * 3}% ${50 + i * 2}% / ${0.5 - i * 0.04}) 0%, 
+                transparent 70%
+              )`,
+              filter: 'blur(30px)',
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Corner accent - top right - more visible */}
       <motion.div
         animate={{
-          scale: [1, 1.03, 1],
-          opacity: [0.85, 1, 0.85],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute"
-        style={{
-          top: '35%',
-          right: '5%',
-          width: 'clamp(400px, 50vw, 700px)',
-          height: 'clamp(400px, 50vw, 700px)',
-          background: `
-            radial-gradient(circle at 50% 50%,
-              hsl(45 95% 70% / 0.9) 0%,
-              hsl(35 90% 65% / 0.7) 15%,
-              hsl(25 85% 60% / 0.5) 30%,
-              hsl(190 70% 60% / 0.3) 50%,
-              hsl(260 60% 65% / 0.15) 70%,
-              transparent 85%
-            )
-          `,
-          filter: 'blur(40px)',
-          transform: 'translate(30%, -20%)',
-        }}
-      />
-
-      {/* Inner bright core of the orb */}
-      <motion.div
-        animate={{
+          opacity: [0.25, 0.4, 0.25],
           scale: [1, 1.08, 1],
-          opacity: [0.9, 1, 0.9],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-        className="absolute"
-        style={{
-          top: '35%',
-          right: '5%',
-          width: 'clamp(200px, 25vw, 350px)',
-          height: 'clamp(200px, 25vw, 350px)',
-          background: `
-            radial-gradient(circle at 50% 50%,
-              hsl(50 100% 85% / 1) 0%,
-              hsl(45 95% 75% / 0.8) 30%,
-              hsl(35 90% 65% / 0.4) 60%,
-              transparent 80%
-            )
-          `,
-          filter: 'blur(20px)',
-          transform: 'translate(30%, -20%)',
-        }}
-      />
-
-      {/* Subtle cyan accent glow */}
-      <motion.div
-        animate={{
-          opacity: [0.4, 0.6, 0.4],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-        className="absolute"
-        style={{
-          top: '25%',
-          right: '0%',
-          width: 'clamp(300px, 35vw, 500px)',
-          height: 'clamp(300px, 35vw, 500px)',
-          background: `
-            radial-gradient(circle at 50% 50%,
-              hsl(190 80% 65% / 0.4) 0%,
-              hsl(200 70% 60% / 0.2) 40%,
-              transparent 70%
-            )
-          `,
-          filter: 'blur(60px)',
-          transform: 'translate(50%, -10%)',
-        }}
-      />
-
-      {/* Lavender highlight accent */}
-      <motion.div
-        animate={{
-          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
           duration: 12,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 1,
         }}
-        className="absolute"
+        className="absolute -top-40 -right-40 w-[600px] h-[600px]"
         style={{
-          top: '50%',
-          right: '10%',
-          width: 'clamp(250px, 30vw, 400px)',
-          height: 'clamp(250px, 30vw, 400px)',
           background: `
-            radial-gradient(circle at 50% 50%,
-              hsl(270 65% 70% / 0.35) 0%,
-              hsl(280 55% 65% / 0.2) 40%,
-              transparent 70%
+            radial-gradient(circle at 70% 30%, 
+              hsl(270 70% 55% / 0.45) 0%,
+              hsl(190 80% 50% / 0.2) 35%,
+              transparent 55%
             )
           `,
-          filter: 'blur(50px)',
-          transform: 'translate(20%, 0%)',
         }}
       />
 
-      {/* Subtle grain for depth */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+      {/* Corner accent - top left */}
+      <motion.div
+        animate={{
+          opacity: [0.2, 0.35, 0.2],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 3,
+        }}
+        className="absolute -top-32 -left-32 w-[450px] h-[450px]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          background: `
+            radial-gradient(circle at 30% 30%, 
+              hsl(190 85% 50% / 0.35) 0%,
+              hsl(175 70% 45% / 0.15) 40%,
+              transparent 55%
+            )
+          `,
+        }}
+      />
+
+      {/* Subtle grid overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(210 40% 98%) 1px, transparent 0)`,
+          backgroundSize: '50px 50px',
         }}
       />
     </div>

@@ -10,7 +10,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-background">
       {/* Animated background orbs */}
       <BackgroundOrbs />
       
