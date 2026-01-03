@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
@@ -49,6 +49,34 @@ const Community = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [memberCount, setMemberCount] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchMemberCount = async () => {
+      const { count } = await supabase
+        .from("community_members")
+        .select("*", { count: "exact", head: true });
+      setMemberCount(count || 0);
+    };
+
+    fetchMemberCount();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel("community-counter")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "community_members" },
+        () => {
+          setMemberCount((prev) => prev + 1);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
   const steps = [
     {
       label: "Personal",
@@ -210,6 +238,24 @@ const Community = () => {
                     Contribute to community statistics.<br />
                     Each one of you, each voice, each vote - matters.
                   </p>
+
+                  {/* Member Counter */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="mt-6"
+                  >
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                      <span className="text-muted-foreground text-sm">
+                        <span className="font-semibold text-foreground">{memberCount.toLocaleString()}</span> members have joined
+                      </span>
+                    </div>
+                  </motion.div>
                 </div>
 
                 {/* Progress indicator */}
