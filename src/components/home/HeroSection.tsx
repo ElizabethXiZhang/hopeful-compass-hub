@@ -157,16 +157,6 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm"
-        >
-          <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-sm text-muted-foreground">A sanctuary for the AI era</span>
-        </motion.div>
 
         {/* Main title */}
         <motion.h1

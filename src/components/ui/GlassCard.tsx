@@ -3,7 +3,7 @@ import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface GlassCardProps extends HTMLMotionProps<"div"> {
-  children: ReactNode;
+  children?: ReactNode;
   variant?: "default" | "strong" | "subtle";
   hover?: boolean;
   glow?: "primary" | "secondary" | "accent" | "none";
