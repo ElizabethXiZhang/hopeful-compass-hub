@@ -4,23 +4,151 @@ import { Heart, Users } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20">
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+    <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20 overflow-hidden">
+      {/* Hero-specific aurora background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Central rising aurora glow */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.8, 1, 0.8],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[200%] h-[90vh]"
+          style={{
+            background: `
+              radial-gradient(ellipse 70% 55% at 50% 100%, 
+                hsl(190 95% 45% / 0.55) 0%,
+                hsl(260 75% 50% / 0.4) 20%,
+                hsl(320 70% 50% / 0.25) 35%,
+                hsl(20 85% 55% / 0.15) 50%,
+                transparent 70%
+              )
+            `,
+          }}
+        />
+        
+        {/* Secondary wave */}
+        <motion.div
+          animate={{
+            scale: [1.05, 0.95, 1.05],
+            opacity: [0.6, 0.8, 0.6],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[180%] h-[75vh]"
+          style={{
+            background: `
+              radial-gradient(ellipse 60% 45% at 50% 100%, 
+                hsl(175 85% 40% / 0.5) 0%,
+                hsl(280 65% 55% / 0.3) 30%,
+                transparent 60%
+              )
+            `,
+          }}
+        />
+
+        {/* Top corner accents */}
+        <motion.div
+          animate={{
+            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute -top-20 -right-20 w-[500px] h-[500px]"
+          style={{
+            background: `
+              radial-gradient(circle at 80% 20%, 
+                hsl(270 75% 50% / 0.4) 0%,
+                hsl(200 80% 50% / 0.15) 40%,
+                transparent 60%
+              )
+            `,
+          }}
+        />
+
+        <motion.div
+          animate={{
+            opacity: [0.25, 0.4, 0.25],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          className="absolute -top-20 -left-20 w-[400px] h-[400px]"
+          style={{
+            background: `
+              radial-gradient(circle at 20% 20%, 
+                hsl(190 90% 45% / 0.35) 0%,
+                hsl(175 70% 40% / 0.15) 40%,
+                transparent 55%
+              )
+            `,
+          }}
+        />
+
+        {/* Floating orbs */}
+        {[...Array(5)].map((_, i) => (
           <motion.div
-            key={i}
-            className="absolute h-1 w-1 rounded-full bg-white/20"
-            initial={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-            }}
+            key={`orb-${i}`}
             animate={{
-              y: [null, -100],
-              opacity: [0.2, 0.8, 0.2],
+              y: [0, -50, 0],
+              x: [0, i % 2 === 0 ? 30 : -30, 0],
+              opacity: [0.5, 0.8, 0.5],
             }}
             transition={{
-              duration: 10 + Math.random() * 10,
+              duration: 6 + i * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.6,
+            }}
+            className="absolute rounded-full"
+            style={{
+              width: `${100 + i * 50}px`,
+              height: `${100 + i * 50}px`,
+              left: `${10 + i * 18}%`,
+              bottom: `${15 + (i % 3) * 20}%`,
+              background: `radial-gradient(circle, 
+                hsl(${180 + i * 25} ${80}% ${50}% / ${0.45 - i * 0.06}) 0%, 
+                transparent 70%
+              )`,
+              filter: 'blur(40px)',
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(25)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-1 w-1 rounded-full bg-white/30"
+            initial={{
+              x: Math.random() * 100 + "%",
+              y: Math.random() * 100 + "%",
+            }}
+            animate={{
+              y: [null, "-20%"],
+              opacity: [0.2, 0.6, 0.2],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 8,
               repeat: Infinity,
               delay: Math.random() * 5,
             }}
