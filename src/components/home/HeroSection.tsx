@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Heart, Users } from "lucide-react";
+import { Heart, Users, Mail } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -227,6 +227,14 @@ const HeroSection = () => {
           >
             <Users size={20} />
             Join Our Community
+          </Link>
+          
+          <Link
+            to="/contact"
+            className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+          >
+            <Mail size={20} />
+            Contact Us
           </Link>
         </motion.div>
 
