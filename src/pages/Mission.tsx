@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
-import { Heart, Compass, Wallet, Users, Globe } from "lucide-react";
+import { Heart, Compass, Wallet, Users, Globe, Leaf } from "lucide-react";
 const Mission = () => {
   const pillars = [{
     icon: Heart,
@@ -23,6 +23,11 @@ const Mission = () => {
     title: "Community & Belonging",
     description: "Creating safe spaces where people can connect, share experiences, and support one another through change.",
     color: "from-cyan-500 to-blue-500"
+  }, {
+    icon: Leaf,
+    title: "Healthy Lifestyle",
+    description: "Promoting physical wellness, mental balance, and sustainable self-care practices to maintain well-being during times of transition.",
+    color: "from-lime-500 to-green-500"
   }, {
     icon: Globe,
     title: "Government Policy Updates",
