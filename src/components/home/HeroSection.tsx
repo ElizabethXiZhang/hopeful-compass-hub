@@ -223,18 +223,22 @@ const HeroSection = () => {
           
           <Link
             to="/community"
-            className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-0.5 transition-all duration-300 hover:shadow-[0_0_40px_-10px_hsl(var(--primary))]"
           >
-            <Users size={20} />
-            Join Our Community
+            <span className="inline-flex items-center gap-2 rounded-[14px] bg-background px-8 py-4 font-semibold text-foreground transition-all group-hover:bg-transparent group-hover:text-primary-foreground">
+              <Users size={20} className="group-hover:animate-pulse" />
+              Join Our Community
+            </span>
           </Link>
           
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:border-white/20 hover:bg-white/10"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-0.5 transition-all duration-300 hover:shadow-[0_0_40px_-10px_hsl(var(--primary))]"
           >
-            <Mail size={20} />
-            Contact Us
+            <span className="inline-flex items-center gap-2 rounded-[14px] bg-background px-8 py-4 font-semibold text-foreground transition-all group-hover:bg-transparent group-hover:text-primary-foreground">
+              <Mail size={20} className="group-hover:animate-pulse" />
+              Contact Us
+            </span>
           </Link>
         </motion.div>
 
