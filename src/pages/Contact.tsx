@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Mic, EyeOff, GraduationCap, Handshake, Heart, Info, Mail } from "lucide-react";
+
 const contactCards = [{
   icon: Mic,
   title: "Feature Your Story With an Interview",
@@ -41,6 +42,7 @@ const contactCards = [{
   email: "info@the-unemployment-pandemic.com",
   color: "from-indigo-500 to-blue-600"
 }];
+
 const Contact = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return <Layout>
@@ -74,7 +76,8 @@ const Contact = () => {
         }} transition={{
           duration: 0.8
         }} className="text-center mb-16">
-            <h1 className="font-display text-5xl font-bold text-foreground sm:text-6xl mb-6 relative inline-block">Contact Us<span className="gradient-text">Us</span>
+            <h1 className="font-display text-5xl font-bold text-foreground sm:text-6xl mb-6 relative inline-block">
+              Contact <span className="gradient-text">Us</span>
               <motion.span className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full" initial={{
               width: 0
             }} animate={{
@@ -175,4 +178,5 @@ const Contact = () => {
       </section>
     </Layout>;
 };
+
 export default Contact;
