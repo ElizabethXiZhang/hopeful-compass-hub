@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
-import { Heart, Compass, Wallet, Users, Globe } from "lucide-react";
+import { Heart, Compass, Wallet, Users, Globe, Leaf } from "lucide-react";
 const Mission = () => {
   const pillars = [{
     icon: Heart,
@@ -9,23 +9,28 @@ const Mission = () => {
     description: "Providing emotional resources, coping strategies, and professional guidance for those navigating job loss and career uncertainty.",
     color: "from-rose-500 to-pink-500"
   }, {
+    icon: Leaf,
+    title: "Healthy Lifestyle",
+    description: "Promoting physical wellness, mental balance, and sustainable self-care practices to maintain well-being during times of transition.",
+    color: "from-lime-500 to-green-500"
+  }, {
     icon: Compass,
     title: "Meaning Beyond Work",
     description: "Helping individuals discover purpose, identity, and fulfillment outside of traditional employment structures.",
     color: "from-violet-500 to-purple-500"
-  }, {
-    icon: Wallet,
-    title: "Financial Resilience",
-    description: "Offering practical tools and education for building financial stability during times of career transition.",
-    color: "from-emerald-500 to-teal-500"
   }, {
     icon: Users,
     title: "Community & Belonging",
     description: "Creating safe spaces where people can connect, share experiences, and support one another through change.",
     color: "from-cyan-500 to-blue-500"
   }, {
+    icon: Wallet,
+    title: "Financial Resilience",
+    description: "Offering practical tools and education for building financial stability during times of career transition.",
+    color: "from-emerald-500 to-teal-500"
+  }, {
     icon: Globe,
-    title: "Policy Awareness",
+    title: "Government Policy Updates",
     description: "Advocating for Universal Basic Income, social safety nets, and global adaptation strategies for the AI economy.",
     color: "from-amber-500 to-orange-500"
   }];
@@ -106,7 +111,9 @@ const Mission = () => {
           duration: 0.6,
           delay: 0.3
         }} className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl relative inline-block">Our Six Pillars<motion.span className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" initial={{
+            <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl relative inline-block">
+              Our Five Pillars
+              <motion.span className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" initial={{
               width: 0
             }} animate={{
               width: "100%"
