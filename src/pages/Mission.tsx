@@ -9,25 +9,25 @@ const Mission = () => {
     description: "Providing emotional resources, coping strategies, and professional guidance for those navigating job loss and career uncertainty.",
     color: "from-rose-500 to-pink-500"
   }, {
+    icon: Leaf,
+    title: "Healthy Lifestyle",
+    description: "Promoting physical wellness, mental balance, and sustainable self-care practices to maintain well-being during times of transition.",
+    color: "from-lime-500 to-green-500"
+  }, {
     icon: Compass,
     title: "Meaning Beyond Work",
     description: "Helping individuals discover purpose, identity, and fulfillment outside of traditional employment structures.",
     color: "from-violet-500 to-purple-500"
-  }, {
-    icon: Wallet,
-    title: "Financial Resilience",
-    description: "Offering practical tools and education for building financial stability during times of career transition.",
-    color: "from-emerald-500 to-teal-500"
   }, {
     icon: Users,
     title: "Community & Belonging",
     description: "Creating safe spaces where people can connect, share experiences, and support one another through change.",
     color: "from-cyan-500 to-blue-500"
   }, {
-    icon: Leaf,
-    title: "Healthy Lifestyle",
-    description: "Promoting physical wellness, mental balance, and sustainable self-care practices to maintain well-being during times of transition.",
-    color: "from-lime-500 to-green-500"
+    icon: Wallet,
+    title: "Financial Resilience",
+    description: "Offering practical tools and education for building financial stability during times of career transition.",
+    color: "from-emerald-500 to-teal-500"
   }, {
     icon: Globe,
     title: "Government Policy Updates",
