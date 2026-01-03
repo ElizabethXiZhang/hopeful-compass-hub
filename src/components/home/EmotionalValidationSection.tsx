@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import GlassCard from "../ui/GlassCard";
 import { Heart, Shield, Sparkles } from "lucide-react";
 const EmotionalValidationSection = () => {
-  return <section className="relative py-24 px-4">
+  return <section id="feelings-valid" className="relative py-24 px-4">
       <div className="mx-auto max-w-6xl">
         <motion.div initial={{
         opacity: 0,
