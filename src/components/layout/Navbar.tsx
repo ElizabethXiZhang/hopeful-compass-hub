@@ -53,15 +53,6 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Link
-              to="/community"
-              className="btn-glow rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
-            >
-              Join Our Community
-            </Link>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -96,15 +87,8 @@ const Navbar = () => {
                   }`}
                 >
                   {link.name}
-                </Link>
-              ))}
-              <Link
-                to="/community"
-                onClick={() => setIsOpen(false)}
-                className="mt-2 rounded-xl bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
-              >
-                Join Us
               </Link>
+              ))}
             </div>
           </motion.div>
         )}
