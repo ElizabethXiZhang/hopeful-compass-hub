@@ -206,7 +206,7 @@ const Community = () => {
                     Join Our <span className="gradient-text">Community</span>
                   </h1>
                   <p className="text-muted-foreground text-lg max-w-md mx-auto">
-                    Join the force for global initiatives. / Contribute to community statistics. / Each one of you, each
+                    Join the force for global initiatives. Contribute to community statistics. Each one of you, each
                     voice, each vote - matters. 
                   </p>
                 </div>
