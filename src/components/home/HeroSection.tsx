@@ -222,6 +222,16 @@ const HeroSection = () => {
           </Link>
           
           <Link
+            to="/community"
+            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-0.5 transition-all duration-300 hover:shadow-[0_0_40px_-10px_hsl(var(--primary))]"
+          >
+            <span className="inline-flex items-center gap-2 rounded-[14px] bg-background px-8 py-4 font-semibold text-foreground transition-all group-hover:bg-transparent group-hover:text-primary-foreground">
+              <Users size={20} className="group-hover:animate-pulse" />
+              Join Our Community
+            </span>
+          </Link>
+          
+          <Link
             to="/contact"
             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-0.5 transition-all duration-300 hover:shadow-[0_0_40px_-10px_hsl(var(--primary))]"
           >
