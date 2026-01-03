@@ -6,65 +6,115 @@ const BackgroundOrbs = () => {
       {/* Main gradient background */}
       <div className="absolute inset-0 bg-background" />
       
-      {/* Animated orbs */}
+      {/* Aurora mesh - central rising glow */}
+      <div className="absolute inset-0">
+        {/* Primary aurora wave */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.4, 0.6, 0.4],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[140%] h-[70vh]"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 50% at 50% 100%, 
+                hsl(190 90% 60% / 0.3) 0%,
+                hsl(270 70% 65% / 0.2) 30%,
+                hsl(20 85% 65% / 0.1) 50%,
+                transparent 70%
+              )
+            `,
+          }}
+        />
+        
+        {/* Secondary wave - offset */}
+        <motion.div
+          animate={{
+            scale: [1.05, 1, 1.05],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[120%] h-[60vh]"
+          style={{
+            background: `
+              radial-gradient(ellipse 70% 45% at 50% 100%, 
+                hsl(175 80% 50% / 0.25) 0%,
+                hsl(270 60% 65% / 0.15) 40%,
+                transparent 65%
+              )
+            `,
+          }}
+        />
+
+        {/* Floating mesh particles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, i % 2 === 0 ? 20 : -20, 0],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 6 + i * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5,
+            }}
+            className="absolute rounded-full blur-2xl"
+            style={{
+              width: `${60 + i * 30}px`,
+              height: `${60 + i * 30}px`,
+              left: `${15 + i * 14}%`,
+              bottom: `${10 + (i % 3) * 15}%`,
+              background: `radial-gradient(circle, 
+                hsl(${190 + i * 15} ${70 + i * 5}% ${55 + i * 3}% / ${0.4 - i * 0.05}) 0%, 
+                transparent 70%
+              )`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Corner accent - top right */}
       <motion.div
         animate={{
-          x: [0, 100, 0],
-          y: [0, -50, 0],
+          opacity: [0.15, 0.25, 0.15],
+          scale: [1, 1.05, 1],
         }}
         transition={{
-          duration: 20,
+          duration: 12,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="gradient-orb gradient-orb-cyan absolute -left-20 top-20 h-96 w-96"
-      />
-      
-      <motion.div
-        animate={{
-          x: [0, -80, 0],
-          y: [0, 60, 0],
+        className="absolute -top-32 -right-32 w-[500px] h-[500px]"
+        style={{
+          background: `
+            radial-gradient(circle at 70% 30%, 
+              hsl(270 70% 65% / 0.3) 0%,
+              hsl(190 80% 55% / 0.1) 40%,
+              transparent 60%
+            )
+          `,
         }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="gradient-orb gradient-orb-lavender absolute -right-20 top-1/3 h-[500px] w-[500px]"
-      />
-      
-      <motion.div
-        animate={{
-          x: [0, 60, 0],
-          y: [0, -40, 0],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="gradient-orb gradient-orb-peach absolute bottom-20 left-1/4 h-80 w-80"
-      />
-      
-      <motion.div
-        animate={{
-          x: [0, -40, 0],
-          y: [0, 80, 0],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="gradient-orb gradient-orb-teal absolute -bottom-20 right-1/3 h-72 w-72 opacity-40"
       />
 
       {/* Subtle grid overlay */}
       <div 
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.015]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-          backgroundSize: '40px 40px',
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(210 40% 98%) 1px, transparent 0)`,
+          backgroundSize: '50px 50px',
         }}
       />
     </div>
