@@ -20,9 +20,9 @@ import { z } from "zod";
 const formSchema = z.object({
   name: z.string().max(100, "Name must be less than 100 characters").optional(),
   gender: z.string().min(1, "Please select your gender"),
-  age: z.number({ required_error: "Age is required", invalid_type_error: "Age is required" }).min(16, "Age must be at least 16").max(120, "Please enter a valid age"),
-  profession: z.string().min(1, "Profession is required").max(100, "Profession must be less than 100 characters"),
-  yearsOfService: z.number({ required_error: "Years of service is required", invalid_type_error: "Years of service is required" }).min(0, "Years of service cannot be negative").max(60, "Please enter a valid number"),
+  age: z.number().min(16, "Age must be at least 16").max(120, "Please enter a valid age").optional(),
+  profession: z.string().max(100, "Profession must be less than 100 characters").optional(),
+  yearsOfService: z.number().min(0, "Years of service cannot be negative").max(60, "Please enter a valid number").optional(),
   country: z.string().min(1, "Country is required").max(100, "Country must be less than 100 characters"),
   city: z.string().min(1, "City is required").max(100, "City must be less than 100 characters"),
   email: z.string().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
@@ -243,7 +243,7 @@ const Community = () => {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="age" className="text-foreground">
-                          Age <span className="text-rose-400">*</span>
+                          Age <span className="text-muted-foreground text-sm">(optional)</span>
                         </Label>
                         <Input
                           id="age"
@@ -266,7 +266,7 @@ const Community = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="profession" className="text-foreground">
-                          Profession <span className="text-rose-400">*</span>
+                          Profession <span className="text-muted-foreground text-sm">(optional)</span>
                         </Label>
                         <Input
                           id="profession"
@@ -282,7 +282,7 @@ const Community = () => {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="yearsOfService" className="text-foreground">
-                          Years of Service <span className="text-rose-400">*</span>
+                          Years of Service <span className="text-muted-foreground text-sm">(last company)</span>
                         </Label>
                         <Input
                           id="yearsOfService"
