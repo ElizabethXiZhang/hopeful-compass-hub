@@ -74,7 +74,7 @@ const Mission = () => {
             className="text-center mb-16"
           >
             <span className="inline-block mb-4 text-sm font-medium text-primary uppercase tracking-wider">
-              Our Purpose
+              What We Stand For
             </span>
             <h1 className="font-display text-5xl font-bold text-foreground sm:text-6xl mb-6 relative inline-block">
               Our <span className="gradient-text">Mission</span>
