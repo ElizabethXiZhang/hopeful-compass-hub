@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       community_members: {
         Row: {
+          age: number | null
           city: string
           country: string
           created_at: string
@@ -23,9 +24,12 @@ export type Database = {
           gender: string
           id: string
           name: string | null
+          profession: string | null
           share_story: boolean
+          years_of_service: number | null
         }
         Insert: {
+          age?: number | null
           city: string
           country: string
           created_at?: string
@@ -33,9 +37,12 @@ export type Database = {
           gender: string
           id?: string
           name?: string | null
+          profession?: string | null
           share_story?: boolean
+          years_of_service?: number | null
         }
         Update: {
+          age?: number | null
           city?: string
           country?: string
           created_at?: string
@@ -43,7 +50,9 @@ export type Database = {
           gender?: string
           id?: string
           name?: string | null
+          profession?: string | null
           share_story?: boolean
+          years_of_service?: number | null
         }
         Relationships: []
       }
