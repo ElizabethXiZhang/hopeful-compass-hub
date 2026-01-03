@@ -60,7 +60,7 @@ const Navbar = () => {
               to="/community"
               className="btn-glow rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
             >
-              Join Us
+              Join Our Community
             </Link>
           </div>
 
