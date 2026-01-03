@@ -25,7 +25,7 @@ const Mission = () => {
     color: "from-cyan-500 to-blue-500"
   }, {
     icon: Globe,
-    title: "Policy Awareness",
+    title: "Government Policy Updates",
     description: "Advocating for Universal Basic Income, social safety nets, and global adaptation strategies for the AI economy.",
     color: "from-amber-500 to-orange-500"
   }];
