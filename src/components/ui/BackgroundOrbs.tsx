@@ -3,142 +3,145 @@ import { motion } from "framer-motion";
 const BackgroundOrbs = () => {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Main gradient background */}
+      {/* Deep navy base */}
       <div className="absolute inset-0 bg-background" />
-      
-      {/* Aurora mesh - central rising glow */}
-      <div className="absolute inset-0">
-        {/* Primary aurora wave */}
+
+      {/* Central glowing orb - rising sun/hope metaphor */}
+      <div className="absolute inset-0 flex items-end justify-center">
+        {/* Core orb glow */}
         <motion.div
           animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.7, 0.9, 0.7],
+            scale: [1, 1.05, 1],
+            opacity: [0.9, 1, 0.9],
           }}
           transition={{
-            duration: 8,
+            duration: 6,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[160%] h-[80vh]"
+          className="absolute bottom-[-20%] w-[600px] h-[600px] md:w-[800px] md:h-[800px]"
           style={{
             background: `
-              radial-gradient(ellipse 80% 50% at 50% 100%, 
-                hsl(190 90% 50% / 0.5) 0%,
-                hsl(270 70% 55% / 0.35) 25%,
-                hsl(20 85% 55% / 0.2) 45%,
-                transparent 65%
+              radial-gradient(circle at 50% 50%,
+                hsl(35 95% 60% / 0.4) 0%,
+                hsl(25 90% 55% / 0.3) 15%,
+                hsl(320 70% 50% / 0.2) 35%,
+                hsl(270 60% 45% / 0.1) 55%,
+                transparent 70%
               )
             `,
+            filter: 'blur(40px)',
           }}
         />
-        
-        {/* Secondary wave - offset */}
+
+        {/* Inner bright core */}
         <motion.div
           animate={{
-            scale: [1.05, 1, 1.05],
-            opacity: [0.5, 0.7, 0.5],
+            scale: [1, 1.1, 1],
+            opacity: [0.7, 0.9, 0.7],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute bottom-[-15%] w-[300px] h-[300px] md:w-[400px] md:h-[400px]"
+          style={{
+            background: `
+              radial-gradient(circle at 50% 50%,
+                hsl(45 100% 70% / 0.5) 0%,
+                hsl(35 95% 60% / 0.3) 30%,
+                transparent 60%
+              )
+            `,
+            filter: 'blur(30px)',
+          }}
+        />
+
+        {/* Outer halo rings */}
+        <motion.div
+          animate={{
+            scale: [1, 1.08, 1],
+            opacity: [0.4, 0.6, 0.4],
+            rotate: [0, 5, 0],
           }}
           transition={{
             duration: 10,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1,
           }}
-          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[140%] h-[70vh]"
+          className="absolute bottom-[-25%] w-[900px] h-[500px] md:w-[1200px] md:h-[700px]"
           style={{
             background: `
-              radial-gradient(ellipse 70% 45% at 50% 100%, 
-                hsl(175 80% 45% / 0.45) 0%,
-                hsl(270 60% 55% / 0.25) 35%,
-                transparent 60%
-              )
-            `,
-          }}
-        />
-
-        {/* Third wave - more color variation */}
-        <motion.div
-          animate={{
-            scale: [1, 1.08, 1],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-          className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[120%] h-[55vh]"
-          style={{
-            background: `
-              radial-gradient(ellipse 60% 40% at 50% 100%, 
-                hsl(280 70% 60% / 0.4) 0%,
-                hsl(190 80% 50% / 0.2) 40%,
-                transparent 55%
-              )
-            `,
-          }}
-        />
-
-        {/* Floating mesh particles - more visible */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{
-              y: [0, -40 - i * 5, 0],
-              x: [0, i % 2 === 0 ? 30 : -30, 0],
-              opacity: [0.4, 0.7, 0.4],
-            }}
-            transition={{
-              duration: 5 + i * 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.4,
-            }}
-            className="absolute rounded-full"
-            style={{
-              width: `${80 + i * 40}px`,
-              height: `${80 + i * 40}px`,
-              left: `${8 + i * 11}%`,
-              bottom: `${5 + (i % 4) * 12}%`,
-              background: `radial-gradient(circle, 
-                hsl(${180 + i * 20} ${75 + i * 3}% ${50 + i * 2}% / ${0.5 - i * 0.04}) 0%, 
+              radial-gradient(ellipse 60% 50% at 50% 100%,
+                hsl(280 70% 55% / 0.25) 0%,
+                hsl(320 60% 50% / 0.15) 30%,
+                hsl(200 80% 50% / 0.08) 50%,
                 transparent 70%
-              )`,
-              filter: 'blur(30px)',
-            }}
-          />
-        ))}
+              )
+            `,
+          }}
+        />
       </div>
 
-      {/* Corner accent - top right - more visible */}
+      {/* Floating light particles */}
+      {[...Array(12)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{
+            x: `${10 + (i * 7) % 80}%`,
+            y: `${60 + (i * 13) % 35}%`,
+          }}
+          animate={{
+            y: [`${60 + (i * 13) % 35}%`, `${20 + (i * 7) % 40}%`],
+            opacity: [0, 0.6, 0.4, 0],
+            scale: [0.5, 1, 0.8],
+          }}
+          transition={{
+            duration: 8 + i * 2,
+            repeat: Infinity,
+            ease: "easeOut",
+            delay: i * 1.2,
+          }}
+          className="absolute rounded-full"
+          style={{
+            width: `${4 + (i % 4) * 3}px`,
+            height: `${4 + (i % 4) * 3}px`,
+            background: `hsl(${40 + i * 15} 80% 70%)`,
+            boxShadow: `0 0 ${10 + i * 2}px hsl(${40 + i * 15} 80% 60% / 0.5)`,
+          }}
+        />
+      ))}
+
+      {/* Corner accent - top right */}
       <motion.div
         animate={{
-          opacity: [0.25, 0.4, 0.25],
-          scale: [1, 1.08, 1],
+          opacity: [0.15, 0.25, 0.15],
+          scale: [1, 1.05, 1],
         }}
         transition={{
           duration: 12,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute -top-40 -right-40 w-[600px] h-[600px]"
+        className="absolute -top-32 -right-32 w-[400px] h-[400px]"
         style={{
           background: `
             radial-gradient(circle at 70% 30%, 
-              hsl(270 70% 55% / 0.45) 0%,
-              hsl(190 80% 50% / 0.2) 35%,
-              transparent 55%
+              hsl(280 60% 50% / 0.3) 0%,
+              hsl(320 50% 45% / 0.15) 40%,
+              transparent 60%
             )
           `,
+          filter: 'blur(60px)',
         }}
       />
 
       {/* Corner accent - top left */}
       <motion.div
         animate={{
-          opacity: [0.2, 0.35, 0.2],
-          scale: [1, 1.05, 1],
+          opacity: [0.1, 0.2, 0.1],
+          scale: [1, 1.03, 1],
         }}
         transition={{
           duration: 15,
@@ -146,24 +149,24 @@ const BackgroundOrbs = () => {
           ease: "easeInOut",
           delay: 3,
         }}
-        className="absolute -top-32 -left-32 w-[450px] h-[450px]"
+        className="absolute -top-24 -left-24 w-[350px] h-[350px]"
         style={{
           background: `
             radial-gradient(circle at 30% 30%, 
-              hsl(190 85% 50% / 0.35) 0%,
-              hsl(175 70% 45% / 0.15) 40%,
+              hsl(200 70% 50% / 0.2) 0%,
+              hsl(220 60% 45% / 0.1) 40%,
               transparent 55%
             )
           `,
+          filter: 'blur(50px)',
         }}
       />
 
-      {/* Subtle grid overlay */}
+      {/* Subtle vignette */}
       <div 
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(210 40% 98%) 1px, transparent 0)`,
-          backgroundSize: '50px 50px',
+          background: `radial-gradient(ellipse 80% 60% at 50% 100%, transparent 0%, hsl(220 50% 8% / 0.4) 100%)`,
         }}
       />
     </div>
