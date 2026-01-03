@@ -211,15 +211,15 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
         >
-          <Link
-            to="/mission"
+          <button
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
             className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-0.5 transition-all duration-300 hover:shadow-[0_0_40px_-10px_hsl(var(--primary))]"
           >
             <span className="inline-flex items-center gap-2 rounded-[14px] bg-background px-8 py-4 font-semibold text-foreground transition-all group-hover:bg-transparent group-hover:text-primary-foreground">
               <Heart size={20} className="group-hover:animate-pulse" />
               Navigate Unemployment
             </span>
-          </Link>
+          </button>
           
           <Link
             to="/community"
