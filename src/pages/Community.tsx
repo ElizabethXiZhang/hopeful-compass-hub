@@ -20,6 +20,9 @@ import { z } from "zod";
 const formSchema = z.object({
   name: z.string().max(100, "Name must be less than 100 characters").optional(),
   gender: z.string().min(1, "Please select your gender"),
+  age: z.number().min(16, "Age must be at least 16").max(120, "Please enter a valid age").optional(),
+  profession: z.string().max(100, "Profession must be less than 100 characters").optional(),
+  yearsOfService: z.number().min(0, "Years of service cannot be negative").max(60, "Please enter a valid number").optional(),
   country: z.string().min(1, "Country is required").max(100, "Country must be less than 100 characters"),
   city: z.string().min(1, "City is required").max(100, "City must be less than 100 characters"),
   email: z.string().email("Please enter a valid email address").max(255, "Email must be less than 255 characters"),
@@ -32,6 +35,9 @@ const Community = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     gender: "",
+    age: undefined,
+    profession: "",
+    yearsOfService: undefined,
     country: "",
     city: "",
     email: "",
@@ -47,7 +53,7 @@ const Community = () => {
     { label: "Contact", completed: !!(formData.email) },
   ];
 
-  const validateField = (field: keyof FormData, value: string | boolean) => {
+  const validateField = (field: keyof FormData, value: string | boolean | number | undefined) => {
     try {
       const partialSchema = z.object({ [field]: formSchema.shape[field] });
       partialSchema.parse({ [field]: value });
@@ -61,7 +67,7 @@ const Community = () => {
     }
   };
 
-  const handleChange = (field: keyof FormData, value: string | boolean) => {
+  const handleChange = (field: keyof FormData, value: string | boolean | number | undefined) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       validateField(field, value);
@@ -96,6 +102,9 @@ const Community = () => {
       const { error } = await supabase.from("community_members").insert({
         name: formData.name || null,
         gender: formData.gender,
+        age: formData.age || null,
+        profession: formData.profession || null,
+        years_of_service: formData.yearsOfService || null,
         country: formData.country,
         city: formData.city,
         email: formData.email,
@@ -208,28 +217,88 @@ const Community = () => {
                       )}
                     </div>
 
-                    {/* Gender */}
-                    <div className="space-y-2">
-                      <Label htmlFor="gender" className="text-foreground">
-                        Gender <span className="text-rose-400">*</span>
-                      </Label>
-                      <Select
-                        value={formData.gender}
-                        onValueChange={(value) => handleChange("gender", value)}
-                      >
-                        <SelectTrigger className="bg-white/5 border-white/10 focus:border-primary">
-                          <SelectValue placeholder="Select your gender" />
-                        </SelectTrigger>
-                        <SelectContent className="bg-card border-white/10">
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="female">Female</SelectItem>
-                          <SelectItem value="non-binary">Non-binary</SelectItem>
-                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {errors.gender && (
-                        <p className="text-sm text-rose-400">{errors.gender}</p>
-                      )}
+                    {/* Gender & Age */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="gender" className="text-foreground">
+                          Gender <span className="text-rose-400">*</span>
+                        </Label>
+                        <Select
+                          value={formData.gender}
+                          onValueChange={(value) => handleChange("gender", value)}
+                        >
+                          <SelectTrigger className="bg-white/5 border-white/10 focus:border-primary">
+                            <SelectValue placeholder="Select your gender" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-card border-white/10">
+                            <SelectItem value="male">Male</SelectItem>
+                            <SelectItem value="female">Female</SelectItem>
+                            <SelectItem value="non-binary">Non-binary</SelectItem>
+                            <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        {errors.gender && (
+                          <p className="text-sm text-rose-400">{errors.gender}</p>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="age" className="text-foreground">
+                          Age <span className="text-muted-foreground text-sm">(optional)</span>
+                        </Label>
+                        <Input
+                          id="age"
+                          type="number"
+                          placeholder="Your age"
+                          value={formData.age ?? ""}
+                          onChange={(e) => handleChange("age", e.target.value ? parseInt(e.target.value) : undefined)}
+                          onBlur={() => handleBlur("age")}
+                          className="bg-white/5 border-white/10 focus:border-primary"
+                          min={16}
+                          max={120}
+                        />
+                        {errors.age && (
+                          <p className="text-sm text-rose-400">{errors.age}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Profession & Years of Service */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="profession" className="text-foreground">
+                          Profession <span className="text-muted-foreground text-sm">(optional)</span>
+                        </Label>
+                        <Input
+                          id="profession"
+                          placeholder="Your profession"
+                          value={formData.profession}
+                          onChange={(e) => handleChange("profession", e.target.value)}
+                          onBlur={() => handleBlur("profession")}
+                          className="bg-white/5 border-white/10 focus:border-primary"
+                        />
+                        {errors.profession && (
+                          <p className="text-sm text-rose-400">{errors.profession}</p>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="yearsOfService" className="text-foreground">
+                          Years of Service <span className="text-muted-foreground text-sm">(last company)</span>
+                        </Label>
+                        <Input
+                          id="yearsOfService"
+                          type="number"
+                          placeholder="Years worked"
+                          value={formData.yearsOfService ?? ""}
+                          onChange={(e) => handleChange("yearsOfService", e.target.value ? parseInt(e.target.value) : undefined)}
+                          onBlur={() => handleBlur("yearsOfService")}
+                          className="bg-white/5 border-white/10 focus:border-primary"
+                          min={0}
+                          max={60}
+                        />
+                        {errors.yearsOfService && (
+                          <p className="text-sm text-rose-400">{errors.yearsOfService}</p>
+                        )}
+                      </div>
                     </div>
 
                     {/* Country & City */}
