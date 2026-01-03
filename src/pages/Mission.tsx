@@ -112,7 +112,7 @@ const Mission = () => {
           delay: 0.3
         }} className="text-center mb-12">
             <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl relative inline-block">
-              Our Five Pillars
+              Our Six Pillars
               <motion.span className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" initial={{
               width: 0
             }} animate={{
