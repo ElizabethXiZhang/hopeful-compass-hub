@@ -157,6 +157,16 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm"
+        >
+          <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+          <span className="text-sm text-muted-foreground">A sanctuary for the AI era</span>
+        </motion.div>
 
         {/* Main title */}
         <motion.h1
@@ -208,16 +218,6 @@ const HeroSection = () => {
             <span className="inline-flex items-center gap-2 rounded-[14px] bg-background px-8 py-4 font-semibold text-foreground transition-all group-hover:bg-transparent group-hover:text-primary-foreground">
               <Heart size={20} className="group-hover:animate-pulse" />
               Navigate Unemployment
-            </span>
-          </Link>
-          
-          <Link
-            to="/community"
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent p-0.5 transition-all duration-300 hover:shadow-[0_0_40px_-10px_hsl(var(--primary))]"
-          >
-            <span className="inline-flex items-center gap-2 rounded-[14px] bg-background px-8 py-4 font-semibold text-foreground transition-all group-hover:bg-transparent group-hover:text-primary-foreground">
-              <Users size={20} className="group-hover:animate-pulse" />
-              Join Our Community
             </span>
           </Link>
           
