@@ -21,7 +21,7 @@ const BackgroundOrbs = () => {
         <motion.div
           animate={{
             scale: [1, 1.04, 1],
-            opacity: [0.25, 0.35, 0.25],
+            opacity: [0.4, 0.55, 0.4],
           }}
           transition={{
             duration: 8,
@@ -32,9 +32,9 @@ const BackgroundOrbs = () => {
           style={{
             background: `
               radial-gradient(circle at 50% 50%,
-                hsl(200 70% 70% / 0.15) 0%,
-                hsl(260 60% 75% / 0.12) 30%,
-                hsl(280 50% 70% / 0.08) 50%,
+                hsl(200 70% 70% / 0.3) 0%,
+                hsl(260 60% 75% / 0.25) 30%,
+                hsl(280 50% 70% / 0.15) 50%,
                 transparent 70%
               )
             `,
@@ -46,7 +46,7 @@ const BackgroundOrbs = () => {
         <motion.div
           animate={{
             scale: [1, 1.06, 1],
-            opacity: [0.3, 0.45, 0.3],
+            opacity: [0.5, 0.7, 0.5],
           }}
           transition={{
             duration: 6,
@@ -58,9 +58,9 @@ const BackgroundOrbs = () => {
           style={{
             background: `
               radial-gradient(circle at 50% 50%,
-                hsl(35 80% 75% / 0.2) 0%,
-                hsl(25 70% 70% / 0.15) 35%,
-                hsl(260 50% 70% / 0.1) 55%,
+                hsl(35 80% 75% / 0.4) 0%,
+                hsl(25 70% 70% / 0.3) 35%,
+                hsl(260 50% 70% / 0.2) 55%,
                 transparent 70%
               )
             `,
@@ -72,7 +72,7 @@ const BackgroundOrbs = () => {
         <motion.div
           animate={{
             scale: [1, 1.08, 1],
-            opacity: [0.35, 0.5, 0.35],
+            opacity: [0.6, 0.8, 0.6],
           }}
           transition={{
             duration: 5,
@@ -84,8 +84,8 @@ const BackgroundOrbs = () => {
           style={{
             background: `
               radial-gradient(circle at 50% 50%,
-                hsl(45 90% 80% / 0.25) 0%,
-                hsl(35 85% 75% / 0.18) 40%,
+                hsl(45 90% 80% / 0.5) 0%,
+                hsl(35 85% 75% / 0.35) 40%,
                 transparent 70%
               )
             `,
