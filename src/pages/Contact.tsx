@@ -1,4 +1,4 @@
-import { useState } from "react";
+ciatimport { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
@@ -170,7 +170,7 @@ const Contact = () => {
                 helpline immediately.
               </p>
               <p className="text-muted-foreground mt-4 text-sm">
-                Your message matters to us. Every email is read by a real person.
+                Your story matters to us. We appreciate you sharing your experience with us.
               </p>
             </GlassCard>
           </motion.div>
