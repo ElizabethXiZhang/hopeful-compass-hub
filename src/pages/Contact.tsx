@@ -1,4 +1,4 @@
-ciatimport { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
