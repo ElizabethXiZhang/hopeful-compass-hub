@@ -208,9 +208,9 @@ const HeroSection = () => {
           </button>
 
           {/* Secondary Button - Outlined/Soft Glass */}
-          <Link to="/community" className="group inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30">
+          <Link to="/contact" className="group inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30">
             <Users className="h-5 w-5 text-primary" />
-            Join Our Community
+            Share Your Story
           </Link>
         </motion.div>
 
