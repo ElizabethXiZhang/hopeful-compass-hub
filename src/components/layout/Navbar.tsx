@@ -5,8 +5,8 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "Navigate Unemployment", path: "/#feelings-valid" },
-  { name: "Mission & Pillars", path: "/mission" },
+  { name: "Mission", path: "/mission" },
+  { name: "Pillars", path: "/pillars" },
   { name: "Community", path: "/community" },
   { name: "Contact", path: "/contact" },
 ];
@@ -22,13 +22,41 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-8"
     >
-      <div className="glass-card mx-auto max-w-6xl px-6 py-4">
+      <div className="glass-card mx-auto max-w-6xl px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5">
-              <div className="flex h-full w-full items-center justify-center rounded-xl bg-background">
-                <span className="font-display text-lg font-bold gradient-text">UP</span>
+            {/* Abstract UP Logo Icon */}
+            <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5 shadow-lg">
+              <div className="flex h-full w-full items-center justify-center rounded-xl bg-background/90 backdrop-blur-sm">
+                <svg
+                  viewBox="0 0 32 32"
+                  className="h-6 w-6"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Bold geometric UP monogram */}
+                  <defs>
+                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" />
+                      <stop offset="50%" stopColor="hsl(var(--secondary))" />
+                      <stop offset="100%" stopColor="hsl(var(--accent))" />
+                    </linearGradient>
+                  </defs>
+                  {/* U shape merged with P - bold geometric design */}
+                  <path
+                    d="M6 6V20C6 24.4183 9.58172 28 14 28C16.5 28 18.5 27 20 25.5V16H26V10H20V6H14V18C14 19.1046 13.1046 20 12 20C10.8954 20 10 19.1046 10 18V6H6Z"
+                    fill="url(#logoGradient)"
+                  />
+                  {/* P bowl accent */}
+                  <circle
+                    cx="23"
+                    cy="10"
+                    r="4"
+                    fill="url(#logoGradient)"
+                    opacity="0.8"
+                  />
+                </svg>
               </div>
             </div>
             <span className="hidden font-display text-lg font-semibold text-foreground sm:block">
@@ -54,7 +82,6 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-
 
           {/* Mobile Menu Button */}
           <button
@@ -89,7 +116,7 @@ const Navbar = () => {
                   }`}
                 >
                   {link.name}
-              </Link>
+                </Link>
               ))}
             </div>
           </motion.div>

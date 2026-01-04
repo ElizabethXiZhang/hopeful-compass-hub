@@ -1,191 +1,172 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
-import { Heart, Compass, Wallet, Users, Globe, Leaf } from "lucide-react";
+import { Target, Eye, Compass } from "lucide-react";
+
 const Mission = () => {
-  const pillars = [{
-    icon: Heart,
-    title: "Mental Health Support",
-    description: "Providing emotional resources, coping strategies, and professional guidance for those navigating job loss and career uncertainty.",
-    color: "from-rose-500 to-pink-500"
-  }, {
-    icon: Leaf,
-    title: "Healthy Lifestyle",
-    description: "Promoting physical wellness, mental balance, and sustainable self-care practices to maintain well-being during times of transition.",
-    color: "from-lime-500 to-green-500"
-  }, {
-    icon: Compass,
-    title: "Meaning Beyond Work",
-    description: "Helping individuals discover purpose, identity, and fulfillment outside of traditional employment structures.",
-    color: "from-violet-500 to-purple-500"
-  }, {
-    icon: Users,
-    title: "Community & Belonging",
-    description: "Creating safe spaces where people can connect, share experiences, and support one another through change.",
-    color: "from-cyan-500 to-blue-500"
-  }, {
-    icon: Wallet,
-    title: "Financial Resilience",
-    description: "Offering practical tools and education for building financial stability during times of career transition.",
-    color: "from-emerald-500 to-teal-500"
-  }, {
-    icon: Globe,
-    title: "Government Policy Updates",
-    description: "Advocating for Universal Basic Income, social safety nets, and global adaptation strategies for the AI economy.",
-    color: "from-amber-500 to-orange-500"
-  }];
-  return <Layout>
+  return (
+    <Layout>
       {/* Page-specific background */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
-        <motion.div animate={{
-        scale: [1, 1.05, 1],
-        opacity: [0.6, 0.8, 0.6]
-      }} transition={{
-        duration: 10,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }} className="absolute left-1/2 -translate-x-1/2 top-1/4 w-[150%] h-[80vh]" style={{
-        background: `
+        <motion.div
+          animate={{
+            scale: [1, 1.05, 1],
+            opacity: [0.6, 0.8, 0.6],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 -translate-x-1/2 top-1/4 w-[150%] h-[80vh]"
+          style={{
+            background: `
               radial-gradient(ellipse 60% 50% at 50% 50%, 
                 hsl(270 70% 50% / 0.3) 0%,
                 hsl(190 80% 45% / 0.15) 40%,
                 transparent 65%
               )
-            `
-      }} />
+            `,
+          }}
+        />
       </div>
 
       <section className="min-h-screen pt-32 pb-24 px-4">
         <div className="mx-auto max-w-4xl">
           {/* Header */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
             <h1 className="font-display text-5xl font-bold text-foreground sm:text-6xl mb-6 relative inline-block">
               Our <span className="gradient-text">Mission</span>
-              <motion.span className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full" initial={{
-              width: 0
-            }} animate={{
-              width: "100%"
-            }} transition={{
-              duration: 1,
-              delay: 0.5
-            }} />
+              <motion.span
+                className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
             </h1>
           </motion.div>
 
-          {/* Main Mission Statement */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 0.2
-        }}>
-            <GlassCard className="p-8 sm:p-12 mb-16" glow="primary">
-              <p className="text-lg sm:text-xl text-foreground/90 leading-relaxed text-center font-medium">We exist to create a compassionate sanctuary for humanity during the greatest economic transformation. As artificial intelligence reshapes the world of work, we stand with those affected — offering support, resources, purpose, strategies, and community to help navigate uncertainty with dignity, peace, meaning and hope.</p>
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-center mt-6">
-                The Unemployment Pandemic is not just a challenge to overcome — it's an opportunity 
-                to redefine what it means to live a meaningful life.
-              </p>
+          {/* Why We Exist */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-12"
+          >
+            <GlassCard className="p-8 sm:p-12" glow="primary">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-secondary p-3">
+                  <Target className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="font-display text-2xl font-semibold text-foreground">
+                  Why We Exist
+                </h2>
+              </div>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  The world of work is transforming at an unprecedented pace. Artificial intelligence, 
+                  automation, and economic shifts are reshaping industries and displacing workers faster 
+                  than ever before. In this new reality, unemployment isn't just an economic issue—it's 
+                  a human one.
+                </p>
+                <p>
+                  We exist to ensure that no one faces this challenge alone. Our mission is to build a 
+                  global community that provides emotional support, practical resources, and a renewed 
+                  sense of purpose to everyone navigating the complexities of unemployment.
+                </p>
+                <p className="text-foreground/80 font-medium">
+                  We believe that your worth is not defined by your job title. Every person deserves 
+                  dignity, support, and the opportunity to thrive—regardless of their employment status.
+                </p>
+              </div>
             </GlassCard>
           </motion.div>
 
-          {/* Section Title */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.3
-        }} className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl relative inline-block">
-              Our Six Pillars
-              <motion.span className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" initial={{
-              width: 0
-            }} animate={{
-              width: "100%"
-            }} transition={{
-              duration: 0.8,
-              delay: 0.8
-            }} />
-            </h2>
+          {/* Our Vision */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-12"
+          >
+            <GlassCard className="p-8 sm:p-12" hover>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="inline-flex rounded-xl bg-gradient-to-br from-secondary to-accent p-3">
+                  <Eye className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="font-display text-2xl font-semibold text-foreground">
+                  Our Vision
+                </h2>
+              </div>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  We envision a world where the transition between jobs is met with compassion rather 
+                  than stigma. A world where communities rally around their members, providing the 
+                  emotional scaffolding needed to weather uncertainty.
+                </p>
+                <p>
+                  We see a future where technology serves humanity—not replaces it—and where every 
+                  individual has access to the tools, knowledge, and support they need to adapt, grow, 
+                  and find meaning in their lives.
+                </p>
+              </div>
+            </GlassCard>
           </motion.div>
 
-          {/* Pillars Grid */}
-          <div className="space-y-6">
-            {pillars.map((pillar, index) => <motion.div key={pillar.title} initial={{
-            opacity: 0,
-            x: index % 2 === 0 ? -30 : 30
-          }} animate={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.6,
-            delay: 0.4 + index * 0.1
-          }}>
-                <GlassCard className="p-6 sm:p-8" hover>
-                  <div className="flex flex-col sm:flex-row items-start gap-5">
-                    <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color}`}>
-                      <pillar.icon className="h-7 w-7 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground mb-2 relative inline-block">
-                        {pillar.title}
-                        <motion.span className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-white/40 to-transparent rounded-full" initial={{
-                      width: 0
-                    }} whileInView={{
-                      width: "100%"
-                    }} transition={{
-                      duration: 0.5,
-                      delay: 0.2
-                    }} viewport={{
-                      once: true
-                    }} />
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed text-base sm:text-lg">
-                        {pillar.description}
-                      </p>
-                    </div>
-                  </div>
-                </GlassCard>
-              </motion.div>)}
-          </div>
+          {/* Our Approach */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-12"
+          >
+            <GlassCard className="p-8 sm:p-12" hover>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3">
+                  <Compass className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="font-display text-2xl font-semibold text-foreground">
+                  Our Approach
+                </h2>
+              </div>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  We take a holistic approach to supporting those facing unemployment. Rather than 
+                  focusing solely on job placement, we address the full spectrum of human needs—mental 
+                  health, physical wellbeing, financial stability, community connection, and personal purpose.
+                </p>
+                <p>
+                  Through our six foundational pillars, we provide a comprehensive framework for navigating 
+                  unemployment with resilience and hope. Each pillar represents a crucial aspect of wellbeing 
+                  that, when supported, enables individuals to not just survive but thrive during times of transition.
+                </p>
+              </div>
+            </GlassCard>
+          </motion.div>
 
           {/* Closing Statement */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 1
-        }} className="mt-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="text-center"
+          >
             <GlassCard className="p-8 sm:p-10" variant="strong">
               <p className="text-lg sm:text-xl text-foreground/90 leading-relaxed font-medium italic">
-                "In times of profound change, it is the learners who inherit the earth, 
-                while the learned find themselves beautifully equipped to deal with a 
-                world that no longer exists."
+                "The Unemployment Pandemic is not just a challenge to overcome — it's an opportunity 
+                to redefine what it means to live a meaningful life."
               </p>
-              <p className="text-muted-foreground mt-4">— Eric Hoffer</p>
             </GlassCard>
           </motion.div>
         </div>
       </section>
-    </Layout>;
+    </Layout>
+  );
 };
+
 export default Mission;
