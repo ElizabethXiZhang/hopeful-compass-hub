@@ -281,7 +281,7 @@ const HeroSection = () => {
             className="group inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30"
           >
             <PenLine className="h-5 w-5 text-primary" />
-            Share Your Story
+            Share Your Storyyyyy
           </Link>
         </motion.div>
 
