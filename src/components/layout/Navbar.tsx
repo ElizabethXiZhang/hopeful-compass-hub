@@ -26,37 +26,12 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            {/* Abstract UP Logo Icon */}
+            {/* Simple UP Text Logo */}
             <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5 shadow-lg">
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-background/90 backdrop-blur-sm">
-                <svg
-                  viewBox="0 0 32 32"
-                  className="h-6 w-6"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Bold geometric UP monogram */}
-                  <defs>
-                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="hsl(var(--primary))" />
-                      <stop offset="50%" stopColor="hsl(var(--secondary))" />
-                      <stop offset="100%" stopColor="hsl(var(--accent))" />
-                    </linearGradient>
-                  </defs>
-                  {/* U shape merged with P - bold geometric design */}
-                  <path
-                    d="M6 6V20C6 24.4183 9.58172 28 14 28C16.5 28 18.5 27 20 25.5V16H26V10H20V6H14V18C14 19.1046 13.1046 20 12 20C10.8954 20 10 19.1046 10 18V6H6Z"
-                    fill="url(#logoGradient)"
-                  />
-                  {/* P bowl accent */}
-                  <circle
-                    cx="23"
-                    cy="10"
-                    r="4"
-                    fill="url(#logoGradient)"
-                    opacity="0.8"
-                  />
-                </svg>
+                <span className="font-display text-lg font-bold bg-gradient-to-br from-primary via-secondary to-accent bg-clip-text text-transparent">
+                  UP
+                </span>
               </div>
             </div>
             <span className="hidden font-display text-lg font-semibold text-foreground sm:block">
