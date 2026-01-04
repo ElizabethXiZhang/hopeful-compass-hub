@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import GlassCard from "../ui/GlassCard";
-import { Users, MessageCircle, Heart, Globe } from "lucide-react";
+import { Users, MessageCircle, Heart, Globe, Compass } from "lucide-react";
 
 const CommunitySection = () => {
   return (
@@ -94,6 +94,7 @@ const CommunitySection = () => {
                   to="/pillars"
                   className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:bg-white/10"
                 >
+                  <Compass size={20} />
                   Explore Our Pillars
                 </Link>
               </div>
