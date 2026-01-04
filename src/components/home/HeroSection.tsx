@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowDown, Users } from "lucide-react";
+import { ArrowDown, PenLine } from "lucide-react";
 const HeroSection = () => {
   return <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20 overflow-hidden">
       {/* Hero-specific aurora background */}
@@ -209,7 +209,7 @@ const HeroSection = () => {
 
           {/* Secondary Button - Outlined/Soft Glass */}
           <Link to="/contact" className="group inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30">
-            <Users className="h-5 w-5 text-primary" />
+            <PenLine className="h-5 w-5 text-primary" />
             Share Your Story
           </Link>
         </motion.div>
