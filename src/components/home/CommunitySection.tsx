@@ -14,9 +14,6 @@ const CommunitySection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <span className="inline-block mb-4 text-sm font-medium text-accent uppercase tracking-wider">
-            Together
-          </span>
           <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
             We Are{" "}
             <span className="gradient-text">In This Together</span>
@@ -94,10 +91,10 @@ const CommunitySection = () => {
                   Join the Community
                 </Link>
                 <Link
-                  to="/mission"
+                  to="/pillars"
                   className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:bg-white/10"
                 >
-                  Learn Our Mission
+                  Explore Our Pillars
                 </Link>
               </div>
             </div>
