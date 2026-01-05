@@ -24,7 +24,7 @@ const EmotionalValidationSection = () => {
               icon: Heart,
               title: "How Do You Feel?",
               description:
-                "Did you get fired? Do you feel shocked, confused, angry, resent, unfair, sad, defeated, disorienting, uncertain or all of them? All these feelings are VALID. You are only human.",
+                "Did you get fired? Do you feel shocked, confused, angry, resent, unfair, sad, defeated, disorienting, uncertain or all of them? All these feelings are VALID. Your feelings are legitimate responses to a real loss. You are only human.",
               color: "primary",
             },
             {
