@@ -32,8 +32,7 @@ export const JobTransitionNewsSection = () => {
       .limit(12);
 
     if (error) {
-      console.error("Error fetching news:", error);
-      setError("Failed to load news. Please try again later.");
+      setError("Unable to load news. Please try again later.");
       setIsLoading(false);
       return;
     }

@@ -5,6 +5,10 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Input validation constants
+const MAX_TITLE_LENGTH = 200;
+const MAX_POLICY_TEXT_LENGTH = 10000;
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -14,6 +18,7 @@ serve(async (req) => {
   try {
     const { policyText, title } = await req.json();
     
+    // Validate required fields
     if (!policyText || !title) {
       return new Response(
         JSON.stringify({ error: 'Policy text and title are required' }),
@@ -21,13 +26,47 @@ serve(async (req) => {
       );
     }
 
+    // Validate input types
+    if (typeof policyText !== 'string' || typeof title !== 'string') {
+      return new Response(
+        JSON.stringify({ error: 'Invalid input types' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate input lengths
+    if (title.length > MAX_TITLE_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: `Title must be less than ${MAX_TITLE_LENGTH} characters` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (policyText.length > MAX_POLICY_TEXT_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: `Policy text must be less than ${MAX_POLICY_TEXT_LENGTH} characters` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Sanitize inputs (remove control characters)
+    const cleanTitle = title.replace(/[\x00-\x1F\x7F]/g, '').trim();
+    const cleanText = policyText.replace(/[\x00-\x1F\x7F]/g, '').trim();
+
+    if (!cleanTitle || !cleanText) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid input content' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {
       console.error('LOVABLE_API_KEY is not configured');
-      throw new Error('LOVABLE_API_KEY is not configured');
+      throw new Error('Service configuration error');
     }
 
-    console.log(`Summarizing policy: ${title}`);
+    console.log(`Summarizing policy: ${cleanTitle.substring(0, 50)}...`);
 
     const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -52,7 +91,7 @@ Guidelines:
           },
           {
             role: 'user',
-            content: `Please summarize this government policy titled "${title}":\n\n${policyText}`
+            content: `Please summarize this government policy titled "${cleanTitle}":\n\n${cleanText}`
           }
         ],
       }),
@@ -75,7 +114,7 @@ Guidelines:
         );
       }
       
-      throw new Error(`AI gateway error: ${response.status}`);
+      throw new Error('AI service error');
     }
 
     const data = await response.json();
@@ -85,7 +124,7 @@ Guidelines:
       throw new Error('No summary generated');
     }
 
-    console.log(`Successfully summarized policy: ${title}`);
+    console.log(`Successfully summarized policy`);
 
     return new Response(
       JSON.stringify({ summary }),
@@ -94,7 +133,7 @@ Guidelines:
   } catch (error) {
     console.error('Error in summarize-policy function:', error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ error: 'Unable to process request. Please try again later.' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
