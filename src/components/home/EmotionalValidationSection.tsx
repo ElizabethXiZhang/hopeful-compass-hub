@@ -24,7 +24,7 @@ const EmotionalValidationSection = () => {
               icon: Heart,
               title: "How do you feel?",
               description:
-                "The world is changing faster than ever. Feeling uncertain about your place in it doesn't mean something is wrong with you—it means you're paying attention.",
+                "Did you get fired? Do you feel shocked, confused, angry, resent, unfair, sad, defeated, or all of them? All these feelings are VALID.",
               color: "primary",
             },
             {
