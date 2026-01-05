@@ -64,11 +64,12 @@ export const JobTransitionNewsSection = () => {
             </div>
           </div>
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-            Job & Transition News
+            Recent Job Cuts Around the World
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Stay informed with calm, balanced updates about AI's impact on employment, 
-            new opportunities, and global reskilling initiatives.
+          <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Mass layoffs and workforce reductions are affecting many industries.
+            <br className="hidden sm:block" />
+            <span className="text-foreground/80 font-medium">You're not alone.</span>
           </p>
         </motion.div>
 
@@ -99,10 +100,10 @@ export const JobTransitionNewsSection = () => {
             className="glass-card p-12 text-center"
           >
             <Newspaper className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">No News Available</h3>
+            <h3 className="text-xl font-semibold mb-2">No Recent News Found</h3>
             <p className="text-muted-foreground max-w-md mx-auto">
-              We're working on gathering the latest updates about workforce transitions 
-              and AI employment trends. Check back soon.
+              We couldn't find any recent layoff news at the moment.
+              Please check back later for updates.
             </p>
           </motion.div>
         ) : (
@@ -122,8 +123,8 @@ export const JobTransitionNewsSection = () => {
           className="mt-12 text-center"
         >
           <p className="text-xs text-muted-foreground/70 max-w-2xl mx-auto">
-            News articles are sourced from reputable outlets and updated periodically. 
-            Content is curated to maintain a balanced, informative perspective.
+            News articles are sourced from reputable outlets and updated periodically.
+            This section is meant to help you feel less alone—not to cause alarm.
           </p>
         </motion.div>
       </div>
