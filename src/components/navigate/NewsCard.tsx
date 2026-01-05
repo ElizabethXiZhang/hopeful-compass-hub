@@ -69,7 +69,7 @@ export const NewsCard = ({ article, index }: NewsCardProps) => {
           className="w-full justify-between text-muted-foreground hover:text-foreground group/btn"
           onClick={() => window.open(article.url, "_blank", "noopener,noreferrer")}
         >
-          <span>Read Full Article</span>
+          <span>Read More</span>
           <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-0.5 transition-transform" />
         </Button>
       </div>

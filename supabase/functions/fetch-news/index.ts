@@ -6,13 +6,22 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Keywords focused on layoffs and job cuts - neutral tone, not alarmist
 const NEWS_KEYWORDS = [
-  "AI jobs",
-  "automation workforce",
-  "reskilling programs",
-  "unemployment policy",
-  "AI employment",
-  "workforce transition",
+  "layoffs",
+  "job cuts",
+  "mass layoffs",
+  "workforce reduction",
+  "furloughs",
+  "redundancy",
+];
+
+// Keywords to exclude from results (hopeful/retraining news)
+const EXCLUDE_KEYWORDS = [
+  "hiring",
+  "new jobs",
+  "reskilling",
+  "training program",
 ];
 
 serve(async (req) => {
@@ -71,14 +80,24 @@ serve(async (req) => {
     console.log(`Fetched ${newsData.articles?.length || 0} articles`);
 
     // Filter and prepare articles for insertion
+    // Exclude hopeful/retraining news to keep focus on job cuts
     const articles = (newsData.articles || [])
-      .filter((article: any) => 
-        article.title && 
-        article.url && 
-        article.source?.name &&
-        article.publishedAt &&
-        !article.title.includes('[Removed]')
-      )
+      .filter((article: any) => {
+        if (!article.title || !article.url || !article.source?.name || !article.publishedAt) {
+          return false;
+        }
+        if (article.title.includes('[Removed]')) {
+          return false;
+        }
+        // Exclude articles with hopeful/retraining keywords
+        const titleLower = article.title.toLowerCase();
+        const descLower = (article.description || '').toLowerCase();
+        const hasExcludedKeyword = EXCLUDE_KEYWORDS.some(keyword => 
+          titleLower.includes(keyword.toLowerCase()) || 
+          descLower.includes(keyword.toLowerCase())
+        );
+        return !hasExcludedKeyword;
+      })
       .map((article: any) => ({
         title: article.title.slice(0, 500),
         description: article.description?.slice(0, 1000) || null,
