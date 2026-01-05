@@ -12,7 +12,7 @@ const timelineSteps = [
   {
     year: "Near Future",
     title: "Adaptation",
-    description: "New roles emerge. Human skills become more valuable. We learn to work alongside AI, not against it.",
+    description: "The key is to understand, process, strategize, ",
     active: false,
   },
   {
