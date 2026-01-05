@@ -89,6 +89,36 @@ export type Database = {
         }
         Relationships: []
       }
+      job_transition_news: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          published_at: string
+          source: string
+          title: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          published_at: string
+          source: string
+          title: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          published_at?: string
+          source?: string
+          title?: string
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
