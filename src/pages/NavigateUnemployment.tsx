@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { GovernmentPoliciesSection } from "@/components/navigate/GovernmentPoliciesSection";
+import { JobTransitionNewsSection } from "@/components/navigate/JobTransitionNewsSection";
 import { Compass, ShieldCheck } from "lucide-react";
 
 const NavigateUnemployment = () => {
@@ -45,6 +45,9 @@ const NavigateUnemployment = () => {
 
       {/* Government Policies Section */}
       <GovernmentPoliciesSection />
+
+      {/* Job & Transition News Section */}
+      <JobTransitionNewsSection />
     </Layout>
   );
 };
