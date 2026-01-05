@@ -22,24 +22,24 @@ const EmotionalValidationSection = () => {
           {[
             {
               icon: Heart,
-              title: "How do you feel?",
+              title: "How Do You Feel?",
               description:
-                "Did you get fired? Do you feel shocked, confused, angry, resent, unfair, sad, defeated, or all of them? All these feelings are VALID. You are only human.",
+                "Did you get fired? Do you feel shocked, confused, angry, resent, unfair, sad, defeated, disorienting, uncertain or all of them? All these feelings are VALID. You are only human.",
               color: "primary",
             },
             {
+              icon: Sparkles,
+              title: "Process Your Emotions with Self-Compassion",
+              description:
+                "The emotions could come strong, they could overwhelm you in many ways. Because this job meant something to you, your finance, your career, you future. Take time to grive.",
+              color: "accent",
+            },
+            {
               icon: Shield,
-              title: "Your identity is not your job ",
+              title: "Your Identity Is Not Your Job ",
               description:
                 "You are much more than a job. You might also be a partner, a parent, a good friend to someone, a kind person, a unique human. You worth is WHO YOU ARE, not what you do. .",
               color: "secondary",
-            },
-            {
-              icon: Sparkles,
-              title: "This Is Temporary",
-              description:
-                "Every major transition in human history felt overwhelming at first. We adapt, we grow, and we find new ways to thrive. This time is no different.",
-              color: "accent",
             },
           ].map((card, index) => (
             <motion.div
