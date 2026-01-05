@@ -4,8 +4,9 @@ import GlassCard from "../ui/GlassCard";
 const timelineSteps = [
   {
     year: "Now",
-    title: "The Transition",
-    description: "AI is reshaping industries. Jobs are evolving, not disappearing. This is the beginning of something new.",
+    title: "The Transition in AI revolution",
+    description:
+      "The AI revolution is reshaping the job market by automating routine and repetitive tasks, leading to significant displacement and contributing to over 50,000 layoffs in 2025 alone as companies streamline operations and invest heavily in AI tools.",
     active: true,
   },
   {
@@ -44,8 +45,7 @@ const AIRevolutionSection = () => {
             Understanding Change
           </span>
           <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl">
-            The AI Revolution{" "}
-            <span className="gradient-text-calm">Explained Calmly</span>
+            The AI Revolution <span className="gradient-text-calm">Explained Calmly</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
             This isn't about doom. It's about understanding where we are and where we're going—together.
@@ -77,25 +77,21 @@ const AIRevolutionSection = () => {
                     glow={step.active ? "primary" : "none"}
                   >
                     <div className="flex items-center gap-4 mb-4">
-                      <span className={`inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold ${
-                        step.active 
-                          ? "bg-primary text-primary-foreground" 
-                          : "bg-white/10 text-muted-foreground"
-                      }`}>
+                      <span
+                        className={`inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold ${
+                          step.active ? "bg-primary text-primary-foreground" : "bg-white/10 text-muted-foreground"
+                        }`}
+                      >
                         {index + 1}
                       </span>
-                      <span className={`text-sm font-semibold ${
-                        step.active ? "text-primary" : "text-muted-foreground"
-                      }`}>
+                      <span
+                        className={`text-sm font-semibold ${step.active ? "text-primary" : "text-muted-foreground"}`}
+                      >
                         {step.year}
                       </span>
                     </div>
-                    <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
+                    <h3 className="font-display text-2xl font-semibold text-foreground mb-3">{step.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
                   </GlassCard>
                 </div>
 
