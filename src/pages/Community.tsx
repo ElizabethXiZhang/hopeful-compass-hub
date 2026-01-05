@@ -116,23 +116,41 @@ const Community = () => {
     }
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("community_members").insert({
-        name: formData.name || null,
-        gender: formData.gender,
-        age: formData.age || null,
-        profession: formData.profession || null,
-        years_of_service: formData.yearsOfService || null,
-        country: formData.country,
-        city: formData.city,
-        email: formData.email,
-        share_story: formData.shareStory,
+      // Use edge function with rate limiting instead of direct database insert
+      const { data, error } = await supabase.functions.invoke('community-signup', {
+        body: {
+          name: formData.name || null,
+          gender: formData.gender,
+          age: formData.age || null,
+          profession: formData.profession || null,
+          years_of_service: formData.yearsOfService || null,
+          country: formData.country,
+          city: formData.city,
+          email: formData.email,
+          share_story: formData.shareStory,
+        },
       });
-      if (error) throw error;
+      
+      if (error) {
+        throw new Error(error.message || 'Failed to submit');
+      }
+      
+      // Check for error in response body
+      if (data?.error) {
+        // Handle rate limiting
+        if (data.retryAfterSeconds) {
+          const minutes = Math.ceil(data.retryAfterSeconds / 60);
+          throw new Error(`Too many submissions. Please try again in ${minutes} minute${minutes > 1 ? 's' : ''}.`);
+        }
+        throw new Error(data.error);
+      }
+      
       setIsSuccess(true);
     } catch (error) {
-      // Show user-friendly error message without exposing internal details
+      // Show user-friendly error message
+      const message = error instanceof Error ? error.message : "Something went wrong. Please try again.";
       setErrors({
-        email: "Something went wrong. Please try again.",
+        email: message,
       });
     } finally {
       setIsSubmitting(false);
