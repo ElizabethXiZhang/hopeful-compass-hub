@@ -9,6 +9,7 @@ import Mission from "./pages/Mission";
 import Pillars from "./pages/Pillars";
 import Community from "./pages/Community";
 import Contact from "./pages/Contact";
+import NavigateUnemployment from "./pages/NavigateUnemployment";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/mission" element={<Mission />} />
             <Route path="/pillars" element={<Pillars />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/navigate" element={<NavigateUnemployment />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

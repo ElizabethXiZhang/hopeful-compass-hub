@@ -56,6 +56,39 @@ export type Database = {
         }
         Relationships: []
       }
+      government_policies: {
+        Row: {
+          ai_summary: string | null
+          country: string
+          created_at: string
+          id: string
+          last_verified: string
+          policy_type: string
+          source_url: string
+          title: string
+        }
+        Insert: {
+          ai_summary?: string | null
+          country: string
+          created_at?: string
+          id?: string
+          last_verified?: string
+          policy_type: string
+          source_url: string
+          title: string
+        }
+        Update: {
+          ai_summary?: string | null
+          country?: string
+          created_at?: string
+          id?: string
+          last_verified?: string
+          policy_type?: string
+          source_url?: string
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
