@@ -130,7 +130,7 @@ const Community = () => {
       if (error) throw error;
       setIsSuccess(true);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      // Show user-friendly error message without exposing internal details
       setErrors({
         email: "Something went wrong. Please try again.",
       });

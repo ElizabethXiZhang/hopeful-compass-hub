@@ -41,7 +41,7 @@ export const GovernmentPoliciesSection = () => {
         .order("country");
 
       if (error) {
-        console.error("Error fetching countries:", error);
+        // Silently handle error - countries list is non-critical
         return;
       }
 
@@ -74,8 +74,7 @@ export const GovernmentPoliciesSection = () => {
       const { data, error } = await query;
 
       if (error) {
-        console.error("Error fetching policies:", error);
-        setError("Failed to load policies. Please try again.");
+        setError("Unable to load policies. Please try again later.");
         setIsLoading(false);
         return;
       }
