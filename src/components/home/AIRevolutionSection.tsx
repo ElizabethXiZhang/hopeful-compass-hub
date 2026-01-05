@@ -3,22 +3,22 @@ import GlassCard from "../ui/GlassCard";
 
 const timelineSteps = [
   {
-    year: "Now",
+    year: "WHAT is happening? ",
     title: "The Transition in AI revolution",
     description:
       "The AI revolution is reshaping the job market by automating routine and repetitive tasks, leading to significant displacement and contributing to over 50,000 layoffs in 2025 alone as companies streamline operations and invest heavily in AI tools.",
     active: true,
   },
   {
-    year: "Near Future",
-    title: "Adaptation",
+    year: "WHAT to do ?",
+    title: "Adaptation to the AI revolution",
     description:
-      "The key is to understand, process, navigate, and strategize in this global AI Revolution to find peace, meaning, structure, purpose, community and vote for global changes. ",
+      "The key is to understand, process, navigate, and strategize in this global AI revolution to find peace, meaning, structure, purpose, community and vote for global changes. ",
     active: false,
   },
   {
-    year: "Ahead",
-    title: "Renaissance",
+    year: "HOW to handle it? ",
+    title: "Strategies in the AI revolution",
     description: "A new era of human creativity and purpose. Work becomes about meaning, connection, and growth.",
     active: false,
   },
