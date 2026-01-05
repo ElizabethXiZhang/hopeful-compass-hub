@@ -19,7 +19,7 @@ const timelineSteps = [
   {
     year: "HOW to handle it? ",
     title: "Strategies in the AI revolution",
-    description: "A new era of human creativity and purpose. Work becomes about meaning, connection, and growth.",
+    description: "We created six pillars and many videos and a community to support you in every way possible.",
     active: false,
   },
 ];
