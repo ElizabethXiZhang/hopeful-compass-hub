@@ -12,7 +12,8 @@ const timelineSteps = [
   {
     year: "Near Future",
     title: "Adaptation",
-    description: "The key is to understand, process, strategize, ",
+    description:
+      "The key is to understand, process, navigate, and strategize in this global AI Revolution to find peace, meaning, structure, purpose, community and vote for global changes. ",
     active: false,
   },
   {
