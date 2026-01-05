@@ -24,14 +24,14 @@ const EmotionalValidationSection = () => {
               icon: Heart,
               title: "How do you feel?",
               description:
-                "Did you get fired? Do you feel shocked, confused, angry, resent, unfair, sad, defeated, or all of them? All these feelings are VALID.",
+                "Did you get fired? Do you feel shocked, confused, angry, resent, unfair, sad, defeated, or all of them? All these feelings are VALID. You are only human.",
               color: "primary",
             },
             {
               icon: Shield,
-              title: "You Are Not Replaceable",
+              title: "Your identity is not your job ",
               description:
-                "Your worth isn't measured by productivity metrics or job titles. Your humanity, creativity, and unique perspective are irreplaceable gifts.",
+                "You are much more than a job. You might also be a partner, a parent, a good friend to someone, a kind person, a unique human. You worth is WHO YOU ARE, not what you do. .",
               color: "secondary",
             },
             {
