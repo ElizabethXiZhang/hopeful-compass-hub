@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import GlassCard from "../ui/GlassCard";
 
 const timelineSteps = [
@@ -8,6 +9,7 @@ const timelineSteps = [
     description:
       "The AI revolution is reshaping the job market by automating routine and repetitive tasks, leading to significant displacement and contributing to over 50,000 layoffs in 2025 alone as companies streamline operations and invest heavily in AI tools.",
     active: true,
+    link: "/job-cuts",
   },
   {
     year: "WHAT to do ?",
@@ -15,6 +17,7 @@ const timelineSteps = [
     description:
       "The key is to understand, process, navigate, and strategize in this global AI revolution to find peace, meaning, structure, purpose, community and vote for global changes. ",
     active: false,
+    link: null,
   },
   {
     year: "HOW to handle it? ",
@@ -22,10 +25,13 @@ const timelineSteps = [
     description:
       "We created strategies under the Pillars page, we created many videos on our YouTube Channel, we provide you the latest updates on job loss and government policties, and we established a community to support you in every way possible.",
     active: false,
+    link: null,
   },
 ];
 
 const AIRevolutionSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative py-24 px-4 overflow-hidden">
       {/* Background glow */}
@@ -75,8 +81,9 @@ const AIRevolutionSection = () => {
                 <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-16" : "md:pl-16"}`}>
                   <GlassCard
                     hover
-                    className={`p-8 ${step.active ? "border-primary/30" : ""}`}
+                    className={`p-8 ${step.active ? "border-primary/30" : ""} ${step.link ? "cursor-pointer group" : ""}`}
                     glow={step.active ? "primary" : "none"}
+                    onClick={() => step.link && navigate(step.link)}
                   >
                     <div className="flex items-center gap-4 mb-4">
                       <span
@@ -92,7 +99,14 @@ const AIRevolutionSection = () => {
                         {step.year}
                       </span>
                     </div>
-                    <h3 className="font-display text-2xl font-semibold text-foreground mb-3">{step.title}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
+                      {step.title}
+                      {step.link && (
+                        <span className="ml-2 text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                          →
+                        </span>
+                      )}
+                    </h3>
                     <p className="text-muted-foreground leading-relaxed">{step.description}</p>
                   </GlassCard>
                 </div>
