@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { GovernmentPoliciesSection } from "@/components/navigate/GovernmentPoliciesSection";
-import { JobTransitionNewsSection } from "@/components/navigate/JobTransitionNewsSection";
-import { Compass, ShieldCheck } from "lucide-react";
+import { Globe, ShieldCheck } from "lucide-react";
 
-const NavigateUnemployment = () => {
+const GovernmentPolicies = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-24 pb-12">
+      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-24 pb-8">
         {/* Background elements */}
         <div className="gradient-orb gradient-orb-1 w-[500px] h-[500px] -top-48 -left-24" />
         <div className="gradient-orb gradient-orb-2 w-[400px] h-[400px] top-1/4 -right-32" />
@@ -22,17 +21,17 @@ const NavigateUnemployment = () => {
           >
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="p-3 rounded-2xl bg-primary/20 border border-primary/30">
-                <Compass className="w-8 h-8 text-primary" />
+                <Globe className="w-8 h-8 text-primary" />
               </div>
             </div>
             
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="gradient-text">Navigate Unemployment</span>
+              <span className="gradient-text">Government Policy Updates</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Your Global Adaptation Hub for understanding support systems, policies, 
-              and resources designed to help you through AI-driven job transitions.
+              Explore official support programs, reskilling initiatives, and social safety nets 
+              available worldwide to help navigate job transitions.
             </p>
 
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -45,11 +44,8 @@ const NavigateUnemployment = () => {
 
       {/* Government Policies Section */}
       <GovernmentPoliciesSection />
-
-      {/* Job & Transition News Section */}
-      <JobTransitionNewsSection />
     </Layout>
   );
 };
 
-export default NavigateUnemployment;
+export default GovernmentPolicies;

@@ -1,15 +1,25 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
-import { Heart, Compass, Wallet, Users, Globe, Leaf } from "lucide-react";
+import { Heart, Compass, Wallet, Users, Globe, Leaf, TrendingDown } from "lucide-react";
 
 const pillars = [
+  {
+    icon: TrendingDown,
+    title: "The Transition in AI Revolution",
+    description:
+      "Understanding the global impact of AI-driven job displacement and staying informed about workforce changes worldwide.",
+    color: "from-red-500 to-rose-500",
+    link: "/job-cuts",
+  },
   {
     icon: Heart,
     title: "Mental Health Support",
     description:
       "Providing emotional resources, coping strategies, and professional guidance for those navigating job loss and career uncertainty.",
     color: "from-rose-500 to-pink-500",
+    link: null,
   },
   {
     icon: Leaf,
@@ -17,6 +27,7 @@ const pillars = [
     description:
       "Promoting physical wellness, mental balance, and sustainable self-care practices to maintain well-being during times of transition.",
     color: "from-lime-500 to-green-500",
+    link: null,
   },
   {
     icon: Compass,
@@ -24,6 +35,7 @@ const pillars = [
     description:
       "Helping individuals discover purpose, identity, and fulfillment outside of traditional employment structures.",
     color: "from-violet-500 to-purple-500",
+    link: null,
   },
   {
     icon: Users,
@@ -31,6 +43,7 @@ const pillars = [
     description:
       "Creating safe spaces where people can connect, share experiences, and support one another through change.",
     color: "from-cyan-500 to-blue-500",
+    link: null,
   },
   {
     icon: Wallet,
@@ -38,6 +51,7 @@ const pillars = [
     description:
       "Offering practical tools and education for building financial stability during times of career transition.",
     color: "from-emerald-500 to-teal-500",
+    link: null,
   },
   {
     icon: Globe,
@@ -45,10 +59,13 @@ const pillars = [
     description:
       "Advocating for Universal Basic Income, social safety nets, and global adaptation strategies for the AI economy.",
     color: "from-amber-500 to-orange-500",
+    link: "/government-policies",
   },
 ];
 
 const Pillars = () => {
+  const navigate = useNavigate();
+
   return (
     <Layout>
       {/* Page-specific background */}
@@ -107,17 +124,27 @@ const Pillars = () => {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                onClick={() => pillar.link && navigate(pillar.link)}
+                className={pillar.link ? "cursor-pointer" : ""}
               >
-                <GlassCard className="p-6 sm:p-8" hover>
+                <GlassCard 
+                  className={`p-6 sm:p-8 ${pillar.link ? "group" : ""}`} 
+                  hover
+                >
                   <div className="flex flex-col sm:flex-row items-start gap-5">
                     <div
-                      className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color}`}
+                      className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${pillar.color} ${pillar.link ? "group-hover:scale-110 transition-transform" : ""}`}
                     >
                       <pillar.icon className="h-7 w-7 text-white" />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-display text-xl sm:text-2xl font-semibold text-foreground mb-2 relative inline-block">
                         {pillar.title}
+                        {pillar.link && (
+                          <span className="ml-2 text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                            →
+                          </span>
+                        )}
                         <motion.span
                           className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-white/40 to-transparent rounded-full"
                           initial={{ width: 0 }}
