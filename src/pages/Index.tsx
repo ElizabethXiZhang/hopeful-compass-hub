@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/home/HeroSection";
 import EmotionalValidationSection from "@/components/home/EmotionalValidationSection";
 import AIRevolutionSection from "@/components/home/AIRevolutionSection";
+import CommunitySection from "@/components/home/CommunitySection";
 import GlassCard from "@/components/ui/GlassCard";
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
       <HeroSection />
       <EmotionalValidationSection />
       <AIRevolutionSection />
+      <CommunitySection />
       
       {/* Contact CTA Card */}
       <section className="py-24 px-4">
