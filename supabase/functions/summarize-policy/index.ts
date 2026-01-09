@@ -9,10 +9,73 @@ const corsHeaders = {
 const MAX_TITLE_LENGTH = 200;
 const MAX_POLICY_TEXT_LENGTH = 10000;
 
+// Simple in-memory rate limiting (per function instance)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10; // max requests per window
+const RATE_WINDOW_MS = 60000; // 1 minute window
+
+function getClientIP(req: Request): string {
+  const forwardedFor = req.headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0].trim();
+  }
+  const realIP = req.headers.get('x-real-ip');
+  if (realIP) {
+    return realIP.trim();
+  }
+  return 'unknown';
+}
+
+function checkRateLimit(ip: string): { allowed: boolean; resetInSeconds: number } {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+  
+  // Clean up old entries periodically
+  if (rateLimitMap.size > 10000) {
+    for (const [key, value] of rateLimitMap.entries()) {
+      if (value.resetTime < now) {
+        rateLimitMap.delete(key);
+      }
+    }
+  }
+  
+  if (!record || record.resetTime < now) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW_MS });
+    return { allowed: true, resetInSeconds: Math.ceil(RATE_WINDOW_MS / 1000) };
+  }
+  
+  if (record.count >= RATE_LIMIT) {
+    const resetInSeconds = Math.ceil((record.resetTime - now) / 1000);
+    return { allowed: false, resetInSeconds };
+  }
+  
+  record.count++;
+  return { allowed: true, resetInSeconds: Math.ceil((record.resetTime - now) / 1000) };
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Rate limiting check
+  const clientIP = getClientIP(req);
+  const rateLimit = checkRateLimit(clientIP);
+  
+  if (!rateLimit.allowed) {
+    console.log(`Rate limit exceeded for IP: ${clientIP.substring(0, 8)}...`);
+    return new Response(
+      JSON.stringify({ error: 'Too many requests. Please try again later.' }),
+      { 
+        status: 429, 
+        headers: { 
+          ...corsHeaders, 
+          'Content-Type': 'application/json',
+          'Retry-After': String(rateLimit.resetInSeconds)
+        } 
+      }
+    );
   }
 
   try {

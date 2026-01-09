@@ -31,9 +31,26 @@ serve(async (req) => {
   }
 
   try {
+    const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    
+    // Verify service role key - this function should only be called by admin/cron
+    const authHeader = req.headers.get('Authorization');
+    const apiKey = req.headers.get('apikey');
+    
+    const isAuthorized = 
+      (authHeader && authHeader === `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`) ||
+      (apiKey && apiKey === SUPABASE_SERVICE_ROLE_KEY);
+    
+    if (!isAuthorized) {
+      console.warn('Unauthorized access attempt to fetch-news function');
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const NEWS_API_KEY = Deno.env.get('NEWS_API_KEY');
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
-    const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
     if (!NEWS_API_KEY) {
       console.error('NEWS_API_KEY is not configured');
