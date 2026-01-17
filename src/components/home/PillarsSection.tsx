@@ -4,7 +4,7 @@ import GlassCard from "../ui/GlassCard";
 import { Heart, Compass, Wallet, Users, Globe, Leaf, TrendingDown } from "lucide-react";
 const pillars = [{
   icon: TrendingDown,
-  title: "The Transition in AI Revolution",
+  title: "Current Global Job Cuts",
   description: "Understanding the global impact of AI-driven job displacement and staying informed about workforce changes worldwide.",
   color: "from-red-500 to-rose-500",
   link: "/job-cuts"
