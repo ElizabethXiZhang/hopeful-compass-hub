@@ -7,7 +7,7 @@ const pillars = [{
   title: "Current Global Job Cuts",
   description: "Understanding the global impact of AI-driven job displacement and staying informed about workforce changes worldwide.",
   color: "from-red-500 to-rose-500",
-  link: null
+  link: "/job-cuts"
 }, {
   icon: Heart,
   title: "Mental Health Support",
