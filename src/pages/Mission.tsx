@@ -49,12 +49,6 @@ const Mission = () => {
               delay: 0.5
             }} />
             </h1>
-            <Button asChild variant="outline" className="gap-2 mt-6">
-              <Link to="/#ai-revolution">
-                <ArrowLeft className="w-4 h-4" />
-                Back to Home
-              </Link>
-            </Button>
           </motion.div>
 
           {/* Why We Exist */}
@@ -182,6 +176,25 @@ const Mission = () => {
                 to redefine what it means to live a meaningful life."
               </p>
             </GlassCard>
+          </motion.div>
+
+          {/* Back to Home Button */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 1
+        }} className="text-center mt-12">
+            <Button asChild variant="outline" className="gap-2">
+              <Link to="/#ai-revolution">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </section>
