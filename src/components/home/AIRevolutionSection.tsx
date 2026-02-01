@@ -23,7 +23,7 @@ const timelineSteps = [
     year: "HOW to handle it? ",
     title: "Strategies in the AI revolution",
     description:
-      "We created strategies under the Pillars page, we created many videos on our YouTube Channel, we provide you the latest updates on job loss and government policties, and we established a community to support you in every way possible.",
+      "We created strategies for you in the following six pillars, together with many videos on our YouTube Channel, aiming to establish a community to support you in every way possible.",
     active: false,
     link: null,
   },
