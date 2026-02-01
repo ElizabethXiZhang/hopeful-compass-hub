@@ -15,11 +15,11 @@ const CommunitySection = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
-            We Are{" "}
-            <span className="gradient-text">In This Together</span>
+            We Are <span className="gradient-text">In This Together</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Connection is our greatest strength. Join a global community of humans navigating change with courage and compassion.
+            Connection is our greatest strength. Join a global community of humans navigating change with courage and
+            compassion.
           </p>
         </motion.div>
 
@@ -29,7 +29,7 @@ const CommunitySection = () => {
             { icon: Users, label: "50K+ Members", sublabel: "Growing daily" },
             { icon: Globe, label: "120+ Countries", sublabel: "Worldwide reach" },
             { icon: MessageCircle, label: "Active Forums", sublabel: "24/7 support" },
-            { icon: Heart, label: "Peer Support", sublabel: "Real connections" },
+            { icon: Heart, label: "Book a Support Call", sublabel: "Real connections" },
           ].map((item, index) => (
             <motion.div
               key={item.label}
@@ -40,9 +40,7 @@ const CommunitySection = () => {
             >
               <GlassCard className="p-6 text-center" hover>
                 <item.icon className="mx-auto mb-3 h-8 w-8 text-primary" />
-                <div className="font-display text-xl font-semibold text-foreground">
-                  {item.label}
-                </div>
+                <div className="font-display text-xl font-semibold text-foreground">{item.label}</div>
                 <div className="text-sm text-muted-foreground">{item.sublabel}</div>
               </GlassCard>
             </motion.div>
@@ -56,32 +54,25 @@ const CommunitySection = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <GlassCard
-            variant="strong"
-            className="relative overflow-hidden p-12 text-center"
-          >
+          <GlassCard variant="strong" className="relative overflow-hidden p-12 text-center">
             {/* Gradient accent */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10" />
-            
+
             <div className="relative z-10">
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="mb-6"
-              >
+              <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 3, repeat: Infinity }} className="mb-6">
                 <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary">
                   <Heart className="h-10 w-10 text-primary-foreground" fill="currentColor" />
                 </div>
               </motion.div>
-              
+
               <h3 className="font-display text-3xl font-bold text-foreground mb-4">
                 You Don't Have to Face This Alone
               </h3>
               <p className="mx-auto max-w-xl text-lg text-muted-foreground mb-8">
-                Join thousands of people who are finding their way through uncertainty, together. 
-                Share stories, find support, and discover new possibilities.
+                Join thousands of people who are finding their way through uncertainty, together. Share stories, find
+                support, and discover new possibilities.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   to="/community"
