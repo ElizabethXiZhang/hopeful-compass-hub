@@ -55,7 +55,7 @@ const PillarsSection = () => {
       }} viewport={{
         once: true
       }} className="text-center mb-16">
-          <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl mb-6">Build Your Six Pillars<span className="gradient-text">Pillars</span>
+          <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl mb-6">Build Your Six Pillars<span className="gradient-text">Pillars</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">The foundation of your support system, designed to address every aspect of wellbeing during unemployment.</p>
         </motion.div>
