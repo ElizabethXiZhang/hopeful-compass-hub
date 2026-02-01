@@ -2,62 +2,64 @@ import { motion } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
 import { Target, Eye, Compass } from "lucide-react";
-
 const Mission = () => {
-  return (
-    <Layout>
+  return <Layout>
       {/* Page-specific background */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
-        <motion.div
-          animate={{
-            scale: [1, 1.05, 1],
-            opacity: [0.6, 0.8, 0.6],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute left-1/2 -translate-x-1/2 top-1/4 w-[150%] h-[80vh]"
-          style={{
-            background: `
+        <motion.div animate={{
+        scale: [1, 1.05, 1],
+        opacity: [0.6, 0.8, 0.6]
+      }} transition={{
+        duration: 10,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }} className="absolute left-1/2 -translate-x-1/2 top-1/4 w-[150%] h-[80vh]" style={{
+        background: `
               radial-gradient(ellipse 60% 50% at 50% 50%, 
                 hsl(270 70% 50% / 0.3) 0%,
                 hsl(190 80% 45% / 0.15) 40%,
                 transparent 65%
               )
-            `,
-          }}
-        />
+            `
+      }} />
       </div>
 
       <section className="min-h-screen pt-32 pb-24 px-4">
         <div className="mx-auto max-w-4xl">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8
+        }} className="text-center mb-16">
             <h1 className="font-display text-5xl font-bold text-foreground sm:text-6xl mb-6 relative inline-block">
               Our <span className="gradient-text">Mission</span>
-              <motion.span
-                className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1, delay: 0.5 }}
-              />
+              <motion.span className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full" initial={{
+              width: 0
+            }} animate={{
+              width: "100%"
+            }} transition={{
+              duration: 1,
+              delay: 0.5
+            }} />
             </h1>
           </motion.div>
 
           {/* Why We Exist */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.2
+        }} className="mb-12">
             <GlassCard className="p-8 sm:p-12" glow="primary">
               <div className="flex items-center gap-4 mb-6">
                 <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-secondary p-3">
@@ -80,20 +82,22 @@ const Mission = () => {
                   sense of purpose to everyone navigating the complexities of unemployment.
                 </p>
                 <p className="text-foreground/80 font-medium">
-                  We believe that your worth is not defined by your job title. Every person deserves 
-                  dignity, support, and the opportunity to thrive—regardless of their employment status.
-                </p>
+              </p>
               </div>
             </GlassCard>
           </motion.div>
 
           {/* Our Vision */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-12"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.4
+        }} className="mb-12">
             <GlassCard className="p-8 sm:p-12" hover>
               <div className="flex items-center gap-4 mb-6">
                 <div className="inline-flex rounded-xl bg-gradient-to-br from-secondary to-accent p-3">
@@ -119,12 +123,16 @@ const Mission = () => {
           </motion.div>
 
           {/* Our Approach */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mb-12"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.6
+        }} className="mb-12">
             <GlassCard className="p-8 sm:p-12" hover>
               <div className="flex items-center gap-4 mb-6">
                 <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3">
@@ -150,12 +158,16 @@ const Mission = () => {
           </motion.div>
 
           {/* Closing Statement */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-center"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.8
+        }} className="text-center">
             <GlassCard className="p-8 sm:p-10" variant="strong">
               <p className="text-lg sm:text-xl text-foreground/90 leading-relaxed font-medium italic">
                 "The Unemployment Pandemic is not just a challenge to overcome — it's an opportunity 
@@ -165,8 +177,6 @@ const Mission = () => {
           </motion.div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Mission;
