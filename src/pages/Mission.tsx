@@ -140,9 +140,7 @@ const Mission = () => {
                 <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3">
                   <Compass className="h-6 w-6 text-white" />
                 </div>
-                <h2 className="font-display text-2xl font-semibold text-foreground">
-                  Our Approach
-                </h2>
+                <h2 className="font-display text-2xl font-semibold text-foreground">Our Mission</h2>
               </div>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
@@ -151,10 +149,7 @@ const Mission = () => {
                   health, physical wellbeing, financial stability, community connection, and personal purpose.
                 </p>
                 <p>
-                  Through our six foundational pillars, we provide a comprehensive framework for navigating 
-                  unemployment with resilience and hope. Each pillar represents a crucial aspect of wellbeing 
-                  that, when supported, enables individuals to not just survive but thrive during times of transition.
-                </p>
+              </p>
               </div>
             </GlassCard>
           </motion.div>
