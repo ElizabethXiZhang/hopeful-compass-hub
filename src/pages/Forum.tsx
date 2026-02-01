@@ -106,6 +106,23 @@ const Forum = () => {
               />
             )}
           </AnimatePresence>
+
+          {/* Back button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mt-12 text-center"
+          >
+            <Button
+              variant="ghost"
+              onClick={() => window.history.back()}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Go Back
+            </Button>
+          </motion.div>
         </div>
       </section>
     </Layout>
