@@ -89,7 +89,7 @@ const Mission = () => {
             </GlassCard>
           </motion.div>
 
-          {/* Our Vision */}
+          {/* Our Mission */}
           <motion.div initial={{
           opacity: 0,
           y: 30
@@ -99,6 +99,36 @@ const Mission = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.4
+        }} className="mb-12">
+            <GlassCard className="p-8 sm:p-12" hover>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3">
+                  <Compass className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="font-display text-2xl font-semibold text-foreground">Our Mission</h2>
+              </div>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  We take a holistic approach to supporting those facing unemployment. Rather than 
+                  focusing solely on job placement, we address the full spectrum of human needs—mental 
+                  health, physical wellbeing, financial stability, community connection, and personal purpose.
+                </p>
+                <p>
+              </p>
+              </div>
+            </GlassCard>
+          </motion.div>
+
+          {/* Our Vision */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.6
         }} className="mb-12">
             <GlassCard className="p-8 sm:p-12" hover>
               <div className="flex items-center gap-4 mb-6">
@@ -120,36 +150,6 @@ const Mission = () => {
                   individual has access to the tools, knowledge, and support they need to adapt, grow, 
                   and find meaning in their lives.
                 </p>
-              </div>
-            </GlassCard>
-          </motion.div>
-
-          {/* Our Approach */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 0.6
-        }} className="mb-12">
-            <GlassCard className="p-8 sm:p-12" hover>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3">
-                  <Compass className="h-6 w-6 text-white" />
-                </div>
-                <h2 className="font-display text-2xl font-semibold text-foreground">Our Mission</h2>
-              </div>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  We take a holistic approach to supporting those facing unemployment. Rather than 
-                  focusing solely on job placement, we address the full spectrum of human needs—mental 
-                  health, physical wellbeing, financial stability, community connection, and personal purpose.
-                </p>
-                <p>
-              </p>
               </div>
             </GlassCard>
           </motion.div>
