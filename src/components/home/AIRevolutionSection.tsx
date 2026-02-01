@@ -17,7 +17,7 @@ const timelineSteps = [
     description:
       "The key is to understand, process, navigate, and strategize in this global AI revolution to find peace, meaning, structure, purpose, community and vote for global changes. ",
     active: false,
-    link: null,
+    link: "/mission",
   },
   {
     year: "HOW to handle it? ",
