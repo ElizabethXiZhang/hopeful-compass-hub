@@ -42,11 +42,12 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Check if email exists in community_members (using service role to bypass RLS)
+    // Use limit(1) instead of maybeSingle() to handle potential duplicates
     const { data, error } = await supabase
       .from('community_members')
       .select('email, name')
       .eq('email', email.toLowerCase().trim())
-      .maybeSingle();
+      .limit(1);
 
     if (error) {
       console.error('Database error:', error.message);
@@ -56,12 +57,13 @@ Deno.serve(async (req) => {
       );
     }
 
-    if (data) {
+    if (data && data.length > 0) {
+      const member = data[0];
       return new Response(
         JSON.stringify({ 
           verified: true, 
-          email: data.email,
-          name: data.name 
+          email: member.email,
+          name: member.name 
         }),
         { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
