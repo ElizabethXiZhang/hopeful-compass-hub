@@ -154,6 +154,34 @@ const Mission = () => {
             </GlassCard>
           </motion.div>
 
+          {/* Our Approach */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.8
+        }} className="mb-12">
+            <GlassCard className="p-8 sm:p-12" hover>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-accent p-3">
+                  <Compass className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="font-display text-2xl font-semibold text-foreground">Our Approach</h2>
+              </div>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  We believe in meeting people where they are. Through community support, practical resources, 
+                  and emotional guidance, we help individuals navigate the challenges of career transitions 
+                  with dignity and hope.
+                </p>
+              </div>
+            </GlassCard>
+          </motion.div>
+
           {/* Closing Statement */}
           <motion.div initial={{
           opacity: 0,
