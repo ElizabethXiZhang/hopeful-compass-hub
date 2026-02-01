@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { JobTransitionNewsSection } from "@/components/navigate/JobTransitionNewsSection";
-import { TrendingDown, Users } from "lucide-react";
-
+import { Button } from "@/components/ui/button";
+import { TrendingDown, Users, ArrowLeft } from "lucide-react";
 const JobCuts = () => {
   return (
     <Layout>
@@ -35,10 +36,17 @@ const JobCuts = () => {
               <span className="text-foreground/90 font-medium">You are not alone.</span>
             </p>
 
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-8">
               <Users className="w-4 h-4 text-secondary" />
               <span>Millions of workers worldwide are facing similar challenges</span>
             </div>
+
+            <Button asChild variant="outline" className="gap-2">
+              <Link to="/#ai-revolution">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </section>
