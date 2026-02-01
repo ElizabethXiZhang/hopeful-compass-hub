@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import GovernmentPolicies from "./pages/GovernmentPolicies";
 import JobCuts from "./pages/JobCuts";
 import Forum from "./pages/Forum";
+import BookCall from "./pages/BookCall";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/government-policies" element={<GovernmentPolicies />} />
             <Route path="/job-cuts" element={<JobCuts />} />
             <Route path="/forum" element={<Forum />} />
+            <Route path="/book-call" element={<BookCall />} />
             <Route path="/contact" element={<Contact />} />
             {/* Redirect old navigate route */}
             <Route path="/navigate" element={<Navigate to="/government-policies" replace />} />
