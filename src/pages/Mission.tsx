@@ -173,11 +173,10 @@ const Mission = () => {
                 <h2 className="font-display text-2xl font-semibold text-foreground">Our Approach</h2>
               </div>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  We believe in meeting people where they are. Through community support, practical resources, 
-                  and emotional guidance, we help individuals navigate the challenges of career transitions 
-                  with dignity and hope.
-                </p>
+                <p>Through our six foundational pillars, we provide a comprehensive framework for navigating unemployment with resilience and hope. Each pillar represents a crucial aspect of wellbeing that, when supported, enables individuals to not just survive but thrive during times of transition.
+
+
+We also provide YouTube videos, experts advice, coach support calls, community connections, options to share your stories, updates on global job markets and government policies. </p>
               </div>
             </GlassCard>
           </motion.div>
