@@ -36,11 +36,25 @@ const JobCuts = () => {
               <span className="text-foreground/90 font-medium">You are not alone.</span>
             </p>
 
-            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-8">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <Users className="w-4 h-4 text-secondary" />
               <span>Millions of workers worldwide are facing similar challenges</span>
             </div>
+          </motion.div>
+        </div>
+      </section>
 
+      {/* Job Transition News Section */}
+      <JobTransitionNewsSection />
+
+      {/* Back to Home Button */}
+      <section className="py-12">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
             <Button asChild variant="outline" className="gap-2">
               <Link to="/#ai-revolution">
                 <ArrowLeft className="w-4 h-4" />
@@ -50,9 +64,6 @@ const JobCuts = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Job Transition News Section */}
-      <JobTransitionNewsSection />
     </Layout>
   );
 };
