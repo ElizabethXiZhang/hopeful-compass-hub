@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
-import { MessageCircle, Users, Heart, Send, Plus, ArrowLeft, Lock } from "lucide-react";
+import { MessageCircle, Users, Heart, Send, Plus, ArrowLeft, Lock, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import ForumTopicList from "@/components/forum/ForumTopicList";
@@ -37,6 +37,14 @@ const Forum = () => {
     if (name) {
       sessionStorage.setItem("forum_member_name", name);
     }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("forum_member_email");
+    sessionStorage.removeItem("forum_member_name");
+    setMemberEmail(null);
+    setMemberName(null);
+    toast.success("You've been logged out. See you soon!");
   };
 
   // If not a member, show the gate
@@ -69,6 +77,15 @@ const Forum = () => {
               Welcome back, {memberName || "friend"}! This is a safe space to share your thoughts, 
               ask questions, and connect with others who understand what you're going through.
             </p>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="mt-4 text-muted-foreground hover:text-foreground"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Switch Account
+            </Button>
           </motion.div>
 
           {/* Empathetic reminder */}
