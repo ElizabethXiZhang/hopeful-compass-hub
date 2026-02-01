@@ -101,9 +101,9 @@ const AIRevolutionSection = () => {
                     </div>
                     <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
                       {step.title}
-                      {step.link && (
+                    {step.link && (
                         <span className="ml-2 text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                          →
+                          Click to Explore
                         </span>
                       )}
                     </h3>
