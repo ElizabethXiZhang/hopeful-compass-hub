@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GlassCard from "../ui/GlassCard";
 import { Users, MessageCircle, Heart, Globe, Mail } from "lucide-react";
 
@@ -26,10 +26,10 @@ const CommunitySection = () => {
         {/* Community features */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
           {[
-            { icon: Users, label: "50K+ Members", sublabel: "Growing daily" },
-            { icon: Globe, label: "120+ Countries", sublabel: "Worldwide reach" },
-            { icon: MessageCircle, label: "Active Forums", sublabel: "24/7 support" },
-            { icon: Heart, label: "Book a Support Call", sublabel: "Real connections" },
+            { icon: Users, label: "50K+ Members", sublabel: "Growing daily", link: null },
+            { icon: Globe, label: "120+ Countries", sublabel: "Worldwide reach", link: null },
+            { icon: MessageCircle, label: "Active Forums", sublabel: "24/7 support", link: "/forum" },
+            { icon: Heart, label: "Book a Support Call", sublabel: "Real connections", link: null },
           ].map((item, index) => (
             <motion.div
               key={item.label}
@@ -38,11 +38,21 @@ const CommunitySection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <GlassCard className="p-6 text-center" hover>
-                <item.icon className="mx-auto mb-3 h-8 w-8 text-primary" />
-                <div className="font-display text-xl font-semibold text-foreground">{item.label}</div>
-                <div className="text-sm text-muted-foreground">{item.sublabel}</div>
-              </GlassCard>
+              {item.link ? (
+                <Link to={item.link}>
+                  <GlassCard className="p-6 text-center cursor-pointer" hover>
+                    <item.icon className="mx-auto mb-3 h-8 w-8 text-primary" />
+                    <div className="font-display text-xl font-semibold text-foreground">{item.label}</div>
+                    <div className="text-sm text-muted-foreground">{item.sublabel}</div>
+                  </GlassCard>
+                </Link>
+              ) : (
+                <GlassCard className="p-6 text-center" hover>
+                  <item.icon className="mx-auto mb-3 h-8 w-8 text-primary" />
+                  <div className="font-display text-xl font-semibold text-foreground">{item.label}</div>
+                  <div className="text-sm text-muted-foreground">{item.sublabel}</div>
+                </GlassCard>
+              )}
             </motion.div>
           ))}
         </div>

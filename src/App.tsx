@@ -11,6 +11,7 @@ import Community from "./pages/Community";
 import Contact from "./pages/Contact";
 import GovernmentPolicies from "./pages/GovernmentPolicies";
 import JobCuts from "./pages/JobCuts";
+import Forum from "./pages/Forum";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/community" element={<Community />} />
             <Route path="/government-policies" element={<GovernmentPolicies />} />
             <Route path="/job-cuts" element={<JobCuts />} />
+            <Route path="/forum" element={<Forum />} />
             <Route path="/contact" element={<Contact />} />
             {/* Redirect old navigate route */}
             <Route path="/navigate" element={<Navigate to="/government-policies" replace />} />
