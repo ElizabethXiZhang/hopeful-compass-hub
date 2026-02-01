@@ -33,7 +33,7 @@ const JobCuts = () => {
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Mass layoffs and job cuts are affecting all industries.
               <br className="hidden sm:block" />
-              <span className="text-foreground/90 font-medium">You are not alone.</span>
+              <span className="text-foreground/90 font-medium">current job market updates</span>
             </p>
 
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
