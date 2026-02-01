@@ -33,7 +33,7 @@ const AIRevolutionSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative py-24 px-4 overflow-hidden">
+    <section id="ai-revolution" className="relative py-24 px-4 overflow-hidden">
       {/* Background glow */}
       <motion.div
         animate={{ opacity: [0.3, 0.5, 0.3] }}
