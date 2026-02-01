@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { JobTransitionNewsSection } from "@/components/navigate/JobTransitionNewsSection";
 import { Button } from "@/components/ui/button";
-import { TrendingDown, UsersRound, ArrowLeft } from "lucide-react";
+import { TrendingDown, Globe, ArrowLeft } from "lucide-react";
 const JobCuts = () => {
   return <Layout>
       {/* Hero Section */}
@@ -39,7 +39,7 @@ const JobCuts = () => {
             </p>
 
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <UsersRound className="w-4 h-4 text-secondary" />
+              <Globe className="w-4 h-4 text-secondary" />
               <span>Millions of workers worldwide are facing similar challenges</span>
             </div>
           </motion.div>
