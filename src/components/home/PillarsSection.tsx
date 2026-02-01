@@ -108,7 +108,7 @@ const PillarsSection = () => {
         once: true
       }} className="mt-16 text-center">
           <GlassCard className="p-8 sm:p-10" variant="strong">
-            <p className="text-lg text-foreground/90 leading-relaxed italic sm:text-3xl font-bold text-center">We believe that your worth is not defined by your job title. Every person deserves dignity, support, and the opportunity to thrive—regardless of their employment status.</p>
+            <p className="text-lg text-foreground/90 leading-relaxed italic font-bold text-center sm:text-xl">We believe that your worth is not defined by your job title. Every person deserves dignity, support, and the opportunity to thrive—regardless of their employment status.</p>
             <p className="text-muted-foreground mt-4">
           </p>
           </GlassCard>
