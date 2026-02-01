@@ -25,11 +25,10 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
 
     setIsChecking(true);
     try {
-      const { data, error } = await supabase
-        .from("community_members")
-        .select("email, name")
-        .eq("email", email.toLowerCase().trim())
-        .maybeSingle();
+      // Use edge function to verify membership (bypasses RLS)
+      const { data, error } = await supabase.functions.invoke('verify-membership', {
+        body: { email: email.toLowerCase().trim() }
+      });
 
       if (error) {
         console.error("Error checking membership:", error);
@@ -37,7 +36,13 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
         return;
       }
 
-      if (data) {
+      if (data?.error) {
+        console.error("Verification error:", data.error);
+        toast.error("Something went wrong. Please try again.");
+        return;
+      }
+
+      if (data?.verified) {
         toast.success("Welcome back! You're now connected to the forum.");
         onVerified(data.email, data.name);
       } else {
