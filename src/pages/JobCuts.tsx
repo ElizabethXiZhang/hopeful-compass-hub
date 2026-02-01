@@ -5,8 +5,7 @@ import { JobTransitionNewsSection } from "@/components/navigate/JobTransitionNew
 import { Button } from "@/components/ui/button";
 import { TrendingDown, Users, ArrowLeft } from "lucide-react";
 const JobCuts = () => {
-  return (
-    <Layout>
+  return <Layout>
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-24 pb-8">
         {/* Background elements */}
@@ -14,12 +13,15 @@ const JobCuts = () => {
         <div className="gradient-orb gradient-orb-2 w-[400px] h-[400px] top-1/4 -right-32" />
         
         <div className="container relative z-10 mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8
+        }} className="text-center max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="p-3 rounded-2xl bg-secondary/20 border border-secondary/30">
                 <TrendingDown className="w-8 h-8 text-secondary" />
@@ -33,7 +35,7 @@ const JobCuts = () => {
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Mass layoffs and job cuts are affecting all industries.
               <br className="hidden sm:block" />
-              <span className="text-foreground/90 font-medium">current job market updates</span>
+              
             </p>
 
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -50,11 +52,16 @@ const JobCuts = () => {
       {/* Back to Home Button */}
       <section className="py-12">
         <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
+          <motion.div initial={{
+          opacity: 0,
+          y: 30
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.8,
+          delay: 0.5
+        }}>
             <Button asChild variant="outline" className="gap-2">
               <Link to="/#ai-revolution">
                 <ArrowLeft className="w-4 h-4" />
@@ -64,8 +71,6 @@ const JobCuts = () => {
           </motion.div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default JobCuts;
