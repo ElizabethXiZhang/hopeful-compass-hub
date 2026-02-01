@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
-import { Target, Eye, Compass } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Target, Eye, Compass, ArrowLeft } from "lucide-react";
 const Mission = () => {
   return <Layout>
       {/* Page-specific background */}
@@ -47,6 +49,12 @@ const Mission = () => {
               delay: 0.5
             }} />
             </h1>
+            <Button asChild variant="outline" className="gap-2 mt-6">
+              <Link to="/#ai-revolution">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Home
+              </Link>
+            </Button>
           </motion.div>
 
           {/* Why We Exist */}
