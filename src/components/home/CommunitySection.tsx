@@ -28,7 +28,7 @@ const CommunitySection = () => {
           {[
             { icon: Users, label: "50K+ Members", sublabel: "Growing daily", link: null },
             { icon: Globe, label: "120+ Countries", sublabel: "Worldwide reach", link: null },
-            { icon: MessageCircle, label: "Active Forums", sublabel: "24/7 support", link: "/forum" },
+            { icon: MessageCircle, label: "Active Forums", sublabel: "Click to Participate", link: "/forum" },
             { icon: Heart, label: "Book a Support Call", sublabel: "$30/hour", link: "/book-call" },
           ].map((item, index) => (
             <motion.div
