@@ -76,7 +76,7 @@ const Footer = () => {
             
             {/* Social Links */}
             <div className="mt-6 flex gap-4">
-              {socialLinks.map(social => <a key={social.name} href={social.href} className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary" aria-label={social.name}>
+              {socialLinks.map((social) => <a key={social.name} href={social.href} className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary" aria-label={social.name}>
                   <social.icon size={18} />
                 </a>)}
             </div>
@@ -97,7 +97,7 @@ const Footer = () => {
         }}>
             <h4 className="mb-4 font-display text-sm font-semibold text-foreground">Navigation</h4>
             <ul className="space-y-3">
-              {footerLinks.navigation.map(link => <li key={link.name}>
+              {footerLinks.navigation.map((link) => <li key={link.name}>
                   <Link to={link.path} className="text-sm text-muted-foreground transition-colors hover:text-primary">
                     {link.name}
                   </Link>
@@ -118,9 +118,9 @@ const Footer = () => {
         }} viewport={{
           once: true
         }}>
-            <h4 className="mb-4 font-display text-sm font-semibold text-foreground">Resources</h4>
+            
             <ul className="space-y-3">
-              {footerLinks.resources.map(link => <li key={link.name}>
+              {footerLinks.resources.map((link) => <li key={link.name}>
                   <Link to={link.path} className="text-sm text-muted-foreground transition-colors hover:text-primary">
                     {link.name}
                   </Link>
