@@ -26,7 +26,7 @@ const App = () => (
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/mission" element={<Mission />} />
+            <Route path="/mission" element={<Navigate to="/" replace />} />
             <Route path="/pillars" element={<Pillars />} />
             <Route path="/community" element={<Community />} />
             <Route path="/government-policies" element={<GovernmentPolicies />} />
