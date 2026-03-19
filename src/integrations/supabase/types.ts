@@ -25,6 +25,8 @@ export type Database = {
           id: string
           name: string | null
           profession: string | null
+          session_token: string | null
+          session_token_expires_at: string | null
           share_story: boolean
           years_of_service: number | null
         }
@@ -38,6 +40,8 @@ export type Database = {
           id?: string
           name?: string | null
           profession?: string | null
+          session_token?: string | null
+          session_token_expires_at?: string | null
           share_story?: boolean
           years_of_service?: number | null
         }
@@ -51,6 +55,8 @@ export type Database = {
           id?: string
           name?: string | null
           profession?: string | null
+          session_token?: string | null
+          session_token_expires_at?: string | null
           share_story?: boolean
           years_of_service?: number | null
         }

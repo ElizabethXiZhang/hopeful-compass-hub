@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 interface ForumMembershipGateProps {
-  onVerified: (email: string, name: string | null) => void;
+  onVerified: (email: string, name: string | null, sessionToken: string) => void;
 }
 
 const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
@@ -25,7 +25,6 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
 
     setIsChecking(true);
     try {
-      // Use edge function to verify membership (bypasses RLS)
       const { data, error } = await supabase.functions.invoke('verify-membership', {
         body: { email: email.toLowerCase().trim() }
       });
@@ -42,9 +41,9 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
         return;
       }
 
-      if (data?.verified) {
+      if (data?.verified && data?.session_token) {
         toast.success("Welcome back! You're now connected to the forum.");
-        onVerified(data.email, data.name);
+        onVerified(data.email, data.name, data.session_token);
       } else {
         toast.error("We couldn't find this email in our community. Please join first!");
       }
@@ -65,7 +64,6 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
           transition={{ duration: 0.8 }}
         >
           <GlassCard variant="strong" className="p-8 md:p-12 text-center">
-            {/* Icon */}
             <motion.div
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
@@ -77,18 +75,15 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
               </div>
             </motion.div>
 
-            {/* Title */}
             <h1 className="font-display text-3xl font-bold text-foreground sm:text-4xl mb-4">
               This Space is for <span className="gradient-text">Our Community</span>
             </h1>
 
-            {/* Empathetic message */}
             <p className="text-muted-foreground text-lg mb-8 max-w-lg mx-auto">
               We've created this forum as a safe haven for those navigating change together. 
               To join the conversation, please verify your community membership.
             </p>
 
-            {/* Already a member - verify */}
             <div className="mb-8">
               <h3 className="text-foreground font-semibold mb-4 flex items-center justify-center gap-2">
                 <Users className="h-5 w-5 text-primary" />
@@ -112,14 +107,12 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
               </form>
             </div>
 
-            {/* Divider */}
             <div className="flex items-center gap-4 my-8">
               <div className="flex-1 h-px bg-white/10" />
               <span className="text-muted-foreground text-sm">or</span>
               <div className="flex-1 h-px bg-white/10" />
             </div>
 
-            {/* Not yet a member - join */}
             <div>
               <h3 className="text-foreground font-semibold mb-4 flex items-center justify-center gap-2">
                 <Heart className="h-5 w-5 text-primary" />
@@ -138,7 +131,6 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
               </Link>
             </div>
 
-            {/* Encouraging footer */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

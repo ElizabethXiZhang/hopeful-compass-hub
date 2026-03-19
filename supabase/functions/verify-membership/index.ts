@@ -12,47 +12,36 @@ const RATE_WINDOW_MS = 60000; // 1 minute
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_EMAIL_LENGTH = 255;
+const SESSION_TOKEN_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 function getClientIP(req: Request): string {
   const forwardedFor = req.headers.get('x-forwarded-for');
-  if (forwardedFor) {
-    return forwardedFor.split(',')[0].trim();
-  }
+  if (forwardedFor) return forwardedFor.split(',')[0].trim();
   const realIP = req.headers.get('x-real-ip');
-  if (realIP) {
-    return realIP.trim();
-  }
+  if (realIP) return realIP.trim();
   return 'unknown';
 }
 
 function checkRateLimit(ip: string): { allowed: boolean; resetInSeconds: number } {
   const now = Date.now();
   const record = rateLimitMap.get(ip);
-
   if (rateLimitMap.size > 10000) {
     for (const [key, value] of rateLimitMap.entries()) {
-      if (value.resetTime < now) {
-        rateLimitMap.delete(key);
-      }
+      if (value.resetTime < now) rateLimitMap.delete(key);
     }
   }
-
   if (!record || record.resetTime < now) {
     rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW_MS });
     return { allowed: true, resetInSeconds: Math.ceil(RATE_WINDOW_MS / 1000) };
   }
-
   if (record.count >= RATE_LIMIT) {
-    const resetInSeconds = Math.ceil((record.resetTime - now) / 1000);
-    return { allowed: false, resetInSeconds };
+    return { allowed: false, resetInSeconds: Math.ceil((record.resetTime - now) / 1000) };
   }
-
   record.count++;
   return { allowed: true, resetInSeconds: Math.ceil((record.resetTime - now) / 1000) };
 }
 
 Deno.serve(async (req) => {
-  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -65,10 +54,8 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Rate limiting
     const clientIP = getClientIP(req);
     const rateLimit = checkRateLimit(clientIP);
-
     if (!rateLimit.allowed) {
       return new Response(
         JSON.stringify({ error: 'Too many requests. Try again later.' }),
@@ -86,8 +73,6 @@ Deno.serve(async (req) => {
     }
 
     const trimmedEmail = email.toLowerCase().trim();
-
-    // Validate email format and length
     if (trimmedEmail.length > MAX_EMAIL_LENGTH || !EMAIL_REGEX.test(trimmedEmail)) {
       return new Response(
         JSON.stringify({ error: 'Invalid email format' }),
@@ -97,7 +82,6 @@ Deno.serve(async (req) => {
 
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-
     if (!supabaseUrl || !supabaseServiceKey) {
       console.error('Missing Supabase environment variables');
       return new Response(
@@ -124,11 +108,30 @@ Deno.serve(async (req) => {
 
     if (data && data.length > 0) {
       const member = data[0];
+
+      // Generate a session token and store it
+      const sessionToken = crypto.randomUUID();
+      const expiresAt = new Date(Date.now() + SESSION_TOKEN_TTL_MS).toISOString();
+
+      const { error: updateError } = await supabase
+        .from('community_members')
+        .update({ session_token: sessionToken, session_token_expires_at: expiresAt })
+        .eq('email', trimmedEmail);
+
+      if (updateError) {
+        console.error('Failed to store session token:', updateError.message);
+        return new Response(
+          JSON.stringify({ error: 'Failed to create session' }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
       return new Response(
         JSON.stringify({ 
           verified: true, 
           email: member.email,
-          name: member.name 
+          name: member.name,
+          session_token: sessionToken,
         }),
         { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
