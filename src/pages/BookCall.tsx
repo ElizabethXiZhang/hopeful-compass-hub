@@ -7,6 +7,16 @@ import { Calendar, Clock, DollarSign, Heart, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const BookCall = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <Layout>
       {/* Page background */}
