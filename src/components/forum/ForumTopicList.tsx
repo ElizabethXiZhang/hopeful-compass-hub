@@ -13,6 +13,7 @@ import { formatDistanceToNow } from "date-fns";
 interface ForumTopicListProps {
   memberEmail: string;
   memberName: string | null;
+  sessionToken: string;
   onSelectTopic: (topicId: string) => void;
 }
 
@@ -20,25 +21,24 @@ interface ForumTopic {
   id: string;
   title: string;
   content: string;
-  author_email: string;
   author_name: string | null;
   created_at: string;
   updated_at: string;
 }
 
-const ForumTopicList = ({ memberEmail, memberName, onSelectTopic }: ForumTopicListProps) => {
+const ForumTopicList = ({ memberEmail, memberName, sessionToken, onSelectTopic }: ForumTopicListProps) => {
   const [showNewTopicForm, setShowNewTopicForm] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
   const queryClient = useQueryClient();
 
-  // Fetch topics
+  // Fetch topics - exclude author_email from selection
   const { data: topics, isLoading } = useQuery({
     queryKey: ["forum-topics"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("forum_topics")
-        .select("*")
+        .select("id, title, content, author_name, created_at, updated_at")
         .order("updated_at", { ascending: false });
 
       if (error) throw error;
@@ -46,13 +46,14 @@ const ForumTopicList = ({ memberEmail, memberName, onSelectTopic }: ForumTopicLi
     },
   });
 
-  // Create topic mutation
+  // Create topic mutation via edge function
   const createTopicMutation = useMutation({
     mutationFn: async ({ title, content }: { title: string; content: string }) => {
       const { data, error } = await supabase.functions.invoke('forum-post', {
         body: {
           action: 'create_topic',
           email: memberEmail,
+          session_token: sessionToken,
           title,
           content,
         },
@@ -155,7 +156,6 @@ const ForumTopicList = ({ memberEmail, memberName, onSelectTopic }: ForumTopicLi
       {/* Topics List */}
       <div className="space-y-4">
         {isLoading ? (
-          // Loading skeletons
           [...Array(3)].map((_, i) => (
             <GlassCard key={i} className="p-6 animate-pulse">
               <div className="h-6 bg-white/10 rounded w-3/4 mb-3" />

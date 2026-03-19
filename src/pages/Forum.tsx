@@ -17,6 +17,7 @@ import ForumMembershipGate from "@/components/forum/ForumMembershipGate";
 const Forum = () => {
   const [memberEmail, setMemberEmail] = useState<string | null>(null);
   const [memberName, setMemberName] = useState<string | null>(null);
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
   const [selectedTopicId, setSelectedTopicId] = useState<string | null>(null);
   const [showNewTopicForm, setShowNewTopicForm] = useState(false);
 
@@ -24,16 +25,20 @@ const Forum = () => {
   useEffect(() => {
     const storedEmail = sessionStorage.getItem("forum_member_email");
     const storedName = sessionStorage.getItem("forum_member_name");
-    if (storedEmail) {
+    const storedToken = sessionStorage.getItem("forum_session_token");
+    if (storedEmail && storedToken) {
       setMemberEmail(storedEmail);
       setMemberName(storedName);
+      setSessionToken(storedToken);
     }
   }, []);
 
-  const handleMembershipVerified = (email: string, name: string | null) => {
+  const handleMembershipVerified = (email: string, name: string | null, token: string) => {
     setMemberEmail(email);
     setMemberName(name);
+    setSessionToken(token);
     sessionStorage.setItem("forum_member_email", email);
+    sessionStorage.setItem("forum_session_token", token);
     if (name) {
       sessionStorage.setItem("forum_member_name", name);
     }
@@ -42,13 +47,15 @@ const Forum = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("forum_member_email");
     sessionStorage.removeItem("forum_member_name");
+    sessionStorage.removeItem("forum_session_token");
     setMemberEmail(null);
     setMemberName(null);
+    setSessionToken(null);
     toast.success("You've been logged out. See you soon!");
   };
 
   // If not a member, show the gate
-  if (!memberEmail) {
+  if (!memberEmail || !sessionToken) {
     return (
       <Layout>
         <ForumMembershipGate onVerified={handleMembershipVerified} />
@@ -112,6 +119,7 @@ const Forum = () => {
                 topicId={selectedTopicId}
                 memberEmail={memberEmail}
                 memberName={memberName}
+                sessionToken={sessionToken}
                 onBack={() => setSelectedTopicId(null)}
               />
             ) : (
@@ -119,6 +127,7 @@ const Forum = () => {
                 key="topic-list"
                 memberEmail={memberEmail}
                 memberName={memberName}
+                sessionToken={sessionToken}
                 onSelectTopic={setSelectedTopicId}
               />
             )}

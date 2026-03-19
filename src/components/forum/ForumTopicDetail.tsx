@@ -13,6 +13,7 @@ interface ForumTopicDetailProps {
   topicId: string;
   memberEmail: string;
   memberName: string | null;
+  sessionToken: string;
   onBack: () => void;
 }
 
@@ -20,7 +21,6 @@ interface ForumTopic {
   id: string;
   title: string;
   content: string;
-  author_email: string;
   author_name: string | null;
   created_at: string;
 }
@@ -29,22 +29,21 @@ interface ForumReply {
   id: string;
   topic_id: string;
   content: string;
-  author_email: string;
   author_name: string | null;
   created_at: string;
 }
 
-const ForumTopicDetail = ({ topicId, memberEmail, memberName, onBack }: ForumTopicDetailProps) => {
+const ForumTopicDetail = ({ topicId, memberEmail, memberName, sessionToken, onBack }: ForumTopicDetailProps) => {
   const [replyContent, setReplyContent] = useState("");
   const queryClient = useQueryClient();
 
-  // Fetch topic
+  // Fetch topic - exclude author_email
   const { data: topic, isLoading: topicLoading } = useQuery({
     queryKey: ["forum-topic", topicId],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("forum_topics")
-        .select("*")
+        .select("id, title, content, author_name, created_at")
         .eq("id", topicId)
         .single();
 
@@ -53,13 +52,13 @@ const ForumTopicDetail = ({ topicId, memberEmail, memberName, onBack }: ForumTop
     },
   });
 
-  // Fetch replies
+  // Fetch replies - exclude author_email
   const { data: replies, isLoading: repliesLoading } = useQuery({
     queryKey: ["forum-replies", topicId],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("forum_replies")
-        .select("*")
+        .select("id, topic_id, content, author_name, created_at")
         .eq("topic_id", topicId)
         .order("created_at", { ascending: true });
 
@@ -68,13 +67,14 @@ const ForumTopicDetail = ({ topicId, memberEmail, memberName, onBack }: ForumTop
     },
   });
 
-  // Create reply mutation
+  // Create reply mutation via edge function
   const createReplyMutation = useMutation({
     mutationFn: async (content: string) => {
       const { data, error } = await supabase.functions.invoke('forum-post', {
         body: {
           action: 'create_reply',
           email: memberEmail,
+          session_token: sessionToken,
           topic_id: topicId,
           content,
         },
