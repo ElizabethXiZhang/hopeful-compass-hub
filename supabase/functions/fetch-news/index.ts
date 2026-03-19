@@ -32,24 +32,6 @@ serve(async (req) => {
 
   try {
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-    const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY');
-    
-    // Verify authorization - accept both service role key and anon key (for cron jobs)
-    const authHeader = req.headers.get('Authorization');
-    const apiKey = req.headers.get('apikey');
-    
-    const token = authHeader?.replace('Bearer ', '');
-    const isAuthorized = 
-      (token && (token === SUPABASE_SERVICE_ROLE_KEY || token === SUPABASE_ANON_KEY)) ||
-      (apiKey && (apiKey === SUPABASE_SERVICE_ROLE_KEY || apiKey === SUPABASE_ANON_KEY));
-    
-    if (!isAuthorized) {
-      console.warn('Unauthorized access attempt to fetch-news function');
-      return new Response(
-        JSON.stringify({ error: 'Unauthorized' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
 
     const NEWS_API_KEY = Deno.env.get('NEWS_API_KEY');
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
