@@ -1,0 +1,157 @@
+import { motion } from "framer-motion";
+import GlassCard from "../ui/GlassCard";
+import { Target, Eye, Compass } from "lucide-react";
+
+const MissionSection = () => {
+  return (
+    <section className="relative py-24 px-4">
+      <div className="mx-auto max-w-4xl">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl mb-6">
+            Our <span className="gradient-text">Mission</span>
+          </h2>
+        </motion.div>
+
+        {/* Why We Exist */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <GlassCard className="p-8 sm:p-12" glow="primary">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-secondary p-3">
+                <Target className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-foreground">Why We Exist</h3>
+            </div>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                The world of work is transforming at an unprecedented pace. Artificial intelligence,
+                automation, and economic shifts are reshaping industries and displacing workers faster
+                than ever before. In this new reality, unemployment isn't just an economic issue—it's
+                a human one.
+              </p>
+              <p>
+                We exist to ensure that no one faces this challenge alone. Our mission is to build a
+                global community that provides emotional support, practical resources, and a renewed
+                sense of purpose to everyone navigating the complexities of unemployment.
+              </p>
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* Our Mission */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <GlassCard className="p-8 sm:p-12" hover>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3">
+                <Compass className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-foreground">Our Mission</h3>
+            </div>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                We take a holistic approach to supporting those facing unemployment. Rather than
+                focusing solely on job placement, we address the full spectrum of human needs—mental
+                health, physical wellbeing, financial stability, community connection, and personal purpose.
+              </p>
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* Our Vision */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <GlassCard className="p-8 sm:p-12" hover>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="inline-flex rounded-xl bg-gradient-to-br from-secondary to-accent p-3">
+                <Eye className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-foreground">Our Vision</h3>
+            </div>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                We envision a world where the transition between jobs is met with compassion rather
+                than stigma. A world where communities rally around their members, providing the
+                emotional scaffolding needed to weather uncertainty.
+              </p>
+              <p>
+                We see a future where technology serves humanity—not replaces it—and where every
+                individual has access to the tools, knowledge, and support they need to adapt, grow,
+                and find meaning in their lives.
+              </p>
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* Our Approach */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <GlassCard className="p-8 sm:p-12" hover>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-accent p-3">
+                <Compass className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-foreground">Our Approach</h3>
+            </div>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <p>
+                Through our six foundational pillars, we provide a comprehensive framework for navigating
+                unemployment with resilience and hope. Each pillar represents a crucial aspect of wellbeing
+                that, when supported, enables individuals to not just survive but thrive during times of transition.
+              </p>
+              <p>
+                We also provide YouTube videos, experts advice, coach support calls, community connections,
+                options to share your stories, updates on global job markets and government policies.
+              </p>
+            </div>
+          </GlassCard>
+        </motion.div>
+
+        {/* Closing Statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <GlassCard className="p-8 sm:p-10" variant="strong">
+            <p className="text-lg sm:text-xl text-foreground/90 leading-relaxed font-medium italic">
+              "The Unemployment Pandemic is not just a challenge to overcome — it's an opportunity
+              to redefine what it means to live a meaningful life."
+            </p>
+          </GlassCard>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default MissionSection;
