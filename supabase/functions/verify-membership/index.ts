@@ -5,6 +5,52 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+// Rate limiting
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10;
+const RATE_WINDOW_MS = 60000; // 1 minute
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_EMAIL_LENGTH = 255;
+
+function getClientIP(req: Request): string {
+  const forwardedFor = req.headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    return forwardedFor.split(',')[0].trim();
+  }
+  const realIP = req.headers.get('x-real-ip');
+  if (realIP) {
+    return realIP.trim();
+  }
+  return 'unknown';
+}
+
+function checkRateLimit(ip: string): { allowed: boolean; resetInSeconds: number } {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  if (rateLimitMap.size > 10000) {
+    for (const [key, value] of rateLimitMap.entries()) {
+      if (value.resetTime < now) {
+        rateLimitMap.delete(key);
+      }
+    }
+  }
+
+  if (!record || record.resetTime < now) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW_MS });
+    return { allowed: true, resetInSeconds: Math.ceil(RATE_WINDOW_MS / 1000) };
+  }
+
+  if (record.count >= RATE_LIMIT) {
+    const resetInSeconds = Math.ceil((record.resetTime - now) / 1000);
+    return { allowed: false, resetInSeconds };
+  }
+
+  record.count++;
+  return { allowed: true, resetInSeconds: Math.ceil((record.resetTime - now) / 1000) };
+}
+
 Deno.serve(async (req) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
@@ -19,11 +65,32 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Rate limiting
+    const clientIP = getClientIP(req);
+    const rateLimit = checkRateLimit(clientIP);
+
+    if (!rateLimit.allowed) {
+      return new Response(
+        JSON.stringify({ error: 'Too many requests. Try again later.' }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json', 'Retry-After': String(rateLimit.resetInSeconds) } }
+      );
+    }
+
     const { email } = await req.json();
 
     if (!email || typeof email !== 'string') {
       return new Response(
         JSON.stringify({ error: 'Email is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const trimmedEmail = email.toLowerCase().trim();
+
+    // Validate email format and length
+    if (trimmedEmail.length > MAX_EMAIL_LENGTH || !EMAIL_REGEX.test(trimmedEmail)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid email format' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
@@ -41,12 +108,10 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Check if email exists in community_members (using service role to bypass RLS)
-    // Use limit(1) instead of maybeSingle() to handle potential duplicates
     const { data, error } = await supabase
       .from('community_members')
       .select('email, name')
-      .eq('email', email.toLowerCase().trim())
+      .eq('email', trimmedEmail)
       .limit(1);
 
     if (error) {
