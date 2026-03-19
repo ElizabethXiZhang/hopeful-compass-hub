@@ -69,7 +69,7 @@ Deno.serve(async (req) => {
     }
 
     const body = await req.json();
-    const { action, email, title, content, topic_id } = body;
+    const { action, email, session_token, title, content, topic_id } = body;
 
     // Validate email
     if (!email || typeof email !== 'string') {
@@ -79,11 +79,28 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Validate session token
+    if (!session_token || typeof session_token !== 'string') {
+      return new Response(
+        JSON.stringify({ error: 'Session token is required' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const trimmedEmail = sanitizeString(email).toLowerCase();
     if (trimmedEmail.length > MAX_EMAIL_LENGTH || !EMAIL_REGEX.test(trimmedEmail)) {
       return new Response(
         JSON.stringify({ error: 'Invalid email format' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate session_token is a UUID
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(session_token)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid session token' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -98,21 +115,30 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Verify the email belongs to a community member (server-side identity check)
+    // Verify the session token matches the email and is not expired
     const { data: memberData, error: memberError } = await supabase
       .from('community_members')
-      .select('email, name')
+      .select('email, name, session_token, session_token_expires_at')
       .eq('email', trimmedEmail)
+      .eq('session_token', session_token)
       .limit(1);
 
     if (memberError || !memberData || memberData.length === 0) {
       return new Response(
-        JSON.stringify({ error: 'Not a verified community member' }),
-        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: 'Invalid or expired session. Please verify your membership again.' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     const member = memberData[0];
+
+    // Check token expiry
+    if (member.session_token_expires_at && new Date(member.session_token_expires_at) < new Date()) {
+      return new Response(
+        JSON.stringify({ error: 'Session expired. Please verify your membership again.' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
     if (action === 'create_topic') {
       if (!title || typeof title !== 'string' || !content || typeof content !== 'string') {
@@ -143,7 +169,7 @@ Deno.serve(async (req) => {
         content: sanitizedContent,
         author_email: member.email,
         author_name: member.name,
-      }).select().single();
+      }).select('id, title, content, author_name, created_at, updated_at').single();
 
       if (error) {
         console.error('Insert topic error:', error.message);
@@ -174,8 +200,6 @@ Deno.serve(async (req) => {
         );
       }
 
-      // Validate topic_id is a valid UUID
-      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
       if (!uuidRegex.test(topic_id)) {
         return new Response(
           JSON.stringify({ error: 'Invalid topic ID' }),
@@ -188,7 +212,7 @@ Deno.serve(async (req) => {
         content: sanitizedContent,
         author_email: member.email,
         author_name: member.name,
-      }).select().single();
+      }).select('id, topic_id, content, author_name, created_at').single();
 
       if (error) {
         console.error('Insert reply error:', error.message);
