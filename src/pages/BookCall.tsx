@@ -112,7 +112,7 @@ const BookCall = () => {
               {/* Calendly Inline Widget */}
               <div 
                 className="calendly-inline-widget rounded-xl overflow-hidden bg-white/5"
-                data-url="https://calendly.com/the-unemployment-pandemic/support-call?hide_gdpr_banner=1&primary_color=8b5cf6"
+                data-url="https://calendly.com/zhangxinxin-the-unemployment-pandemic/30min?hide_gdpr_banner=1&primary_color=8b5cf6"
                 style={{ minWidth: "320px", height: "700px" }}
               />
             </GlassCard>
