@@ -115,13 +115,6 @@ const BookCall = () => {
                 data-url="https://calendly.com/the-unemployment-pandemic/support-call?hide_gdpr_banner=1&primary_color=8b5cf6"
                 style={{ minWidth: "320px", height: "700px" }}
               />
-              
-              {/* Load Calendly Script */}
-              <script 
-                type="text/javascript" 
-                src="https://assets.calendly.com/assets/external/widget.js" 
-                async 
-              />
             </GlassCard>
           </motion.div>
 
