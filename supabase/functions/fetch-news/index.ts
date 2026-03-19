@@ -32,14 +32,16 @@ serve(async (req) => {
 
   try {
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY');
     
-    // Verify service role key - this function should only be called by admin/cron
+    // Verify authorization - accept both service role key and anon key (for cron jobs)
     const authHeader = req.headers.get('Authorization');
     const apiKey = req.headers.get('apikey');
     
+    const token = authHeader?.replace('Bearer ', '');
     const isAuthorized = 
-      (authHeader && authHeader === `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`) ||
-      (apiKey && apiKey === SUPABASE_SERVICE_ROLE_KEY);
+      (token && (token === SUPABASE_SERVICE_ROLE_KEY || token === SUPABASE_ANON_KEY)) ||
+      (apiKey && (apiKey === SUPABASE_SERVICE_ROLE_KEY || apiKey === SUPABASE_ANON_KEY));
     
     if (!isAuthorized) {
       console.warn('Unauthorized access attempt to fetch-news function');
