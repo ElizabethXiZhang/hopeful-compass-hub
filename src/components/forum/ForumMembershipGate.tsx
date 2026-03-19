@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import GlassCard from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Heart, Users, Lock, ArrowRight, MessageCircle } from "lucide-react";
+import { Heart, Users, Lock, ArrowRight, MessageCircle, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -141,6 +141,20 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
                 <MessageCircle className="h-4 w-4" />
                 <span>Real conversations. Real support. Real community.</span>
               </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="mt-6 text-center"
+            >
+              <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
+                <Link to="/">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Home
+                </Link>
+              </Button>
             </motion.div>
           </GlassCard>
         </motion.div>
