@@ -121,9 +121,9 @@ const Footer = () => {
             
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => <li key={link.name}>
-                  <Link to={link.path} className="text-sm text-muted-foreground transition-colors hover:text-primary">
-                    {link.name}
-                  </Link>
+                  
+
+              
                 </li>)}
             </ul>
           </motion.div>
