@@ -142,13 +142,11 @@ const Forum = () => {
           >
             <Button
               variant="ghost"
-              asChild
+              onClick={() => window.history.back()}
               className="text-muted-foreground hover:text-foreground"
             >
-              <Link to="/">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Home
-              </Link>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Go Back
             </Button>
           </motion.div>
         </div>
