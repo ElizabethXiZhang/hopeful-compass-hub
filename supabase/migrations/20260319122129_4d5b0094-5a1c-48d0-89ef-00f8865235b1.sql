@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Authors can update their own topics" ON public.forum_topics;
