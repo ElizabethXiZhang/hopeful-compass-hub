@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import GlassCard from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Heart, Users, Lock, ArrowRight, MessageCircle } from "lucide-react";
+import { Heart, Users, Lock, ArrowRight, MessageCircle, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
