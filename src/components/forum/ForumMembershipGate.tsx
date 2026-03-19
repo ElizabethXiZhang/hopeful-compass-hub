@@ -142,6 +142,20 @@ const ForumMembershipGate = ({ onVerified }: ForumMembershipGateProps) => {
                 <span>Real conversations. Real support. Real community.</span>
               </div>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="mt-6 text-center"
+            >
+              <Button variant="ghost" asChild className="text-muted-foreground hover:text-foreground">
+                <Link to="/">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Home
+                </Link>
+              </Button>
+            </motion.div>
           </GlassCard>
         </motion.div>
       </div>
