@@ -49,15 +49,18 @@ const ForumTopicList = ({ memberEmail, memberName, onSelectTopic }: ForumTopicLi
   // Create topic mutation
   const createTopicMutation = useMutation({
     mutationFn: async ({ title, content }: { title: string; content: string }) => {
-      const { data, error } = await supabase.from("forum_topics").insert({
-        title,
-        content,
-        author_email: memberEmail,
-        author_name: memberName,
-      }).select().single();
+      const { data, error } = await supabase.functions.invoke('forum-post', {
+        body: {
+          action: 'create_topic',
+          email: memberEmail,
+          title,
+          content,
+        },
+      });
 
       if (error) throw error;
-      return data;
+      if (data?.error) throw new Error(data.error);
+      return data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["forum-topics"] });

@@ -71,15 +71,18 @@ const ForumTopicDetail = ({ topicId, memberEmail, memberName, onBack }: ForumTop
   // Create reply mutation
   const createReplyMutation = useMutation({
     mutationFn: async (content: string) => {
-      const { data, error } = await supabase.from("forum_replies").insert({
-        topic_id: topicId,
-        content,
-        author_email: memberEmail,
-        author_name: memberName,
-      }).select().single();
+      const { data, error } = await supabase.functions.invoke('forum-post', {
+        body: {
+          action: 'create_reply',
+          email: memberEmail,
+          topic_id: topicId,
+          content,
+        },
+      });
 
       if (error) throw error;
-      return data;
+      if (data?.error) throw new Error(data.error);
+      return data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["forum-replies", topicId] });

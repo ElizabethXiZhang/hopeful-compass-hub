@@ -8,3 +8,9 @@ verify_jwt = false
 
 [functions.community-signup]
 verify_jwt = false
+
+[functions.verify-membership]
+verify_jwt = false
+
+[functions.forum-post]
+verify_jwt = false
