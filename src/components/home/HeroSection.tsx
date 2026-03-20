@@ -157,6 +157,7 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
+        <HeroComets />
 
         {/* Main title */}
         <motion.h1
