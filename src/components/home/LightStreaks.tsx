@@ -6,227 +6,228 @@ const LightStreaks = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationId: number;
+    let startTime = performance.now();
 
     const resize = () => {
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.scale(dpr, dpr);
     };
 
     resize();
     window.addEventListener("resize", resize);
 
+    // Streak configuration
     const streaks = [
       {
-        // Top-right arc
-        orbitRx: 0.52, orbitRy: 0.38,
-        rotation: -0.2,
-        speed: 0.0004,
+        // Top-right sweeping arc
+        cx: 0.65, cy: 0.35,
+        rx: 0.42, ry: 0.32,
+        rotation: -0.3,
+        speed: 0.00012,
         offset: 0,
         direction: 1,
-        trailLen: 0.28,
+        trailLength: 0.35,
         colors: [
-          { r: 100, g: 130, b: 255 },
-          { r: 170, g: 110, b: 255 },
-          { r: 255, g: 140, b: 200 },
+          { r: 120, g: 140, b: 255 },  // blue
+          { r: 180, g: 120, b: 255 },  // purple
+          { r: 255, g: 150, b: 200 },  // pink
         ],
-        opacity: 0.9,
+        opacity: 0.85,
+        coreSize: 6,
+        glowSize: 35,
+        bloomSize: 80,
+      },
+      {
+        // Bottom-left sweeping arc
+        cx: 0.35, cy: 0.65,
+        rx: 0.40, ry: 0.30,
+        rotation: -0.25,
+        speed: 0.0001,
+        offset: Math.PI,
+        direction: -1,
+        trailLength: 0.3,
+        colors: [
+          { r: 80, g: 200, b: 255 },   // cyan
+          { r: 160, g: 100, b: 255 },  // violet
+          { r: 240, g: 130, b: 200 },  // rose
+        ],
+        opacity: 0.7,
         coreSize: 5,
         glowSize: 30,
         bloomSize: 70,
-        // Visible arc range (radians) — top-right quadrant
-        arcStart: -Math.PI * 0.75,
-        arcEnd: Math.PI * 0.15,
-      },
-      {
-        // Bottom-left arc
-        orbitRx: 0.50, orbitRy: 0.36,
-        rotation: -0.15,
-        speed: 0.00035,
-        offset: Math.PI,
-        direction: -1,
-        trailLen: 0.25,
-        colors: [
-          { r: 70, g: 190, b: 255 },
-          { r: 150, g: 90, b: 255 },
-          { r: 235, g: 120, b: 195 },
-        ],
-        opacity: 0.8,
-        coreSize: 4.5,
-        glowSize: 26,
-        bloomSize: 60,
-        arcStart: Math.PI * 0.25,
-        arcEnd: Math.PI * 1.15,
       },
     ];
 
-    const lerpColor = (colors: { r: number; g: number; b: number }[], t: number) => {
-      const s = t * (colors.length - 1);
-      const i = Math.floor(s);
-      const f = s - i;
+    const getEllipsePoint = (
+      streak: typeof streaks[0],
+      angle: number,
+      w: number,
+      h: number
+    ) => {
+      const cos = Math.cos(streak.rotation);
+      const sin = Math.sin(streak.rotation);
+      const ex = streak.rx * w * Math.cos(angle);
+      const ey = streak.ry * h * Math.sin(angle);
+      return {
+        x: streak.cx * w + ex * cos - ey * sin,
+        y: streak.cy * h + ex * sin + ey * cos,
+      };
+    };
+
+    const lerpColor = (
+      colors: { r: number; g: number; b: number }[],
+      t: number
+    ) => {
+      const scaled = t * (colors.length - 1);
+      const i = Math.floor(scaled);
+      const f = scaled - i;
       const c1 = colors[Math.min(i, colors.length - 1)];
       const c2 = colors[Math.min(i + 1, colors.length - 1)];
-      return { r: c1.r + (c2.r - c1.r) * f, g: c1.g + (c2.g - c1.g) * f, b: c1.b + (c2.b - c1.b) * f };
-    };
-
-    const getPoint = (rx: number, ry: number, rot: number, angle: number, cx: number, cy: number) => {
-      const cosR = Math.cos(rot), sinR = Math.sin(rot);
-      const ex = rx * Math.cos(angle), ey = ry * Math.sin(angle);
-      return { x: cx + ex * cosR - ey * sinR, y: cy + ex * sinR + ey * cosR };
-    };
-
-    // Normalize angle to [-PI, PI]
-    const normAngle = (a: number) => {
-      while (a > Math.PI) a -= Math.PI * 2;
-      while (a < -Math.PI) a += Math.PI * 2;
-      return a;
-    };
-
-    // Smooth visibility within arc range
-    const arcVisibility = (angle: number, arcStart: number, arcEnd: number) => {
-      const a = normAngle(angle);
-      const s = normAngle(arcStart);
-      const e = normAngle(arcEnd);
-
-      let inArc: boolean;
-      if (s < e) {
-        inArc = a >= s && a <= e;
-      } else {
-        inArc = a >= s || a <= e;
-      }
-
-      if (!inArc) return 0;
-
-      // Smooth fade at edges
-      const fadeRange = 0.3;
-      let dist: number;
-      if (s < e) {
-        const mid = (s + e) / 2;
-        const half = (e - s) / 2;
-        dist = 1 - Math.abs(a - mid) / half;
-      } else {
-        const range = (Math.PI * 2 - s + e);
-        let pos = a - s;
-        if (pos < 0) pos += Math.PI * 2;
-        const norm = pos / range;
-        dist = norm < 0.5 ? norm * 2 : (1 - norm) * 2;
-      }
-
-      if (dist < fadeRange) return dist / fadeRange;
-      return 1;
+      return {
+        r: c1.r + (c2.r - c1.r) * f,
+        g: c1.g + (c2.g - c1.g) * f,
+        b: c1.b + (c2.b - c1.b) * f,
+      };
     };
 
     const draw = (timestamp: number) => {
+      const elapsed = timestamp - startTime;
       const rect = canvas.getBoundingClientRect();
-      const w = rect.width, h = rect.height;
-      const cx = w / 2, cy = h / 2;
+      const w = rect.width;
+      const h = rect.height;
 
       ctx.clearRect(0, 0, w, h);
 
-      for (const s of streaks) {
-        const rx = s.orbitRx * w * 0.5;
-        const ry = s.orbitRy * h * 0.5;
-        const baseAngle = s.offset + timestamp * s.speed * s.direction;
-        const visibility = arcVisibility(normAngle(baseAngle % (Math.PI * 2)), s.arcStart, s.arcEnd);
+      for (const streak of streaks) {
+        const baseAngle =
+          streak.offset + elapsed * streak.speed * streak.direction;
+        
+        // Fade cycle: streak fades in and out over its orbit
+        const cyclePos = ((elapsed * streak.speed * 0.5) % (Math.PI * 2)) / (Math.PI * 2);
+        const visibility = Math.sin(cyclePos * Math.PI) * 0.6 + 0.4;
 
-        if (visibility < 0.01) {
-          animationId = requestAnimationFrame(draw);
-          return;
-        }
+        const trailSegments = 120;
+        const trailAngleSpan = streak.trailLength * Math.PI * 2;
 
-        const segments = 100;
-        const trailSpan = s.trailLen * Math.PI * 2;
+        // Draw bloom layer (outermost, softest)
+        for (let i = 0; i < trailSegments; i++) {
+          const t = i / trailSegments;
+          const angle = baseAngle - t * trailAngleSpan * streak.direction;
+          const pos = getEllipsePoint(streak, angle, w, h);
 
-        // Bloom layer
-        for (let i = 0; i < segments; i++) {
-          const t = i / segments;
-          const angle = baseAngle - t * trailSpan * s.direction;
-          const pos = getPoint(rx, ry, s.rotation, angle, cx, cy);
+          // Taper: thick at head, thin at tail with smooth cubic falloff
           const taper = Math.pow(1 - t, 3);
-          const color = lerpColor(s.colors, t);
-          const alpha = taper * 0.05 * s.opacity * visibility;
+          const color = lerpColor(streak.colors, t);
+          const alpha = taper * 0.06 * streak.opacity * visibility;
+
           if (alpha < 0.001) continue;
 
-          const r = s.bloomSize * (0.3 + taper * 0.7);
-          const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
-          grad.addColorStop(0, `rgba(${color.r},${color.g},${color.b},${alpha})`);
-          grad.addColorStop(0.4, `rgba(${color.r},${color.g},${color.b},${alpha * 0.25})`);
-          grad.addColorStop(1, `rgba(${color.r},${color.g},${color.b},0)`);
+          const bloomRadius = streak.bloomSize * (0.3 + taper * 0.7);
+          const gradient = ctx.createRadialGradient(
+            pos.x, pos.y, 0,
+            pos.x, pos.y, bloomRadius
+          );
+          gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`);
+          gradient.addColorStop(0.4, `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha * 0.3})`);
+          gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+
           ctx.beginPath();
-          ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
+          ctx.arc(pos.x, pos.y, bloomRadius, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
           ctx.fill();
         }
 
-        // Glow layer
-        for (let i = 0; i < segments; i++) {
-          const t = i / segments;
-          const angle = baseAngle - t * trailSpan * s.direction;
-          const pos = getPoint(rx, ry, s.rotation, angle, cx, cy);
+        // Draw glow layer (mid layer)
+        for (let i = 0; i < trailSegments; i++) {
+          const t = i / trailSegments;
+          const angle = baseAngle - t * trailAngleSpan * streak.direction;
+          const pos = getEllipsePoint(streak, angle, w, h);
+
           const taper = Math.pow(1 - t, 2.5);
-          const color = lerpColor(s.colors, t);
-          const alpha = taper * 0.14 * s.opacity * visibility;
+          const color = lerpColor(streak.colors, t);
+          const alpha = taper * 0.15 * streak.opacity * visibility;
+
           if (alpha < 0.001) continue;
 
-          const r = s.glowSize * (0.2 + taper * 0.8);
-          const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
-          grad.addColorStop(0, `rgba(${color.r},${color.g},${color.b},${alpha})`);
-          grad.addColorStop(0.5, `rgba(${color.r},${color.g},${color.b},${alpha * 0.2})`);
-          grad.addColorStop(1, `rgba(${color.r},${color.g},${color.b},0)`);
+          const glowRadius = streak.glowSize * (0.2 + taper * 0.8);
+          const gradient = ctx.createRadialGradient(
+            pos.x, pos.y, 0,
+            pos.x, pos.y, glowRadius
+          );
+          gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`);
+          gradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha * 0.2})`);
+          gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+
           ctx.beginPath();
-          ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
+          ctx.arc(pos.x, pos.y, glowRadius, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
           ctx.fill();
         }
 
-        // Core trail
+        // Draw core trail (bright inner line)
         ctx.lineCap = "round";
-        for (let i = 0; i < segments - 1; i++) {
-          const t = i / segments;
-          const t2 = (i + 1) / segments;
-          const p1 = getPoint(rx, ry, s.rotation, baseAngle - t * trailSpan * s.direction, cx, cy);
-          const p2 = getPoint(rx, ry, s.rotation, baseAngle - t2 * trailSpan * s.direction, cx, cy);
+        for (let i = 0; i < trailSegments - 1; i++) {
+          const t = i / trailSegments;
+          const t2 = (i + 1) / trailSegments;
+          const angle1 = baseAngle - t * trailAngleSpan * streak.direction;
+          const angle2 = baseAngle - t2 * trailAngleSpan * streak.direction;
+          const p1 = getEllipsePoint(streak, angle1, w, h);
+          const p2 = getEllipsePoint(streak, angle2, w, h);
+
           const taper = Math.pow(1 - t, 2);
-          const color = lerpColor(s.colors, t * 0.7);
-          const alpha = taper * 0.55 * s.opacity * visibility;
-          const lw = s.coreSize * taper;
-          if (alpha < 0.001 || lw < 0.1) continue;
+          const color = lerpColor(streak.colors, t * 0.7);
+          const alpha = taper * 0.6 * streak.opacity * visibility;
+          const lineWidth = streak.coreSize * taper;
+
+          if (alpha < 0.001 || lineWidth < 0.1) continue;
 
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(${color.r},${color.g},${color.b},${alpha})`;
-          ctx.lineWidth = lw;
+          ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+          ctx.lineWidth = lineWidth;
           ctx.stroke();
         }
 
-        // Bright head
-        const head = getPoint(rx, ry, s.rotation, baseAngle, cx, cy);
-        const hc = s.colors[0];
-        const ha = 0.85 * s.opacity * visibility;
+        // Draw bright head
+        const headPos = getEllipsePoint(streak, baseAngle, w, h);
+        const headColor = streak.colors[0];
+        const headAlpha = 0.9 * streak.opacity * visibility;
 
-        const cg = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, s.coreSize * 2.5);
-        cg.addColorStop(0, `rgba(255,255,255,${ha * 0.9})`);
-        cg.addColorStop(0.3, `rgba(${hc.r},${hc.g},${hc.b},${ha * 0.5})`);
-        cg.addColorStop(1, `rgba(${hc.r},${hc.g},${hc.b},0)`);
+        // White-hot core
+        const coreGrad = ctx.createRadialGradient(
+          headPos.x, headPos.y, 0,
+          headPos.x, headPos.y, streak.coreSize * 2
+        );
+        coreGrad.addColorStop(0, `rgba(255, 255, 255, ${headAlpha * 0.9})`);
+        coreGrad.addColorStop(0.3, `rgba(${headColor.r}, ${headColor.g}, ${headColor.b}, ${headAlpha * 0.6})`);
+        coreGrad.addColorStop(1, `rgba(${headColor.r}, ${headColor.g}, ${headColor.b}, 0)`);
+
         ctx.beginPath();
-        ctx.arc(head.x, head.y, s.coreSize * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = cg;
+        ctx.arc(headPos.x, headPos.y, streak.coreSize * 2, 0, Math.PI * 2);
+        ctx.fillStyle = coreGrad;
         ctx.fill();
 
-        const bg = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, s.bloomSize * 0.5);
-        bg.addColorStop(0, `rgba(${hc.r},${hc.g},${hc.b},${ha * 0.25})`);
-        bg.addColorStop(0.5, `rgba(${hc.r},${hc.g},${hc.b},${ha * 0.06})`);
-        bg.addColorStop(1, `rgba(${hc.r},${hc.g},${hc.b},0)`);
+        // Head bloom
+        const headBloom = ctx.createRadialGradient(
+          headPos.x, headPos.y, 0,
+          headPos.x, headPos.y, streak.bloomSize * 0.6
+        );
+        headBloom.addColorStop(0, `rgba(${headColor.r}, ${headColor.g}, ${headColor.b}, ${headAlpha * 0.3})`);
+        headBloom.addColorStop(0.5, `rgba(${headColor.r}, ${headColor.g}, ${headColor.b}, ${headAlpha * 0.08})`);
+        headBloom.addColorStop(1, `rgba(${headColor.r}, ${headColor.g}, ${headColor.b}, 0)`);
+
         ctx.beginPath();
-        ctx.arc(head.x, head.y, s.bloomSize * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = bg;
+        ctx.arc(headPos.x, headPos.y, streak.bloomSize * 0.6, 0, Math.PI * 2);
+        ctx.fillStyle = headBloom;
         ctx.fill();
       }
 
