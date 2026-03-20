@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowDown, PenLine } from "lucide-react";
+import LightStreaks from "./LightStreaks";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20 overflow-hidden">
+      {/* Cinematic light streaks */}
+      <LightStreaks />
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
 
