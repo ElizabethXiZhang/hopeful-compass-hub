@@ -157,6 +157,80 @@ const HeroSection = () => {
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
 
+        {/* Comet animations */}
+        <div className="absolute inset-0 pointer-events-none overflow-visible">
+          {/* Comet 1 - Cyan/Teal sweeping top-right to left */}
+          <motion.div
+            className="absolute"
+            style={{ top: "-60px", right: "-10%" }}
+            animate={{
+              x: [0, -900],
+              y: [0, 120],
+              opacity: [1, 0.9, 0.7, 0.3, 0],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              repeatDelay: 3,
+              ease: "easeOut",
+            }}
+          >
+            <div
+              className="relative h-[3px] w-[120px] rounded-full"
+              style={{
+                background: "linear-gradient(90deg, transparent, hsl(190 95% 55% / 0.8), hsl(175 85% 50%))",
+                boxShadow: "0 0 20px hsl(190 95% 55% / 0.6), 0 0 40px hsl(175 85% 50% / 0.3)",
+                transform: "rotate(8deg)",
+              }}
+            >
+              {/* Comet head glow */}
+              <div
+                className="absolute right-0 top-1/2 -translate-y-1/2 h-[8px] w-[8px] rounded-full"
+                style={{
+                  background: "hsl(175 90% 70%)",
+                  boxShadow: "0 0 12px hsl(175 90% 60%), 0 0 30px hsl(190 90% 50% / 0.5)",
+                }}
+              />
+            </div>
+          </motion.div>
+
+          {/* Comet 2 - Purple/Magenta sweeping bottom-left to right */}
+          <motion.div
+            className="absolute"
+            style={{ bottom: "-40px", left: "-5%" }}
+            animate={{
+              x: [0, 800],
+              y: [0, -100],
+              opacity: [1, 0.9, 0.7, 0.3, 0],
+            }}
+            transition={{
+              duration: 2.8,
+              repeat: Infinity,
+              repeatDelay: 4,
+              ease: "easeOut",
+              delay: 1.5,
+            }}
+          >
+            <div
+              className="relative h-[3px] w-[140px] rounded-full"
+              style={{
+                background: "linear-gradient(270deg, transparent, hsl(280 75% 60% / 0.8), hsl(320 70% 55%))",
+                boxShadow: "0 0 20px hsl(280 75% 60% / 0.6), 0 0 40px hsl(320 70% 55% / 0.3)",
+                transform: "rotate(-6deg)",
+              }}
+            >
+              {/* Comet head glow */}
+              <div
+                className="absolute left-0 top-1/2 -translate-y-1/2 h-[8px] w-[8px] rounded-full"
+                style={{
+                  background: "hsl(310 80% 70%)",
+                  boxShadow: "0 0 12px hsl(310 80% 65%), 0 0 30px hsl(280 75% 55% / 0.5)",
+                }}
+              />
+            </div>
+          </motion.div>
+        </div>
+
         {/* Main title */}
         <motion.h1
           initial={{
