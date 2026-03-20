@@ -156,6 +156,9 @@ const HeroSection = () => {
         ))}
       </div>
 
+      {/* Premium comet animations */}
+      <HeroComets />
+
       <div className="relative z-10 mx-auto max-w-5xl text-center">
 
         {/* Main title */}
