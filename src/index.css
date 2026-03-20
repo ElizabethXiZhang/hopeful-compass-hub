@@ -5,7 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
-  :root {
+  :root,
+  .dark {
     /* Deep navy glassmorphism theme */
     --background: 220 50% 6%;
     --foreground: 210 40% 98%;
@@ -52,6 +53,78 @@
     --glow-primary: 190 80% 55% / 0.4;
     --glow-secondary: 270 60% 65% / 0.3;
     --glow-accent: 20 80% 65% / 0.3;
+
+    /* Theme-aware surface colors */
+    --surface-overlay: 210 40% 98% / 0.05;
+    --surface-overlay-hover: 210 40% 98% / 0.1;
+    --surface-border: 210 40% 98% / 0.1;
+    --surface-border-hover: 210 40% 98% / 0.2;
+    --hero-gradient-from: 220 60% 4%;
+    --hero-gradient-via: 230 50% 8%;
+    --hero-overlay: 220 50% 4% / 0.75;
+    --frame-vignette: 220 50% 4% / 0.4;
+    --frame-bottom-gradient: 220 50% 4% / 0.65;
+    --glow-multiplier: 1;
+  }
+
+  .light {
+    --background: 220 20% 96%;
+    --foreground: 220 30% 12%;
+
+    --card: 220 15% 92%;
+    --card-foreground: 220 30% 12%;
+
+    --popover: 220 20% 94%;
+    --popover-foreground: 220 30% 12%;
+
+    --primary: 200 85% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 270 50% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 15% 88%;
+    --muted-foreground: 220 15% 40%;
+
+    --accent: 20 75% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 82%;
+    --input: 220 15% 85%;
+    --ring: 200 85% 42%;
+
+    --radius: 1rem;
+
+    /* Glassmorphism tokens for light */
+    --glass-bg: 220 20% 100% / 0.55;
+    --glass-border: 220 20% 30% / 0.08;
+    --glass-blur: 20px;
+
+    /* Gradient colors - slightly deeper for visibility on light */
+    --gradient-cyan: 200 80% 48%;
+    --gradient-lavender: 270 55% 55%;
+    --gradient-peach: 20 75% 55%;
+    --gradient-teal: 175 70% 40%;
+
+    /* Glow effects - softer for light mode */
+    --glow-primary: 200 85% 42% / 0.15;
+    --glow-secondary: 270 50% 55% / 0.12;
+    --glow-accent: 20 75% 55% / 0.12;
+
+    /* Theme-aware surface colors */
+    --surface-overlay: 220 20% 20% / 0.04;
+    --surface-overlay-hover: 220 20% 20% / 0.08;
+    --surface-border: 220 20% 30% / 0.1;
+    --surface-border-hover: 220 20% 30% / 0.2;
+    --hero-gradient-from: 220 25% 94%;
+    --hero-gradient-via: 230 20% 92%;
+    --hero-overlay: 220 20% 96% / 0.8;
+    --frame-vignette: 220 20% 20% / 0.1;
+    --frame-bottom-gradient: 220 20% 15% / 0.35;
+    --glow-multiplier: 0.5;
   }
 }
 
@@ -67,6 +140,7 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -77,17 +151,21 @@
 @layer components {
   /* Glassmorphism card */
   .glass-card {
-    @apply relative rounded-2xl border border-white/10;
+    @apply relative rounded-2xl;
+    border: 1px solid hsl(var(--glass-border));
     background: hsl(var(--glass-bg));
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
   }
 
   .glass-card-strong {
-    @apply relative rounded-2xl border border-white/15;
-    background: hsl(220 50% 12% / 0.6);
+    @apply relative rounded-2xl;
+    border: 1px solid hsl(var(--glass-border));
+    background: hsl(var(--card) / 0.6);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
   }
 
   /* Floating animation */

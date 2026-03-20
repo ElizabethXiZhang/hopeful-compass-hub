@@ -93,7 +93,7 @@ const CommunitySection = () => {
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:bg-white/10"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-border/50 bg-[hsl(var(--surface-overlay))] px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all hover:bg-[hsl(var(--surface-overlay-hover))]"
                 >
                   <Mail size={20} />
                   Contact Us

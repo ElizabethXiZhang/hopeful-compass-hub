@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "../theme/ThemeToggle";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -24,7 +25,6 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            {/* Simple UP Text Logo */}
             <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5 shadow-lg">
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-background/90 backdrop-blur-sm">
                 <span className="font-display text-lg font-bold bg-gradient-to-br from-primary via-secondary to-accent bg-clip-text text-transparent">
@@ -54,15 +54,19 @@ const Navbar = () => {
                 )}
               </Link>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="rounded-lg p-2 text-foreground transition-colors hover:bg-white/10 md:hidden"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="rounded-lg p-2 text-foreground transition-colors hover:bg-muted/30"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -85,7 +89,7 @@ const Navbar = () => {
                   className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                     location.pathname === link.path
                       ? "bg-primary/20 text-primary"
-                      : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                      : "text-muted-foreground hover:bg-muted/20 hover:text-foreground"
                   }`}
                 >
                   {link.name}

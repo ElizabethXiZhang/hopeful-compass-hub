@@ -32,8 +32,8 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Base dark cinematic gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,60%,4%)] via-[hsl(230,50%,8%)] to-background" />
+      {/* Base cinematic gradient - uses CSS variables */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--hero-gradient-from))] via-[hsl(var(--hero-gradient-via))] to-background" />
 
       {/* Radial glow behind heading */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-[radial-gradient(ellipse,hsl(var(--primary)/0.08)_0%,transparent_70%)]" />
@@ -55,7 +55,7 @@ const HeroSection = () => {
               alt=""
               className="w-full h-full object-cover blur-[2px]"
             />
-            <div className="absolute inset-0 bg-[hsl(220,50%,4%/0.75)]" />
+            <div className="absolute inset-0 bg-[hsl(var(--hero-overlay))]" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -133,7 +133,7 @@ const HeroSection = () => {
 
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/25 active:scale-[0.97]"
+            className="group inline-flex items-center gap-2 rounded-2xl border border-border/50 bg-[hsl(var(--surface-overlay))] px-8 py-4 font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-[hsl(var(--surface-overlay-hover))] hover:border-border active:scale-[0.97]"
           >
             <PenLine className="h-5 w-5 text-primary" />
             Share Your Story
@@ -150,7 +150,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-              className="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden ring-1 ring-white/10"
+              className="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden ring-1 ring-border/50"
               onTouchStart={() => handleHover(index)}
               onTouchEnd={handleLeave}
             >

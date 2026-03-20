@@ -88,7 +88,7 @@ const AIRevolutionSection = () => {
                     <div className="flex items-center gap-4 mb-4">
                       <span
                         className={`inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold ${
-                          step.active ? "bg-primary text-primary-foreground" : "bg-white/10 text-muted-foreground"
+                          step.active ? "bg-primary text-primary-foreground" : "bg-muted/50 text-muted-foreground"
                         }`}
                       >
                         {index + 1}
