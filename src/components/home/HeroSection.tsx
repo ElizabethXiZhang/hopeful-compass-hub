@@ -157,74 +157,86 @@ const HeroSection = () => {
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
 
-        {/* Comet animations */}
+        {/* Premium comet animations */}
         <div className="absolute inset-0 pointer-events-none overflow-visible">
-          {/* Comet 1 - Cyan/Teal sweeping top-right to left */}
+          {/* Comet 1 — Top-left, violet→blue drift */}
           <motion.div
-            className="absolute"
-            style={{ top: "-60px", right: "-10%" }}
+            className="absolute -top-16 -left-[8%] will-change-transform"
+            initial={{ opacity: 0, x: 0, y: 0 }}
             animate={{
-              x: [0, -900],
-              y: [0, 120],
-              opacity: [1, 0.9, 0.7, 0.3, 0],
+              opacity: [0, 0.45, 0.5, 0.35, 0],
+              x: [0, 60, 120],
+              y: [0, 30, 70],
             }}
             transition={{
-              duration: 2.5,
+              duration: 5,
               repeat: Infinity,
-              repeatDelay: 3,
-              ease: "easeOut",
+              ease: "easeInOut",
+              times: [0, 0.2, 0.5, 0.8, 1],
             }}
           >
             <div
-              className="relative h-[3px] w-[120px] rounded-full"
+              className="relative h-[2px] w-[100px] rounded-full sm:w-[140px]"
               style={{
-                background: "linear-gradient(90deg, transparent, hsl(190 95% 55% / 0.8), hsl(175 85% 50%))",
-                boxShadow: "0 0 20px hsl(190 95% 55% / 0.6), 0 0 40px hsl(175 85% 50% / 0.3)",
-                transform: "rotate(8deg)",
+                background: "linear-gradient(90deg, transparent 0%, hsl(270 70% 65% / 0.5) 40%, hsl(220 80% 60% / 0.6) 100%)",
+                filter: "blur(0.5px)",
               }}
             >
-              {/* Comet head glow */}
               <div
-                className="absolute right-0 top-1/2 -translate-y-1/2 h-[8px] w-[8px] rounded-full"
+                className="absolute right-0 top-1/2 -translate-y-1/2 h-[6px] w-[6px] rounded-full"
                 style={{
-                  background: "hsl(175 90% 70%)",
-                  boxShadow: "0 0 12px hsl(175 90% 60%), 0 0 30px hsl(190 90% 50% / 0.5)",
+                  background: "hsl(220 80% 72% / 0.7)",
+                  boxShadow: "0 0 8px hsl(220 80% 65% / 0.4), 0 0 20px hsl(270 60% 60% / 0.2)",
+                }}
+              />
+              <div
+                className="absolute inset-0 -z-10 rounded-full"
+                style={{
+                  background: "linear-gradient(90deg, transparent 0%, hsl(270 60% 60% / 0.15) 50%, hsl(220 70% 60% / 0.1) 100%)",
+                  filter: "blur(6px)",
+                  transform: "scaleY(4)",
                 }}
               />
             </div>
           </motion.div>
 
-          {/* Comet 2 - Purple/Magenta sweeping bottom-left to right */}
+          {/* Comet 2 — Bottom-right, cyan→purple drift */}
           <motion.div
-            className="absolute"
-            style={{ bottom: "-40px", left: "-5%" }}
+            className="absolute -bottom-12 -right-[6%] will-change-transform"
+            initial={{ opacity: 0, x: 0, y: 0 }}
             animate={{
-              x: [0, 800],
-              y: [0, -100],
-              opacity: [1, 0.9, 0.7, 0.3, 0],
+              opacity: [0, 0.4, 0.5, 0.3, 0],
+              x: [0, -55, -110],
+              y: [0, -25, -60],
             }}
             transition={{
-              duration: 2.8,
+              duration: 5.5,
               repeat: Infinity,
-              repeatDelay: 4,
-              ease: "easeOut",
-              delay: 1.5,
+              ease: "easeInOut",
+              delay: 2,
+              times: [0, 0.2, 0.5, 0.8, 1],
             }}
           >
             <div
-              className="relative h-[3px] w-[140px] rounded-full"
+              className="relative h-[2px] w-[90px] rounded-full sm:w-[130px]"
               style={{
-                background: "linear-gradient(270deg, transparent, hsl(280 75% 60% / 0.8), hsl(320 70% 55%))",
-                boxShadow: "0 0 20px hsl(280 75% 60% / 0.6), 0 0 40px hsl(320 70% 55% / 0.3)",
-                transform: "rotate(-6deg)",
+                background: "linear-gradient(270deg, transparent 0%, hsl(190 80% 60% / 0.5) 40%, hsl(260 65% 60% / 0.55) 100%)",
+                filter: "blur(0.5px)",
               }}
             >
-              {/* Comet head glow */}
               <div
-                className="absolute left-0 top-1/2 -translate-y-1/2 h-[8px] w-[8px] rounded-full"
+                className="absolute left-0 top-1/2 -translate-y-1/2 h-[6px] w-[6px] rounded-full"
                 style={{
-                  background: "hsl(310 80% 70%)",
-                  boxShadow: "0 0 12px hsl(310 80% 65%), 0 0 30px hsl(280 75% 55% / 0.5)",
+                  background: "hsl(260 70% 72% / 0.65)",
+                  boxShadow: "0 0 8px hsl(260 65% 60% / 0.35), 0 0 20px hsl(190 70% 55% / 0.2)",
+                }}
+              />
+              <div
+                className="absolute inset-0 -z-10 rounded-full"
+                style={{
+                  background: "linear-gradient(270deg, transparent 0%, hsl(190 70% 55% / 0.12) 50%, hsl(260 55% 60% / 0.1) 100%)",
+                  filter: "blur(6px)",
+                  transform: "scaleY(4)",
                 }}
               />
             </div>
