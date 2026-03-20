@@ -15,23 +15,40 @@ interface HeroFrameClusterProps {
   side: "left" | "right";
 }
 
-// Left cluster: 3 images in an asymmetric wall-frame composition
-// Right cluster: 2 images stacked with offset
 const leftLayout = [
-  // Large hero frame
-  { top: "8%", left: "10%", width: "78%", height: "38%", delay: 0.9, z: 3 },
-  // Medium frame, offset right and overlapping slightly
-  { top: "50%", left: "20%", width: "65%", height: "28%", delay: 1.05, z: 2 },
-  // Small accent frame, tucked bottom-left
-  { top: "72%", left: "4%", width: "40%", height: "22%", delay: 1.15, z: 1 },
+  { top: "8%", left: "10%", width: "78%", height: "38%", delay: 0.9, z: 3, depth: "near" as const, floatDuration: 5.5 },
+  { top: "50%", left: "20%", width: "65%", height: "28%", delay: 1.05, z: 2, depth: "mid" as const, floatDuration: 6.5 },
+  { top: "72%", left: "4%", width: "40%", height: "22%", delay: 1.15, z: 1, depth: "far" as const, floatDuration: 7.5 },
 ];
 
 const rightLayout = [
-  // Large frame
-  { top: "12%", right: "8%", width: "80%", height: "40%", delay: 1.0, z: 3 },
-  // Medium frame offset
-  { top: "58%", right: "15%", width: "60%", height: "30%", delay: 1.12, z: 2 },
+  { top: "12%", right: "8%", width: "80%", height: "40%", delay: 1.0, z: 3, depth: "near" as const, floatDuration: 6 },
+  { top: "58%", right: "15%", width: "60%", height: "30%", delay: 1.12, z: 2, depth: "mid" as const, floatDuration: 7 },
 ];
+
+const depthStyles = {
+  near: {
+    opacity: 1,
+    blur: "0px",
+    glowOpacity: 0.3,
+    shadowSpread: 30,
+    borderOpacity: 0.25,
+  },
+  mid: {
+    opacity: 0.9,
+    blur: "0.5px",
+    glowOpacity: 0.2,
+    shadowSpread: 20,
+    borderOpacity: 0.18,
+  },
+  far: {
+    opacity: 0.75,
+    blur: "1px",
+    glowOpacity: 0.12,
+    shadowSpread: 14,
+    borderOpacity: 0.12,
+  },
+};
 
 const HeroFrameCluster = ({
   images,
@@ -50,6 +67,7 @@ const HeroFrameCluster = ({
         if (!pos) return null;
         const globalIndex = indices[i];
         const isActive = activeImage === globalIndex;
+        const depth = depthStyles[pos.depth];
 
         return (
           <motion.div
@@ -63,33 +81,74 @@ const HeroFrameCluster = ({
               height: pos.height,
               zIndex: pos.z,
             }}
-            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+            animate={{
+              opacity: depth.opacity,
+              y: [0, -8 * (pos.depth === "near" ? 1.2 : pos.depth === "mid" ? 1 : 0.6), 0],
+              filter: `blur(${depth.blur})`,
+            }}
             transition={{
-              duration: 0.7,
-              delay: pos.delay,
-              ease: [0.16, 1, 0.3, 1],
+              opacity: { duration: 0.7, delay: pos.delay },
+              filter: { duration: 0.7, delay: pos.delay },
+              y: {
+                duration: pos.floatDuration,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: pos.delay,
+              },
             }}
             onMouseEnter={() => onHover(globalIndex)}
             onMouseLeave={onLeave}
           >
+            {/* Outer glow layer */}
+            <div
+              className="absolute -inset-[2px] rounded-2xl transition-opacity duration-500"
+              style={{
+                background: `linear-gradient(135deg, hsl(var(--primary) / ${isActive ? 0.5 : depth.borderOpacity}), hsl(var(--secondary) / ${isActive ? 0.4 : depth.borderOpacity * 0.7}), hsl(var(--accent) / ${isActive ? 0.35 : depth.borderOpacity * 0.5}))`,
+                opacity: isActive ? 1 : 0.8,
+              }}
+            />
+
+            {/* Diffused shadow beneath for floating feel */}
+            <div
+              className="absolute -bottom-3 left-[10%] right-[10%] h-6 rounded-full transition-all duration-500"
+              style={{
+                background: `radial-gradient(ellipse, hsl(var(--primary) / ${isActive ? 0.2 : depth.glowOpacity * 0.3}) 0%, transparent 70%)`,
+                filter: `blur(${isActive ? 12 : 8}px)`,
+              }}
+            />
+
             <div
               className={`relative w-full h-full rounded-2xl overflow-hidden transition-all duration-500 ease-out
                 ${isActive
-                  ? "scale-105 shadow-[0_0_40px_hsl(var(--primary)/0.35)] ring-2 ring-[hsl(var(--primary)/0.5)]"
-                  : "scale-100 shadow-[0_8px_30px_hsl(220,50%,4%/0.7)] ring-1 ring-white/10 hover:ring-white/20 hover:scale-[1.03] hover:shadow-[0_0_24px_hsl(var(--primary)/0.15)]"
+                  ? "scale-105"
+                  : "scale-100 hover:scale-[1.04]"
                 }`}
+              style={{
+                boxShadow: isActive
+                  ? `0 0 ${depth.shadowSpread + 20}px hsl(var(--primary) / 0.35), 0 8px 32px hsl(220 50% 4% / 0.6), inset 0 1px 0 hsl(210 40% 98% / 0.08)`
+                  : `0 0 ${depth.shadowSpread}px hsl(var(--primary) / ${depth.glowOpacity}), 0 8px 24px hsl(220 50% 4% / 0.7), inset 0 1px 0 hsl(210 40% 98% / 0.05)`,
+              }}
             >
+              {/* Glass reflection highlight at top */}
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent z-10" />
+
               <img
                 src={image.src}
                 alt={image.alt}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                className={`w-full h-full object-cover transition-all duration-700 ease-out
+                  ${isActive ? "scale-110 blur-0" : "group-hover:scale-110"}`}
               />
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,50%,4%/0.6)] via-transparent to-transparent" />
-              {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 p-3">
+
+              {/* Inner vignette for depth */}
+              <div className="absolute inset-0 shadow-[inset_0_0_30px_hsl(220,50%,4%/0.4)]" />
+
+              {/* Bottom gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,50%,4%/0.65)] via-transparent to-transparent" />
+
+              {/* Glassmorphism label bar */}
+              <div className="absolute bottom-0 left-0 right-0 p-3 backdrop-blur-sm bg-white/[0.03]">
                 <span className="text-[11px] font-medium text-foreground/70 tracking-widest uppercase">
                   {image.label}
                 </span>
@@ -99,19 +158,27 @@ const HeroFrameCluster = ({
         );
       })}
 
-      {/* Subtle connecting line between frames */}
+      {/* Subtle glow connection lines */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.07]"
+        className="absolute inset-0 w-full h-full pointer-events-none"
         preserveAspectRatio="none"
       >
+        <defs>
+          <linearGradient id={`line-grad-${side}`} x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+            <stop offset="30%" stopColor="hsl(var(--primary))" stopOpacity="0.08" />
+            <stop offset="70%" stopColor="hsl(var(--secondary))" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="hsl(var(--secondary))" stopOpacity="0" />
+          </linearGradient>
+        </defs>
         <line
           x1="50%"
-          y1="20%"
+          y1="15%"
           x2="50%"
-          y2="80%"
-          stroke="hsl(var(--primary))"
+          y2="85%"
+          stroke={`url(#line-grad-${side})`}
           strokeWidth="1"
-          strokeDasharray="4 6"
+          strokeDasharray="4 8"
         />
       </svg>
     </div>
