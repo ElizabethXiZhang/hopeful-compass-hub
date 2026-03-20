@@ -27,42 +27,42 @@ const LightStreaks = () => {
     // Streak configuration
     const streaks = [
       {
-        // Top-right sweeping arc
-        cx: 0.65, cy: 0.35,
-        rx: 0.42, ry: 0.32,
-        rotation: -0.3,
-        speed: 0.00012,
+        // Tight orbit around heading - top arc
+        cx: 0.5, cy: 0.5,
+        rx: 0.32, ry: 0.18,
+        rotation: -0.15,
+        speed: 0.00015,
         offset: 0,
         direction: 1,
-        trailLength: 0.35,
-        colors: [
-          { r: 120, g: 140, b: 255 },  // blue
-          { r: 180, g: 120, b: 255 },  // purple
-          { r: 255, g: 150, b: 200 },  // pink
-        ],
-        opacity: 0.85,
-        coreSize: 6,
-        glowSize: 35,
-        bloomSize: 80,
-      },
-      {
-        // Bottom-left sweeping arc
-        cx: 0.35, cy: 0.65,
-        rx: 0.40, ry: 0.30,
-        rotation: -0.25,
-        speed: 0.0001,
-        offset: Math.PI,
-        direction: -1,
         trailLength: 0.3,
         colors: [
-          { r: 80, g: 200, b: 255 },   // cyan
-          { r: 160, g: 100, b: 255 },  // violet
-          { r: 240, g: 130, b: 200 },  // rose
+          { r: 120, g: 140, b: 255 },
+          { r: 180, g: 120, b: 255 },
+          { r: 255, g: 150, b: 200 },
         ],
-        opacity: 0.7,
+        opacity: 0.85,
         coreSize: 5,
         glowSize: 30,
-        bloomSize: 70,
+        bloomSize: 65,
+      },
+      {
+        // Tight orbit around heading - bottom arc
+        cx: 0.5, cy: 0.5,
+        rx: 0.30, ry: 0.16,
+        rotation: 0.1,
+        speed: 0.00012,
+        offset: Math.PI,
+        direction: -1,
+        trailLength: 0.28,
+        colors: [
+          { r: 80, g: 200, b: 255 },
+          { r: 160, g: 100, b: 255 },
+          { r: 240, g: 130, b: 200 },
+        ],
+        opacity: 0.7,
+        coreSize: 4,
+        glowSize: 25,
+        bloomSize: 55,
       },
     ];
 
