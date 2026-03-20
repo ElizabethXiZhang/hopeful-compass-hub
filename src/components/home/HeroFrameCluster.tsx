@@ -126,12 +126,12 @@ const HeroFrameCluster = ({
                 }`}
               style={{
                 boxShadow: isActive
-                  ? `0 0 ${depth.shadowSpread + 20}px hsl(var(--primary) / 0.35), 0 8px 32px hsl(220 50% 4% / 0.6), inset 0 1px 0 hsl(210 40% 98% / 0.08)`
-                  : `0 0 ${depth.shadowSpread}px hsl(var(--primary) / ${depth.glowOpacity}), 0 8px 24px hsl(220 50% 4% / 0.7), inset 0 1px 0 hsl(210 40% 98% / 0.05)`,
+                  ? `0 0 ${depth.shadowSpread + 20}px hsl(var(--primary) / 0.35), 0 8px 32px hsl(var(--background) / 0.6), inset 0 1px 0 hsl(var(--foreground) / 0.08)`
+                  : `0 0 ${depth.shadowSpread}px hsl(var(--primary) / ${depth.glowOpacity}), 0 8px 24px hsl(var(--background) / 0.7), inset 0 1px 0 hsl(var(--foreground) / 0.05)`,
               }}
             >
               {/* Glass reflection highlight at top */}
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent z-10" />
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-foreground/15 to-transparent z-10" />
 
               <img
                 src={image.src}
@@ -142,13 +142,13 @@ const HeroFrameCluster = ({
               />
 
               {/* Inner vignette for depth */}
-              <div className="absolute inset-0 shadow-[inset_0_0_30px_hsl(220,50%,4%/0.4)]" />
+              <div className="absolute inset-0 shadow-[inset_0_0_30px_hsl(var(--frame-vignette))]" />
 
               {/* Bottom gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,50%,4%/0.65)] via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--frame-bottom-gradient))] via-transparent to-transparent" />
 
               {/* Glassmorphism label bar */}
-              <div className="absolute bottom-0 left-0 right-0 p-3 backdrop-blur-sm bg-white/[0.03]">
+              <div className="absolute bottom-0 left-0 right-0 p-3 backdrop-blur-sm bg-[hsl(var(--surface-overlay))]">
                 <span className="text-[11px] font-medium text-foreground/70 tracking-widest uppercase">
                   {image.label}
                 </span>

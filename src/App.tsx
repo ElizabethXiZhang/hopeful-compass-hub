@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Index from "./pages/Index";
 import Mission from "./pages/Mission";
 import Pillars from "./pages/Pillars";
@@ -19,28 +20,29 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/mission" element={<Navigate to="/" replace />} />
-            <Route path="/pillars" element={<Pillars />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/government-policies" element={<GovernmentPolicies />} />
-            <Route path="/job-cuts" element={<JobCuts />} />
-            <Route path="/forum" element={<Forum />} />
-            <Route path="/book-call" element={<BookCall />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* Redirect old navigate route */}
-            <Route path="/navigate" element={<Navigate to="/government-policies" replace />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AnimatePresence>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/mission" element={<Navigate to="/" replace />} />
+              <Route path="/pillars" element={<Pillars />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/government-policies" element={<GovernmentPolicies />} />
+              <Route path="/job-cuts" element={<JobCuts />} />
+              <Route path="/forum" element={<Forum />} />
+              <Route path="/book-call" element={<BookCall />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/navigate" element={<Navigate to="/government-policies" replace />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AnimatePresence>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
