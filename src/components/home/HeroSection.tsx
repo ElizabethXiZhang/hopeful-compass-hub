@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowDown, PenLine } from "lucide-react";
 import LightStreaks from "./LightStreaks";
+import HeroFrameCluster from "./HeroFrameCluster";
 
 import heroLoneliness from "@/assets/hero-loneliness.jpg";
 import heroAiFuture from "@/assets/hero-ai-future.jpg";
@@ -16,18 +17,6 @@ const heroImages = [
   { src: heroCommunity, alt: "Community standing together at sunrise", label: "Community" },
   { src: heroRebuilding, alt: "Walking toward new beginnings", label: "Rebuilding" },
   { src: heroReflection, alt: "Reflection under city lights", label: "Reflection" },
-];
-
-// Asymmetric positions for each image thumbnail
-const imagePositions = [
-  // Left side - stacked
-  "absolute top-[12%] left-[3%] w-36 h-48 md:w-44 md:h-56 lg:w-52 lg:h-64",
-  "absolute top-[52%] left-[5%] w-32 h-40 md:w-40 md:h-48 lg:w-44 lg:h-52",
-  // Right side
-  "absolute top-[8%] right-[3%] w-40 h-48 md:w-48 md:h-56 lg:w-56 lg:h-64",
-  "absolute top-[55%] right-[4%] w-34 h-44 md:w-42 md:h-52 lg:w-48 lg:h-56",
-  // Bottom center - small floating
-  "absolute bottom-[6%] left-[50%] -translate-x-1/2 w-28 h-36 md:w-36 md:h-44",
 ];
 
 const HeroSection = () => {
@@ -66,62 +55,42 @@ const HeroSection = () => {
               alt=""
               className="w-full h-full object-cover blur-[2px]"
             />
-            {/* Dark overlay for readability */}
             <div className="absolute inset-0 bg-[hsl(220,50%,4%/0.75)]" />
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Light streaks */}
-      <div className="absolute inset-0 z-[2]">
+      <div className="absolute inset-0 z-[2] opacity-40">
         <LightStreaks />
       </div>
 
-      {/* Image grid - asymmetric placement */}
-      <div className="absolute inset-0 z-[3] hidden md:block">
-        {heroImages.map((image, index) => (
-          <motion.div
-            key={index}
-            className={`${imagePositions[index]} cursor-pointer group`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.7,
-              delay: 0.8 + index * 0.12,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            onMouseEnter={() => handleHover(index)}
-            onMouseLeave={handleLeave}
-          >
-            <div
-              className={`relative w-full h-full rounded-2xl overflow-hidden transition-all duration-500 ease-out
-                ${activeImage === index
-                  ? "scale-110 shadow-[0_0_40px_hsl(var(--primary)/0.4)] ring-2 ring-[hsl(var(--primary)/0.5)]"
-                  : "scale-100 shadow-[0_8px_32px_hsl(220,50%,4%/0.6)] ring-1 ring-white/10 hover:ring-white/25 hover:scale-105 hover:shadow-[0_0_24px_hsl(var(--primary)/0.2)]"
-                }`}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-              />
-              {/* Glass overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,50%,4%/0.6)] via-transparent to-transparent" />
-              {/* Label */}
-              <div className="absolute bottom-0 left-0 right-0 p-3">
-                <span className="text-xs font-medium text-foreground/80 tracking-wide uppercase">
-                  {image.label}
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+      {/* LEFT CLUSTER */}
+      <div className="absolute left-0 top-0 bottom-0 z-[3] hidden lg:flex items-center" style={{ width: "22%" }}>
+        <HeroFrameCluster
+          images={[heroImages[0], heroImages[1], heroImages[2]]}
+          indices={[0, 1, 2]}
+          activeImage={activeImage}
+          onHover={handleHover}
+          onLeave={handleLeave}
+          side="left"
+        />
+      </div>
+
+      {/* RIGHT CLUSTER */}
+      <div className="absolute right-0 top-0 bottom-0 z-[3] hidden lg:flex items-center" style={{ width: "22%" }}>
+        <HeroFrameCluster
+          images={[heroImages[3], heroImages[4]]}
+          indices={[3, 4]}
+          activeImage={activeImage}
+          onHover={handleHover}
+          onLeave={handleLeave}
+          side="right"
+        />
       </div>
 
       {/* Main content */}
-      <div className="relative z-[4] mx-auto max-w-4xl text-center px-4 pt-24 pb-20">
-        {/* Heading */}
+      <div className="relative z-[4] mx-auto max-w-3xl text-center px-4 pt-24 pb-20">
         <motion.h1
           initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -133,7 +102,6 @@ const HeroSection = () => {
           <span className="gradient-text">Pandemic</span>
         </motion.h1>
 
-        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -145,7 +113,6 @@ const HeroSection = () => {
           <span className="text-foreground/80">You are not alone.</span>
         </motion.p>
 
-        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -175,7 +142,7 @@ const HeroSection = () => {
       </div>
 
       {/* Mobile image strip */}
-      <div className="absolute bottom-0 left-0 right-0 z-[3] md:hidden">
+      <div className="absolute bottom-0 left-0 right-0 z-[3] lg:hidden">
         <div className="flex gap-2 px-4 pb-4 overflow-x-auto no-scrollbar">
           {heroImages.map((image, index) => (
             <motion.div
