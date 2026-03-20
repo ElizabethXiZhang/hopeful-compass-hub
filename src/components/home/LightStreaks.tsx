@@ -28,8 +28,8 @@ const LightStreaks = () => {
     const streaks = [
       {
         // Tight orbit around heading - top arc
-        cx: 0.5, cy: 0.5,
-        rx: 0.32, ry: 0.18,
+        cx: 0.5, cy: 0.35,
+        rx: 0.34, ry: 0.14,
         rotation: -0.15,
         speed: 0.00015,
         offset: 0,
@@ -47,8 +47,8 @@ const LightStreaks = () => {
       },
       {
         // Tight orbit around heading - bottom arc
-        cx: 0.5, cy: 0.5,
-        rx: 0.30, ry: 0.16,
+        cx: 0.5, cy: 0.35,
+        rx: 0.32, ry: 0.12,
         rotation: 0.1,
         speed: 0.00012,
         offset: Math.PI,
