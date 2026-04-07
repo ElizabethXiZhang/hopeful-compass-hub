@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import GlassCard from "../ui/GlassCard";
-import { Target, Eye, Compass } from "lucide-react";
+import { Target, Compass } from "lucide-react";
 
 const MissionSection = () => {
   return (
