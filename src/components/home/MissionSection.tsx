@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import GlassCard from "../ui/GlassCard";
-import { Target, Eye, Compass } from "lucide-react";
+import { Target, Compass } from "lucide-react";
 
 const MissionSection = () => {
   return (
@@ -67,38 +67,12 @@ const MissionSection = () => {
             </div>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                We take a holistic approach to supporting those facing unemployment. Rather than
-                focusing solely on job placement, we address the full spectrum of human needs—mental
-                health, physical wellbeing, financial stability, community connection, and personal purpose.
-              </p>
-            </div>
-          </GlassCard>
-        </motion.div>
-
-        {/* Our Vision */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mb-8"
-        >
-          <GlassCard className="p-8 sm:p-12" hover>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="inline-flex rounded-xl bg-gradient-to-br from-secondary to-accent p-3">
-                <Eye className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-display text-2xl font-semibold text-foreground">Our Vision</h3>
-            </div>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                We envision a world where the transition between jobs is met with compassion rather
-                than stigma. A world where communities rally around their members, providing the
-                emotional scaffolding needed to weather uncertainty.
+                We take a holistic approach to supporting those facing unemployment—addressing mental
+                health, financial stability, community connection, and personal purpose, not just job placement.
               </p>
               <p>
-                We see a future where technology serves humanity—not replaces it—and where every
-                individual has access to the tools, knowledge, and support they need to adapt, grow,
+                We envision a world where job transitions are met with compassion, where technology
+                serves humanity, and where every individual has the tools and support to adapt, grow,
                 and find meaning in their lives.
               </p>
             </div>
