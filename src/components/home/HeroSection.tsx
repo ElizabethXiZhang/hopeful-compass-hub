@@ -97,7 +97,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
         >
-          <span className="text-foreground">The Unemployment</span>
+          <span className="text-foreground">Handle the Unemployment</span>
           <br />
           <span className="gradient-text">Pandemic</span>
         </motion.h1>
