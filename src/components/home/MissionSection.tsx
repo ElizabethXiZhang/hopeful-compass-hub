@@ -91,9 +91,9 @@ const MissionSection = () => {
                 that, when supported, enables individuals to not just survive but thrive during times of transition.
               </p>
               <p>
-                Beyond our pillars, we offer expert-led coaching calls, multilingual YouTube content,
+                Beyond our six pillars, we offer expert-led coaching calls, multilingual YouTube content,
                 a supportive community space to share your story, and real-time updates on global job
-                markets and government policies — all designed to keep you informed and empowered.
+                market layoff news and updated government policies — all designed to keep you informed and empowered.
               </p>
             </div>
           </GlassCard>
