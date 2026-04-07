@@ -41,11 +41,6 @@ const MissionSection = () => {
                 than ever before. In this new reality, unemployment isn't just an economic issue—it's
                 a human one.
               </p>
-              <p>
-                We exist to ensure that no one faces this challenge alone. Our mission is to build a
-                global community that provides emotional support, practical resources, and a renewed
-                sense of purpose to everyone navigating the complexities of unemployment.
-              </p>
             </div>
           </GlassCard>
         </motion.div>
