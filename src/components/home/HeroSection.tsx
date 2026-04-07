@@ -13,8 +13,8 @@ import heroReflection from "@/assets/hero-reflection.jpg";
 
 const heroImages = [
   { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope" },
-  { src: heroAiFuture, alt: "Hands reaching out in solidarity and support", label: "Solidarity" },
-  { src: heroCommunity, alt: "Community coming together with warmth and connection", label: "Community" },
+  { src: heroCommunity, alt: "Hands reaching out in solidarity and support", label: "Solidarity" },
+  { src: heroAiFuture, alt: "Community coming together with warmth and connection", label: "Community" },
   { src: heroRebuilding, alt: "Walking toward a bright new beginning at sunrise", label: "New Beginnings" },
   { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience" },
 ];
