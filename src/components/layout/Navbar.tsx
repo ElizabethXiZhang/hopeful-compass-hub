@@ -28,12 +28,12 @@ const Navbar = () => {
             <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5 shadow-lg">
               <div className="flex h-full w-full items-center justify-center rounded-xl bg-background/90 backdrop-blur-sm">
                 <span className="font-display text-lg font-bold bg-gradient-to-br from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  UP
+                  HUP
                 </span>
               </div>
             </div>
             <span className="hidden font-display text-lg font-semibold text-foreground sm:block">
-              The Unemployment Pandemic
+              Handle The Unemployment Pandemic
             </span>
           </Link>
 
