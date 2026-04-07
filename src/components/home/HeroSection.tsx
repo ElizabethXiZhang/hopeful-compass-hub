@@ -12,11 +12,11 @@ import heroRebuilding from "@/assets/hero-rebuilding.jpg";
 import heroReflection from "@/assets/hero-reflection.jpg";
 
 const heroImages = [
-  { src: heroLoneliness, alt: "Solitude in the modern workplace", label: "Solitude" },
-  { src: heroAiFuture, alt: "The intersection of AI and humanity", label: "AI & Humanity" },
-  { src: heroCommunity, alt: "Community standing together at sunrise", label: "Community" },
-  { src: heroRebuilding, alt: "Walking toward new beginnings", label: "Rebuilding" },
-  { src: heroReflection, alt: "Reflection under city lights", label: "Reflection" },
+  { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope" },
+  { src: heroAiFuture, alt: "Hands reaching out in solidarity and support", label: "Solidarity" },
+  { src: heroCommunity, alt: "Community coming together with warmth and connection", label: "Community" },
+  { src: heroRebuilding, alt: "Walking toward a bright new beginning at sunrise", label: "New Beginnings" },
+  { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience" },
 ];
 
 const HeroSection = () => {
