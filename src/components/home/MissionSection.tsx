@@ -96,8 +96,9 @@ const MissionSection = () => {
                 that, when supported, enables individuals to not just survive but thrive during times of transition.
               </p>
               <p>
-                We also provide YouTube videos, experts advice, coach support calls, community connections,
-                options to share your stories, updates on global job markets and government policies.
+                Beyond our pillars, we offer expert-led coaching calls, multilingual YouTube content,
+                a supportive community space to share your story, and real-time updates on global job
+                markets and government policies — all designed to keep you informed and empowered.
               </p>
             </div>
           </GlassCard>
