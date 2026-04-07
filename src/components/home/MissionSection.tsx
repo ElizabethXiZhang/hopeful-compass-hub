@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import GlassCard from "../ui/GlassCard";
-import { Target, Compass } from "lucide-react";
+import { Target, Compass, Layers } from "lucide-react";
 
 const MissionSection = () => {
   return (
@@ -80,7 +80,7 @@ const MissionSection = () => {
           <GlassCard className="p-8 sm:p-12" hover>
             <div className="flex items-center gap-4 mb-6">
               <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-accent p-3">
-                <Compass className="h-6 w-6 text-white" />
+                <Layers className="h-6 w-6 text-white" />
               </div>
               <h3 className="font-display text-2xl font-semibold text-foreground">Our Approach</h3>
             </div>
