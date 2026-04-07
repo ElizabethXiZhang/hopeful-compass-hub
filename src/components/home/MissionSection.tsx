@@ -70,11 +70,6 @@ const MissionSection = () => {
                 We take a holistic approach to supporting those facing unemployment—addressing mental
                 health, financial stability, community connection, and personal purpose, not just job placement.
               </p>
-              <p>
-                We envision a world where job transitions are met with compassion, where technology
-                serves humanity, and where every individual has the tools and support to adapt, grow,
-                and find meaning in their lives.
-              </p>
             </div>
           </GlassCard>
         </motion.div>
