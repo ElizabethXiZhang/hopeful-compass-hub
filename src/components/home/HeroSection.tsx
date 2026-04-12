@@ -10,11 +10,11 @@ import heroRebuilding from "@/assets/hero-rebuilding.jpg";
 import heroReflection from "@/assets/hero-reflection.jpg";
 
 const heroSlides = [
-  { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope", tagline: "Find strength in stillness" },
-  { src: heroCommunity, alt: "Hands reaching out in solidarity and support", label: "Solidarity", tagline: "Together we rise" },
-  { src: heroAiFuture, alt: "Community coming together with warmth and connection", label: "Community", tagline: "Connection is power" },
-  { src: heroRebuilding, alt: "Family walking toward a bright new beginning at sunrise", label: "New Beginnings", tagline: "Every ending is a fresh start" },
-  { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience", tagline: "Endure. Adapt. Thrive." },
+  { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope", verse: ["In the quiet of uncertainty,", "hope whispers — you will rise again."] },
+  { src: heroCommunity, alt: "Hands reaching out in solidarity and support", label: "Solidarity", verse: ["No hand was meant to reach alone —", "together, we carry what one cannot."] },
+  { src: heroAiFuture, alt: "Community coming together with warmth and connection", label: "Community", verse: ["When the world shifts beneath your feet,", "community becomes the ground you stand on."] },
+  { src: heroRebuilding, alt: "Family walking toward a bright new beginning at sunrise", label: "New Beginnings", verse: ["Every closed door is a horizon —", "walk toward the light that waits for you."] },
+  { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience", verse: ["Storms shape the strongest trees —", "your scars are proof you survived."] },
 ];
 
 const CYCLE_DURATION = 6000;
@@ -102,18 +102,17 @@ const HeroSection = () => {
 
           {/* Tagline that changes with slide */}
           <AnimatePresence mode="wait">
-            <motion.p
-              key={`tagline-${activeIndex}`}
+            <motion.div
+              key={`verse-${activeIndex}`}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.6 }}
-              className="mx-auto mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-white/70"
+              className="mx-auto mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-white/80 italic"
             >
-              {currentSlide.tagline}.
-              <br />
-              <span className="text-white/90">You are not alone.</span>
-            </motion.p>
+              <p>{currentSlide.verse[0]}</p>
+              <p className="text-white/95 font-medium">{currentSlide.verse[1]}</p>
+            </motion.div>
           </AnimatePresence>
 
           {/* CTA buttons */}
