@@ -10,11 +10,11 @@ import heroRebuilding from "@/assets/hero-rebuilding.jpg";
 import heroReflection from "@/assets/hero-reflection.jpg";
 
 const heroSlides = [
-  { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope", verse: ["In the quiet of uncertainty,", "hope whispers — you will rise again."] },
-  { src: heroCommunity, alt: "Hands reaching out in solidarity and support", label: "Solidarity", verse: ["No hand was meant to reach alone —", "together, we carry what one cannot."] },
-  { src: heroAiFuture, alt: "Community coming together with warmth and connection", label: "Community", verse: ["When the world shifts beneath your feet,", "community becomes the ground you stand on."] },
-  { src: heroRebuilding, alt: "Family walking toward a bright new beginning at sunrise", label: "New Beginnings", verse: ["Every closed door is a horizon —", "walk toward the light that waits for you."] },
-  { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience", verse: ["Storms shape the strongest trees —", "your scars are proof you survived."] },
+  { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope", verse: ["Rise again, don't lose sight", "Your future is still bright"] },
+  { src: heroCommunity, alt: "Hands reaching out in solidarity and support", label: "Solidarity", verse: ["Storms fade, hold your ground", "Strength within will be found"] },
+  { src: heroAiFuture, alt: "Community coming together with warmth and connection", label: "Community", verse: ["Paths break, still move ahead", "New dreams wait to be led"] },
+  { src: heroRebuilding, alt: "Family walking toward a bright new beginning at sunrise", label: "New Beginnings", verse: ["Silent pain, hidden fight", "You will turn it to light"] },
+  { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience", verse: ["Fall today, grow tomorrow", "You will outgrow this sorrow"] },
 ];
 
 const CYCLE_DURATION = 6000;
