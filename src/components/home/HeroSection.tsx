@@ -102,18 +102,17 @@ const HeroSection = () => {
 
           {/* Tagline that changes with slide */}
           <AnimatePresence mode="wait">
-            <motion.p
-              key={`tagline-${activeIndex}`}
+            <motion.div
+              key={`verse-${activeIndex}`}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.6 }}
-              className="mx-auto mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-white/70"
+              className="mx-auto mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-white/80 italic"
             >
-              {currentSlide.tagline}.
-              <br />
-              <span className="text-white/90">You are not alone.</span>
-            </motion.p>
+              <p>{currentSlide.verse[0]}</p>
+              <p className="text-white/95 font-medium">{currentSlide.verse[1]}</p>
+            </motion.div>
           </AnimatePresence>
 
           {/* CTA buttons */}
