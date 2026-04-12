@@ -110,8 +110,8 @@ const HeroSection = () => {
               transition={{ duration: 0.6 }}
               className="mx-auto mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed text-white/70"
             >
-              {currentSlide.tagline}
-              <br className="hidden sm:block" />
+              {currentSlide.tagline}.
+              <br />
               <span className="text-white/90">You are not alone.</span>
             </motion.p>
           </AnimatePresence>
