@@ -10,11 +10,11 @@ import heroRebuilding from "@/assets/hero-rebuilding.jpg";
 import heroReflection from "@/assets/hero-reflection.jpg";
 
 const heroSlides = [
-  { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope", tagline: "Find strength in stillness" },
-  { src: heroCommunity, alt: "Hands reaching out in solidarity and support", label: "Solidarity", tagline: "Together we rise" },
-  { src: heroAiFuture, alt: "Community coming together with warmth and connection", label: "Community", tagline: "Connection is power" },
-  { src: heroRebuilding, alt: "Family walking toward a bright new beginning at sunrise", label: "New Beginnings", tagline: "Every ending is a fresh start" },
-  { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience", tagline: "Endure. Adapt. Thrive." },
+  { src: heroLoneliness, alt: "Finding peace and hope in quiet contemplation", label: "Hope", verse: ["In the quiet of uncertainty,", "hope whispers — you will rise again."] },
+  { src: heroCommunity, alt: "Hands reaching out in solidarity and support", label: "Solidarity", verse: ["No hand was meant to reach alone —", "together, we carry what one cannot."] },
+  { src: heroAiFuture, alt: "Community coming together with warmth and connection", label: "Community", verse: ["When the world shifts beneath your feet,", "community becomes the ground you stand on."] },
+  { src: heroRebuilding, alt: "Family walking toward a bright new beginning at sunrise", label: "New Beginnings", verse: ["Every closed door is a horizon —", "walk toward the light that waits for you."] },
+  { src: heroReflection, alt: "Quiet determination and strength in morning light", label: "Resilience", verse: ["Storms shape the strongest trees —", "your scars are proof you survived."] },
 ];
 
 const CYCLE_DURATION = 6000;
