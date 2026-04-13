@@ -105,16 +105,21 @@ const HeroSection = () => {
         )}
       </AnimatePresence>
 
-      {/* Dark cinematic overlay — stronger for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 z-[1]" />
+      {/* Lighter cinematic overlay with color tints */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/60 z-[1]" />
+
+      {/* Colored gradient overlay for warmth */}
+      <div className="absolute inset-0 z-[1]" style={{
+        background: "linear-gradient(135deg, hsl(190 80% 55% / 0.08) 0%, hsl(270 60% 65% / 0.1) 50%, hsl(20 80% 65% / 0.08) 100%)"
+      }} />
 
       {/* Radial center glow for text contrast */}
       <div className="absolute inset-0 z-[1]" style={{
-        background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.5) 0%, transparent 100%)"
+        background: "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(0,0,0,0.45) 0%, transparent 100%)"
       }} />
 
-      {/* Vignette edges */}
-      <div className="absolute inset-0 z-[1] shadow-[inset_0_0_150px_60px_rgba(0,0,0,0.6)]" />
+      {/* Vignette edges - softer */}
+      <div className="absolute inset-0 z-[1] shadow-[inset_0_0_120px_40px_rgba(0,0,0,0.4)]" />
 
       {/* Cinematic light comets */}
       <div className="absolute inset-0 z-[2]">
@@ -153,7 +158,7 @@ const HeroSection = () => {
               className="mx-auto mt-5 sm:mt-8 max-w-2xl"
             >
               <p
-                className="text-sm sm:text-base md:text-lg leading-relaxed text-white/80 italic"
+                className="text-sm sm:text-base md:text-lg leading-relaxed text-white/90 italic"
                 style={{ textShadow: "0 2px 12px rgba(0,0,0,0.7)" }}
               >
                 {currentSlide.verse[0]}
@@ -179,7 +184,7 @@ const HeroSection = () => {
                 const section = document.getElementById("feelings-valid");
                 if (section) section.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/25 active:scale-[0.97]"
+              className="group relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.97] animate-[breathe_3s_ease-in-out_infinite]"
             >
               <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-y-0.5" />
               Start Your Journey
@@ -188,7 +193,7 @@ const HeroSection = () => {
 
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/30 active:scale-[0.97]"
+              className="group inline-flex items-center gap-2 rounded-2xl border border-primary/30 bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-primary/50 active:scale-[0.97]"
             >
               <PenLine className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               Share Your Story

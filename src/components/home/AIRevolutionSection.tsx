@@ -10,6 +10,7 @@ const timelineSteps = [
       "The AI revolution is reshaping the job market by automating routine and repetitive tasks, leading to significant displacement and contributing to over 50,000 layoffs in 2025 alone as companies streamline operations and invest heavily in AI tools.",
     active: true,
     link: "/job-cuts",
+    borderColor: "from-cyan-400 to-blue-500",
   },
   {
     year: "WHAT to do ?",
@@ -18,6 +19,7 @@ const timelineSteps = [
       "The key is to understand, process, navigate, and strategize in this global AI revolution to find peace, meaning, structure, purpose, community and vote for global changes. ",
     active: false,
     link: null,
+    borderColor: "from-violet-400 to-purple-500",
   },
   {
     year: "HOW to handle it? ",
@@ -26,6 +28,7 @@ const timelineSteps = [
       "We created strategies for you in the following six pillars, together with many videos on our YouTube Channel, aiming to establish a community to support you in every way possible.",
     active: false,
     link: null,
+    borderColor: "from-amber-400 to-orange-500",
   },
 ];
 
@@ -34,6 +37,14 @@ const AIRevolutionSection = () => {
 
   return (
     <section id="ai-revolution" className="relative py-24 px-4 overflow-hidden">
+      {/* Section accent glow - cyan tinted */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 70% 50% at 50% 40%, hsl(190 80% 55% / 0.06) 0%, transparent 70%)"
+      }} />
+
+      {/* Gradient divider at top */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
+
       {/* Background glow */}
       <motion.div
         animate={{ opacity: [0.3, 0.5, 0.3] }}
@@ -55,14 +66,14 @@ const AIRevolutionSection = () => {
           <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl">
             The AI Revolution <span className="gradient-text-calm">Explained Calmly</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground/90">
             This isn't about doom. It's about understanding where we are and where we're going—together.
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Timeline line */}
+          {/* Timeline line - more colorful */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent hidden md:block" />
 
           <div className="space-y-12 md:space-y-0">
@@ -81,10 +92,12 @@ const AIRevolutionSection = () => {
                 <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-16" : "md:pl-16"}`}>
                   <GlassCard
                     hover
-                    className={`p-8 ${step.active ? "border-primary/30" : ""} ${step.link ? "cursor-pointer group" : ""}`}
+                    className={`p-8 relative overflow-hidden ${step.active ? "border-primary/30" : ""} ${step.link ? "cursor-pointer group" : ""}`}
                     glow={step.active ? "primary" : "none"}
                     onClick={() => step.link && navigate(step.link)}
                   >
+                    {/* Colored top border */}
+                    <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${step.borderColor}`} />
                     <div className="flex items-center gap-4 mb-4">
                       <span
                         className={`inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold ${
@@ -107,7 +120,7 @@ const AIRevolutionSection = () => {
                         Click to Explore More
                       </span>
                     )}
-                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                    <p className="text-muted-foreground/90 leading-relaxed">{step.description}</p>
                   </GlassCard>
                 </div>
 

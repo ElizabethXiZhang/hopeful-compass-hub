@@ -5,7 +5,15 @@ import { Target, Compass, Layers } from "lucide-react";
 const MissionSection = () => {
   return (
     <section className="relative py-24 px-4">
-      <div className="mx-auto max-w-4xl">
+      {/* Section accent glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 70% 50% at 50% 50%, hsl(270 60% 65% / 0.05) 0%, transparent 70%)"
+      }} />
+
+      {/* Gradient divider at top */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+
+      <div className="mx-auto max-w-4xl relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -27,14 +35,15 @@ const MissionSection = () => {
           viewport={{ once: true }}
           className="mb-8"
         >
-          <GlassCard className="p-8 sm:p-12" glow="primary">
+          <GlassCard className="p-8 sm:p-12 relative overflow-hidden" glow="primary">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500" />
             <div className="flex items-center gap-4 mb-6">
-              <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-secondary p-3">
+              <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-secondary p-3 shadow-lg shadow-primary/20">
                 <Target className="h-6 w-6 text-white" />
               </div>
               <h3 className="font-display text-2xl font-semibold text-foreground">Why We Exist</h3>
             </div>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className="space-y-4 text-muted-foreground/90 leading-relaxed">
               <p>
                 The world of work is transforming at an unprecedented pace. Artificial intelligence,
                 automation, and economic shifts are reshaping industries and displacing workers faster
@@ -53,14 +62,15 @@ const MissionSection = () => {
           viewport={{ once: true }}
           className="mb-8"
         >
-          <GlassCard className="p-8 sm:p-12" hover>
+          <GlassCard className="p-8 sm:p-12 relative overflow-hidden" hover>
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-400 to-orange-500" />
             <div className="flex items-center gap-4 mb-6">
-              <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3">
+              <div className="inline-flex rounded-xl bg-gradient-to-br from-accent to-primary p-3 shadow-lg shadow-accent/20">
                 <Compass className="h-6 w-6 text-white" />
               </div>
               <h3 className="font-display text-2xl font-semibold text-foreground">Our Mission</h3>
             </div>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className="space-y-4 text-muted-foreground/90 leading-relaxed">
               <p>
                 We take a holistic approach to supporting those facing unemployment—addressing mental
                 health, financial stability, community connection, and personal purpose, not just job placement.
@@ -77,14 +87,15 @@ const MissionSection = () => {
           viewport={{ once: true }}
           className="mb-8"
         >
-          <GlassCard className="p-8 sm:p-12" hover>
+          <GlassCard className="p-8 sm:p-12 relative overflow-hidden" hover>
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-400 to-purple-500" />
             <div className="flex items-center gap-4 mb-6">
-              <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-accent p-3">
+              <div className="inline-flex rounded-xl bg-gradient-to-br from-primary to-accent p-3 shadow-lg shadow-primary/20">
                 <Layers className="h-6 w-6 text-white" />
               </div>
               <h3 className="font-display text-2xl font-semibold text-foreground">Our Approach</h3>
             </div>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className="space-y-4 text-muted-foreground/90 leading-relaxed">
               <p>
                 Through our six foundational pillars, we provide a comprehensive framework for navigating
                 unemployment with resilience and hope. Each pillar represents a crucial aspect of wellbeing
