@@ -270,18 +270,3 @@
     box-shadow: 0 0 35px hsl(var(--glow-primary)), 0 0 60px hsl(var(--glow-primary)), 0 4px 20px rgba(0,0,0,0.3);
   }
 }
-
-@keyframes neonSweep {
-  0% {
-    background-position: 100% 50%;
-    filter: drop-shadow(0 0 6px hsl(190 90% 65% / 0.3)) drop-shadow(0 0 16px hsl(270 80% 70% / 0.25));
-  }
-  50% {
-    background-position: 0% 50%;
-    filter: drop-shadow(0 0 12px hsl(270 80% 70% / 0.7)) drop-shadow(0 0 28px hsl(190 90% 65% / 0.5));
-  }
-  100% {
-    background-position: 100% 50%;
-    filter: drop-shadow(0 0 6px hsl(190 90% 65% / 0.3)) drop-shadow(0 0 16px hsl(270 80% 70% / 0.25));
-  }
-}
