@@ -136,10 +136,10 @@ const HeroSection = () => {
             <span
               className="drop-shadow-lg inline-block bg-clip-text text-transparent text-[1.15em] font-black tracking-wide"
               style={{
-                backgroundImage: "linear-gradient(135deg, hsl(190 90% 65%), hsl(270 80% 72%), hsl(330 80% 65%), hsl(20 90% 70%))",
+                backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
                 fontFamily: "'Playfair Display', 'DM Sans', serif",
                 letterSpacing: "0.04em",
-                filter: "drop-shadow(0 0 30px hsl(270 60% 65% / 0.5))"
+                filter: "drop-shadow(0 0 20px rgba(255,255,255,0.6)) drop-shadow(0 0 50px hsl(270 70% 75% / 0.7))"
               }}
             >Pandemic</span>
           </motion.h1>
