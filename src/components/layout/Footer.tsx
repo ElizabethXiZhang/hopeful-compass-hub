@@ -1,21 +1,13 @@
 import { Link } from "react-router-dom";
 import { Twitter, Linkedin, Github, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import logoFull from "@/assets/logo-full.png";
 
-const footerLinks = {
-  navigation: [
-    { name: "Home", path: "/" },
-    { name: "Mission", path: "/mission" },
-    { name: "Community", path: "/community" },
-    { name: "Contact", path: "/contact" },
-  ],
-  resources: [
-    { name: "Blog", path: "/blog" },
-    { name: "Support", path: "/support" },
-    { name: "Privacy", path: "/privacy" },
-    { name: "Terms", path: "/terms" },
-  ],
-};
+const footerLinks = [
+  { name: "Home", path: "/" },
+  { name: "Community", path: "/community" },
+  { name: "Contact", path: "/contact" },
+];
 
 const socialLinks = [
   { name: "Twitter", icon: Twitter, href: "#" },
@@ -31,8 +23,8 @@ const Footer = () => {
       <div className="gradient-orb gradient-orb-lavender absolute -bottom-40 -right-40 h-80 w-80 opacity-20" />
 
       <div className="container relative mx-auto max-w-6xl px-4 py-16">
-        <div className="grid gap-12 md:grid-cols-4">
-          {/* Brand */}
+        <div className="grid gap-12 md:grid-cols-3">
+          {/* Brand with Full Logo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -40,17 +32,14 @@ const Footer = () => {
             viewport={{ once: true }}
             className="md:col-span-2"
           >
-            <Link to="/" className="inline-flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5">
-                <div className="flex h-full w-full items-center justify-center rounded-xl bg-background">
-                  <span className="font-display text-lg font-bold gradient-text">UP</span>
-                </div>
-              </div>
-              <span className="font-display text-xl font-semibold text-foreground">
-                The Unemployment Pandemic
-              </span>
+            <Link to="/" className="inline-block">
+              <img
+                src={logoFull}
+                alt="The Unemployment Pandemic"
+                className="h-24 w-auto object-contain drop-shadow-[0_0_10px_hsla(270,60%,70%,0.2)]"
+              />
             </Link>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
               Navigating meaning, stability, and peace in the AI era. We support people through the challenges of changes. You are not alone in this journey. Together, we find new paths forward.
             </p>
 
@@ -78,26 +67,12 @@ const Footer = () => {
           >
             <h4 className="mb-4 font-display text-sm font-semibold text-foreground">Navigation</h4>
             <ul className="space-y-3">
-              {footerLinks.navigation.map((link) => (
+              {footerLinks.map((link) => (
                 <li key={link.name}>
                   <Link to={link.path} className="text-sm text-muted-foreground transition-colors hover:text-primary">
                     {link.name}
                   </Link>
                 </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Resources */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}></li>
               ))}
             </ul>
           </motion.div>
