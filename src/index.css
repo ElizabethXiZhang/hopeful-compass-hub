@@ -156,13 +156,13 @@
     background: hsl(var(--glass-bg));
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
   }
 
   .glass-card-strong {
     @apply relative rounded-2xl;
     border: 1px solid hsl(var(--glass-border));
-    background: hsl(var(--card) / 0.6);
+    background: hsl(var(--card) / 0.7);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     transition: background-color 0.4s ease, border-color 0.4s ease;
@@ -259,5 +259,14 @@
   50% {
     opacity: 0.8;
     transform: scale(1.05);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(var(--glow-primary)), 0 4px 15px rgba(0,0,0,0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px hsl(var(--glow-primary)), 0 0 60px hsl(var(--glow-primary)), 0 4px 20px rgba(0,0,0,0.3);
   }
 }

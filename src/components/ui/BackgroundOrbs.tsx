@@ -5,8 +5,8 @@ const BackgroundOrbs = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
-  // Scale opacities based on theme
-  const o = (darkVal: number) => isDark ? darkVal : darkVal * 0.35;
+  // Boosted opacities for more vibrancy
+  const o = (darkVal: number) => isDark ? darkVal * 1.4 : darkVal * 0.5;
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden transition-colors duration-500">
@@ -87,14 +87,41 @@ const BackgroundOrbs = () => {
           }}
         />
 
-        {/* Floating mesh particles */}
-        {[...Array(8)].map((_, i) => (
+        {/* Horizontal aurora band at ~30% from top */}
+        <motion.div
+          animate={{
+            opacity: [o(0.2), o(0.4), o(0.2)],
+            x: ["-5%", "5%", "-5%"],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-[25%] left-0 right-0 h-[200px]"
+          style={{
+            background: `
+              linear-gradient(90deg, 
+                transparent 0%,
+                hsl(var(--gradient-cyan) / ${o(0.15)}) 20%,
+                hsl(var(--gradient-lavender) / ${o(0.2)}) 40%,
+                hsl(var(--gradient-peach) / ${o(0.15)}) 60%,
+                hsl(var(--gradient-teal) / ${o(0.1)}) 80%,
+                transparent 100%
+              )
+            `,
+            filter: 'blur(60px)',
+          }}
+        />
+
+        {/* Floating mesh particles - larger and brighter */}
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             animate={{
-              y: [0, -40 - i * 5, 0],
-              x: [0, i % 2 === 0 ? 30 : -30, 0],
-              opacity: [o(0.4), o(0.7), o(0.4)],
+              y: [0, -50 - i * 6, 0],
+              x: [0, i % 2 === 0 ? 35 : -35, 0],
+              opacity: [o(0.5), o(0.8), o(0.5)],
             }}
             transition={{
               duration: 5 + i * 1.5,
@@ -104,15 +131,15 @@ const BackgroundOrbs = () => {
             }}
             className="absolute rounded-full"
             style={{
-              width: `${80 + i * 40}px`,
-              height: `${80 + i * 40}px`,
-              left: `${8 + i * 11}%`,
-              bottom: `${5 + (i % 4) * 12}%`,
+              width: `${100 + i * 50}px`,
+              height: `${100 + i * 50}px`,
+              left: `${5 + i * 9}%`,
+              bottom: `${3 + (i % 5) * 10}%`,
               background: `radial-gradient(circle, 
-                hsl(var(--gradient-cyan) / ${o(0.5 - i * 0.04)}) 0%, 
+                hsl(var(${i % 3 === 0 ? '--gradient-cyan' : i % 3 === 1 ? '--gradient-lavender' : '--gradient-peach'}) / ${o(0.5 - i * 0.03)}) 0%, 
                 transparent 70%
               )`,
-              filter: 'blur(30px)',
+              filter: 'blur(35px)',
             }}
           />
         ))}
@@ -121,7 +148,7 @@ const BackgroundOrbs = () => {
       {/* Corner accent - top right */}
       <motion.div
         animate={{
-          opacity: [o(0.25), o(0.4), o(0.25)],
+          opacity: [o(0.3), o(0.5), o(0.3)],
           scale: [1, 1.08, 1],
         }}
         transition={{
@@ -129,12 +156,12 @@ const BackgroundOrbs = () => {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute -top-40 -right-40 w-[600px] h-[600px]"
+        className="absolute -top-40 -right-40 w-[700px] h-[700px]"
         style={{
           background: `
             radial-gradient(circle at 70% 30%, 
-              hsl(var(--gradient-lavender) / ${o(0.45)}) 0%,
-              hsl(var(--gradient-cyan) / ${o(0.2)}) 35%,
+              hsl(var(--gradient-lavender) / ${o(0.5)}) 0%,
+              hsl(var(--gradient-cyan) / ${o(0.25)}) 35%,
               transparent 55%
             )
           `,
@@ -144,7 +171,7 @@ const BackgroundOrbs = () => {
       {/* Corner accent - top left */}
       <motion.div
         animate={{
-          opacity: [o(0.2), o(0.35), o(0.2)],
+          opacity: [o(0.25), o(0.4), o(0.25)],
           scale: [1, 1.05, 1],
         }}
         transition={{
@@ -153,12 +180,12 @@ const BackgroundOrbs = () => {
           ease: "easeInOut",
           delay: 3,
         }}
-        className="absolute -top-32 -left-32 w-[450px] h-[450px]"
+        className="absolute -top-32 -left-32 w-[550px] h-[550px]"
         style={{
           background: `
             radial-gradient(circle at 30% 30%, 
-              hsl(var(--gradient-cyan) / ${o(0.35)}) 0%,
-              hsl(var(--gradient-teal) / ${o(0.15)}) 40%,
+              hsl(var(--gradient-cyan) / ${o(0.4)}) 0%,
+              hsl(var(--gradient-teal) / ${o(0.2)}) 40%,
               transparent 55%
             )
           `,
