@@ -134,12 +134,11 @@ const HeroSection = () => {
             Handle the Unemployment
             <br />
             <span
-              className="drop-shadow-lg inline-block bg-clip-text text-transparent text-[1.15em] font-black tracking-wide"
+              className="inline-block text-[1.28em] font-black tracking-[0.08em]"
               style={{
-                backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
-                fontFamily: "'Playfair Display', 'DM Sans', serif",
-                letterSpacing: "0.04em",
-                filter: "drop-shadow(0 0 20px rgba(255,255,255,0.6)) drop-shadow(0 0 50px hsl(270 70% 75% / 0.7))"
+                color: "hsl(0 0% 100%)",
+                fontFamily: "'Cinzel Decorative', 'DM Sans', serif",
+                WebkitTextStroke: "1px hsl(270 80% 82% / 0.45)"
               }}
             >Pandemic</span>
           </motion.h1>
