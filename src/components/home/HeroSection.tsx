@@ -136,7 +136,9 @@ const HeroSection = () => {
             <span
               className="inline-block bg-clip-text text-transparent"
               style={{
-                backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))"
+                backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
+                textShadow: "none",
+                filter: "none"
               }}
             >Pandemic</span>
           </motion.h1>
