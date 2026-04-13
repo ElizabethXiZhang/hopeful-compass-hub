@@ -134,11 +134,16 @@ const HeroSection = () => {
             Handle the Unemployment
             <br />
             <span
-              className="inline-block bg-clip-text text-transparent"
+              className="inline-block relative"
               style={{
-                backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
-                textShadow: "none",
-                filter: "none"
+                background: "linear-gradient(90deg, hsl(190 95% 70%), hsl(270 85% 75%), hsl(330 85% 72%), hsl(20 90% 75%), hsl(190 95% 70%))",
+                backgroundSize: "200% 100%",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                animation: "neonSweep 3s ease-in-out infinite",
+                filter: "drop-shadow(0 0 8px hsl(270 80% 70% / 0.6)) drop-shadow(0 0 20px hsl(190 90% 65% / 0.4))",
+                WebkitTextStroke: "0.5px hsl(270 60% 80% / 0.3)",
               }}
             >Pandemic</span>
           </motion.h1>
