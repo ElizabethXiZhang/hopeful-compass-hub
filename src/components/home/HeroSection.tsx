@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowDown, PenLine } from "lucide-react";
 
 import heroLoneliness from "@/assets/hero-loneliness.webp";
+import LightStreaks from "./LightStreaks";
 
 const heroSlides = [
   { src: heroLoneliness, alt: "Person standing confidently at sunrise cliff", verse: ["Rise again, don't lose sight", "Your future is still bright"] },
@@ -114,6 +115,11 @@ const HeroSection = () => {
 
       {/* Vignette edges */}
       <div className="absolute inset-0 z-[1] shadow-[inset_0_0_150px_60px_rgba(0,0,0,0.6)]" />
+
+      {/* Cinematic light comets */}
+      <div className="absolute inset-0 z-[2]">
+        <LightStreaks />
+      </div>
 
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/80 to-transparent z-[2]" />
