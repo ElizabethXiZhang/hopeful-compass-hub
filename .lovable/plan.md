@@ -1,39 +1,60 @@
 
 
-## Faster, More Beautiful Hero Section
+## Brighten & Energize the Homepage
 
-### Problem
-All 5 hero images (~670KB total) load simultaneously on page load, causing visible delay. The current implementation renders only the active slide but imports all images eagerly through Vite's bundler.
+### Problems Identified
+1. **Hero section**: Dark overlays (black/70, black/50, black/80) crush the background images, making everything feel heavy and washed out
+2. **Background**: The `BackgroundOrbs` use very low opacity values, barely visible against the deep navy `hsl(220 50% 6%)` background
+3. **Cards**: All glass cards are dark-on-dark with subtle borders -- no color accents, no vibrancy
+4. **Sections**: No visual breaks or color variation between sections -- it's one continuous dark block
+5. **Pillars section**: Single-column stacked cards with no visual interest
+6. **No color pops**: Despite the theme having cyan, lavender, peach, and teal, they're barely used in the UI
 
 ### Plan
 
-#### 1. Image Loading Optimizations
-- **Eager-load only the first image** — preload it via a `<link rel="preload">` in `index.html` or use an `onLoad` state to show a gradient placeholder until it's ready
-- **Lazy-load remaining images** — only fetch the next slide's image 1-2 seconds before it's needed using `new Image()` prefetching
-- **Add a shimmer/gradient placeholder** — show an animated gradient (matching the dark cinematic overlay) while images load, so the transition feels intentional rather than broken
-- **Convert images to WebP format** — reduce file sizes by ~30-50% with no visible quality loss
-- **Remove thumbnail images from initial load** — use tiny CSS gradient dots as indicators instead of loading 5 additional image thumbnails
+#### 1. Hero Section -- Lighten Overlays & Add Color
+- Reduce dark overlay from `black/70 via black/50 to black/80` to `black/40 via black/25 to black/60`
+- Add a subtle colored gradient overlay (primary/secondary tints) so the hero feels warm and alive, not just dark
+- Increase gradient text vibrancy on "Pandemic" with a brighter, more saturated gradient
+- Make the poetic verse text brighter (`text-white/90` instead of `text-white/80`)
 
-#### 2. Animated Placeholder While Loading
-- Replace the blank/white flash with a smooth animated gradient that matches the site's primary-to-secondary color scheme
-- Add a subtle pulse animation on the gradient so it feels alive even before the image loads
-- Fade from placeholder to image seamlessly once loaded
+#### 2. Background Orbs -- Boost Vibrancy
+- Increase opacity multipliers across all orbs by ~40-50%
+- Add a slow-moving horizontal aurora band at ~30% from top for color interest behind content sections
+- Make floating mesh particles slightly larger and brighter
 
-#### 3. Performance-Friendly Animation Tweaks
-- Use `will-change: transform, opacity` on the active slide for GPU-accelerated transitions
-- Preload the *next* slide image during the current slide's display time (predictive prefetch)
-- Use `requestIdleCallback` for non-critical image prefetching
+#### 3. Section Dividers & Color Breaks
+- Add subtle gradient dividers between major sections (thin gradient lines or soft colored bands)
+- Add section-specific accent glows: e.g., a soft rose glow behind "Your Feelings Are Valid", a cyan glow behind "AI Revolution"
+- Each section gets a faint background tint so they don't all look identical
 
-#### 4. Replace Thumbnail Strip with Minimal Dot Indicators
-- Swap the 5 thumbnail images (which each load the full hero image again) with styled dot/pill indicators
-- Active indicator gets a progress bar animation (already exists) but as a pill shape rather than an image
-- This eliminates 5 extra image loads on the initial page
+#### 4. Glass Cards -- Add Life
+- Add colored top-border accents to cards matching their theme (rose for mental health, cyan for community, etc.)
+- Increase glass card background opacity slightly for better contrast
+- Add subtle gradient shimmer on hover (a moving highlight across the card)
+- Add colored icon backgrounds with soft glow behind them
 
-### Technical Details
+#### 5. Pillars Section -- Visual Upgrade
+- Switch from single-column stacked to a 2x3 grid on desktop
+- Each pillar card gets a colored gradient border matching its pillar color
+- Add a subtle animated gradient background that shifts behind the active/hovered card
 
-**Files to modify:**
-- `src/components/home/HeroSection.tsx` — add image preloading logic, shimmer placeholder, replace thumbnails with dot indicators, add `will-change` optimization
-- `src/assets/` — convert 5 JPGs to WebP format via script
+#### 6. CTA Buttons -- More Punch
+- "Start Your Journey" button: increase glow intensity, add a subtle breathing animation
+- "Share Your Story" button: add a soft gradient border instead of plain white/20
 
-**No other files need changes.** The Index page and layout remain the same.
+#### 7. Typography Color
+- Section headings: make the gradient text spans more vivid with wider color range
+- Subtext: bump from `text-muted-foreground` to slightly brighter for readability
+
+### Files to Modify
+- `src/components/home/HeroSection.tsx` -- overlay colors, text brightness, button glow
+- `src/components/ui/BackgroundOrbs.tsx` -- boost opacity values, add aurora band
+- `src/components/home/EmotionalValidationSection.tsx` -- section accent glow, card colors
+- `src/components/home/AIRevolutionSection.tsx` -- section accent glow, timeline styling
+- `src/components/home/MissionSection.tsx` -- card border accents, background tint
+- `src/components/home/PillarsSection.tsx` -- 2x3 grid layout, gradient borders
+- `src/components/home/CommunitySection.tsx` -- stat cards color accents
+- `src/components/ui/GlassCard.tsx` -- hover shimmer effect, colored border support
+- `src/index.css` -- new utility classes for section glows and gradient borders
 
