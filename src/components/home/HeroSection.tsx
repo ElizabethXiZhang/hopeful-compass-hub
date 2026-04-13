@@ -133,19 +133,20 @@ const HeroSection = () => {
           >
             Handle the Unemployment
             <br />
-            <span
-              className="inline-block relative"
-              style={{
-                background: "linear-gradient(90deg, hsl(190 95% 70%), hsl(270 85% 75%), hsl(330 85% 72%), hsl(20 90% 75%), hsl(190 95% 70%))",
-                backgroundSize: "200% 100%",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                animation: "neonSweep 3s ease-in-out infinite",
-                filter: "drop-shadow(0 0 8px hsl(270 80% 70% / 0.6)) drop-shadow(0 0 20px hsl(190 90% 65% / 0.4))",
-                WebkitTextStroke: "0.5px hsl(270 60% 80% / 0.3)",
-              }}
-            >Pandemic</span>
+            <span className="inline-flex">
+              {"Pandemic".split("").map((letter, i) => (
+                <span
+                  key={i}
+                  className="inline-block bg-clip-text text-transparent transition-all duration-300 cursor-default hover:scale-125 hover:drop-shadow-[0_0_12px_hsl(270_80%_70%/0.7)]"
+                  style={{
+                    backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
+                    textShadow: "none",
+                    filter: "none",
+                    transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                  }}
+                >{letter}</span>
+              ))}
+            </span>
           </motion.h1>
 
           {/* Poetic verse */}
