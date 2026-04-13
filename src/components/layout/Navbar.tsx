@@ -28,7 +28,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-3">
             <img
               src={logoIcon}
-              alt="The Unemployment Pandemic"
+              alt="Unemployment Reboot"
               className="h-10 w-10 object-contain drop-shadow-[0_0_6px_hsla(270,60%,70%,0.3)]"
             />
             <span className="hidden font-display text-lg font-semibold text-foreground sm:block">
