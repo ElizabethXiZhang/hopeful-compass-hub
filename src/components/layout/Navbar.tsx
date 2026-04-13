@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "../theme/ThemeToggle";
+import logoIcon from "@/assets/logo-icon.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -25,13 +26,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent p-0.5 shadow-lg">
-              <div className="flex h-full w-full items-center justify-center rounded-xl bg-background/90 backdrop-blur-sm">
-                <span className="font-display text-lg font-bold bg-gradient-to-br from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  HUP
-                </span>
-              </div>
-            </div>
+            <img
+              src={logoIcon}
+              alt="The Unemployment Pandemic"
+              className="h-10 w-10 object-contain drop-shadow-[0_0_6px_hsla(270,60%,70%,0.3)]"
+            />
             <span className="hidden font-display text-lg font-semibold text-foreground sm:block">
               Handle The Unemployment Pandemic
             </span>
