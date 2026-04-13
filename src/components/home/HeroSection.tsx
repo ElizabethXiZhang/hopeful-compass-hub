@@ -122,10 +122,10 @@ const HeroSection = () => {
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/80 to-transparent z-[2]" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/80 to-transparent z-[3]" />
 
       {/* Main content */}
-      <div className="relative z-[3] flex flex-col items-center justify-center h-full px-5 sm:px-8">
+      <div className="relative z-[4] flex flex-col items-center justify-center h-full px-5 sm:px-8">
         <div className="max-w-4xl text-center">
           {/* Headline */}
           <motion.h1
@@ -197,7 +197,7 @@ const HeroSection = () => {
         </div>
 
         {/* Dot indicators */}
-        <div className="absolute bottom-10 sm:bottom-14 left-0 right-0 z-[4]">
+        <div className="absolute bottom-10 sm:bottom-14 left-0 right-0 z-[5]">
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             {heroSlides.map((_, index) => (
               <button
