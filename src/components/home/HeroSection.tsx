@@ -133,14 +133,21 @@ const HeroSection = () => {
           >
             Handle the Unemployment
             <br />
-            <span
-              className="inline-block bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
-                textShadow: "none",
-                filter: "none"
-              }}
-            >Pandemic</span>
+            <span className="inline-block">
+              {"Pandemic".split("").map((letter, i) => (
+                <span
+                  key={i}
+                  className="inline-block bg-clip-text text-transparent transition-transform duration-200 ease-out hover:scale-125 cursor-default"
+                  style={{
+                    backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
+                    textShadow: "none",
+                    filter: "none",
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </span>
           </motion.h1>
 
           {/* Poetic verse */}
