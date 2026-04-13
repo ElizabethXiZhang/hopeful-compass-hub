@@ -105,21 +105,10 @@ const HeroSection = () => {
         )}
       </AnimatePresence>
 
-      {/* Lighter cinematic overlay with color tints */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/60 z-[1]" />
-
-      {/* Colored gradient overlay for warmth */}
+      {/* Center-only dark overlay fading to transparent at edges */}
       <div className="absolute inset-0 z-[1]" style={{
-        background: "linear-gradient(135deg, hsl(190 80% 55% / 0.08) 0%, hsl(270 60% 65% / 0.1) 50%, hsl(20 80% 65% / 0.08) 100%)"
+        background: "radial-gradient(ellipse 60% 50% at 50% 48%, hsl(220 50% 6% / 0.65) 0%, hsl(220 50% 6% / 0.25) 55%, transparent 100%)"
       }} />
-
-      {/* Radial center glow for text contrast */}
-      <div className="absolute inset-0 z-[1]" style={{
-        background: "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(0,0,0,0.45) 0%, transparent 100%)"
-      }} />
-
-      {/* Vignette edges - softer */}
-      <div className="absolute inset-0 z-[1] shadow-[inset_0_0_120px_40px_rgba(0,0,0,0.4)]" />
 
       {/* Cinematic light comets */}
       <div className="absolute inset-0 z-[2]">
@@ -144,7 +133,15 @@ const HeroSection = () => {
           >
             Handle the Unemployment
             <br />
-            <span className="gradient-text drop-shadow-lg">Pandemic</span>
+            <span
+              className="drop-shadow-lg inline-block bg-clip-text text-transparent text-[1.15em] font-black tracking-wide"
+              style={{
+                backgroundImage: "linear-gradient(135deg, hsl(190 90% 65%), hsl(270 80% 72%), hsl(330 80% 65%), hsl(20 90% 70%))",
+                fontFamily: "'Playfair Display', 'DM Sans', serif",
+                letterSpacing: "0.04em",
+                filter: "drop-shadow(0 0 30px hsl(270 60% 65% / 0.5))"
+              }}
+            >Pandemic</span>
           </motion.h1>
 
           {/* Poetic verse */}
@@ -184,11 +181,11 @@ const HeroSection = () => {
                 const section = document.getElementById("feelings-valid");
                 if (section) section.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.97] animate-[breathe_3s_ease-in-out_infinite]"
+              className="group relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.97]"
             >
               <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-y-0.5" />
               Start Your Journey
-              <span className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent opacity-40 blur-xl transition-opacity group-hover:opacity-60" />
+              <span className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent opacity-20 blur-lg transition-opacity group-hover:opacity-35" />
             </button>
 
             <Link
