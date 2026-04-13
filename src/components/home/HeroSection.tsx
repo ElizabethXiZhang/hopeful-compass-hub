@@ -133,19 +133,13 @@ const HeroSection = () => {
           >
             Handle the Unemployment
             <br />
-            <span
-              className="inline-flex bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
-                textShadow: "none",
-                filter: "none",
-              }}
-            >
+            <span className="inline-flex">
               {"Pandemic".split("").map((letter, i) => (
                 <span
                   key={i}
-                  className="inline-block transition-transform duration-300 cursor-default hover:scale-125 hover:drop-shadow-[0_0_12px_hsl(270_80%_70%/0.7)]"
+                  className="inline-block bg-clip-text text-transparent transition-transform duration-300 cursor-default hover:scale-125 hover:drop-shadow-[0_0_12px_hsl(270_80%_70%/0.7)]"
                   style={{
+                    backgroundImage: "linear-gradient(135deg, hsl(190 90% 78%), hsl(270 80% 82%), hsl(330 80% 78%), hsl(20 90% 80%))",
                     transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)",
                   }}
                 >{letter}</span>
