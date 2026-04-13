@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ArrowDown, PenLine } from "lucide-react";
 
 import heroLoneliness from "@/assets/hero-loneliness.webp";
+import LightStreaks from "./LightStreaks";
 
 const heroSlides = [
   { src: heroLoneliness, alt: "Person standing confidently at sunrise cliff", verse: ["Rise again, don't lose sight", "Your future is still bright"] },
@@ -115,11 +116,16 @@ const HeroSection = () => {
       {/* Vignette edges */}
       <div className="absolute inset-0 z-[1] shadow-[inset_0_0_150px_60px_rgba(0,0,0,0.6)]" />
 
+      {/* Cinematic light comets */}
+      <div className="absolute inset-0 z-[2]">
+        <LightStreaks />
+      </div>
+
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/80 to-transparent z-[2]" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/80 to-transparent z-[3]" />
 
       {/* Main content */}
-      <div className="relative z-[3] flex flex-col items-center justify-center h-full px-5 sm:px-8">
+      <div className="relative z-[4] flex flex-col items-center justify-center h-full px-5 sm:px-8">
         <div className="max-w-4xl text-center">
           {/* Headline */}
           <motion.h1
@@ -191,7 +197,7 @@ const HeroSection = () => {
         </div>
 
         {/* Dot indicators */}
-        <div className="absolute bottom-10 sm:bottom-14 left-0 right-0 z-[4]">
+        <div className="absolute bottom-10 sm:bottom-14 left-0 right-0 z-[5]">
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             {heroSlides.map((_, index) => (
               <button
