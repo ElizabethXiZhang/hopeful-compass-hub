@@ -89,7 +89,7 @@ const PillarsSection = () => {
             Build Your Six <span className="gradient-text">Pillars</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground/90">
-            The foundation of your support system, designed to address every aspect of wellbeing during unemployment.
+            Our Six Pillars framework is the foundation of your support system, designed to help you rebuild with resilience, purpose, and community support while addressing every aspect of wellbeing during unemployment.
           </p>
         </motion.div>
 
