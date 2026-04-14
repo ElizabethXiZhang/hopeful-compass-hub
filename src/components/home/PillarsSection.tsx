@@ -82,6 +82,9 @@ const PillarsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <span className="inline-block mb-4 text-sm font-medium text-secondary uppercase tracking-wider">
+            Feel → Understand → <span className="text-primary font-bold">REBUILD</span>
+          </span>
           <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl mb-6">
             Build Your Six <span className="gradient-text">Pillars</span>
           </h2>
