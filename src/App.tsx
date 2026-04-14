@@ -9,6 +9,8 @@ import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Index from "./pages/Index";
 import Mission from "./pages/Mission";
 import Pillars from "./pages/Pillars";
+import Reality from "./pages/Reality";
+import Rebuild from "./pages/Rebuild";
 import Community from "./pages/Community";
 import Contact from "./pages/Contact";
 import GovernmentPolicies from "./pages/GovernmentPolicies";
