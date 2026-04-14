@@ -401,6 +401,9 @@ src/
 
 - [ ] Add clear value proposition to hero (what the platform actually does)
 - [ ] Improve navigation — add dropdown or mega-menu for hidden pages (Forum, Pillars, Policies, etc.)
+- [x] Improve navigation — added Reality and Rebuild pages to navbar, creating a journey-based nav structure (Home → Reality → Rebuild → Community → Contact)
+- [x] Add dedicated Reality page (AI Revolution timeline with streamlined layout)
+- [x] Add dedicated Rebuild page (Six Pillars framework with streamlined layout)
 - [ ] Add proper loading/skeleton states for data-driven pages
 - [ ] Implement React Error Boundaries
 - [ ] Add route-level code splitting (`React.lazy`)
