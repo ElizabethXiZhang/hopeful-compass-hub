@@ -7,27 +7,6 @@ import { Users } from "lucide-react";
 const Rebuild = () => {
   return (
     <Layout>
-      {/* Page Hero */}
-      <section className="relative pt-32 pb-8 px-4">
-        <div className="mx-auto max-w-4xl text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block mb-4 text-sm font-medium text-secondary uppercase tracking-wider">
-              Feel → Understand → <span className="text-primary font-bold">Act</span>
-            </span>
-            <h1 className="font-display text-4xl font-bold text-foreground sm:text-5xl md:text-6xl mb-6">
-              <span className="gradient-text">Rebuild</span> Your Life
-            </h1>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground/90">
-              Our Six Pillars framework gives you a comprehensive foundation to rebuild with resilience, purpose, and community support.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Pillars Grid */}
       <PillarsSection />
 
