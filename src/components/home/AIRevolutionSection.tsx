@@ -42,8 +42,6 @@ const AIRevolutionSection = () => {
         background: "radial-gradient(ellipse 70% 50% at 50% 40%, hsl(190 80% 55% / 0.06) 0%, transparent 70%)"
       }} />
 
-      {/* Gradient divider at top */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
 
       {/* Background glow */}
       <motion.div
@@ -60,9 +58,6 @@ const AIRevolutionSection = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <span className="inline-block mb-4 text-sm font-medium text-secondary uppercase tracking-wider">
-            Understanding Change
-          </span>
           <h2 className="font-display text-4xl font-bold text-foreground sm:text-5xl">
             The AI Revolution <span className="gradient-text-calm">Explained Calmly</span>
           </h2>
