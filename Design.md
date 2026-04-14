@@ -29,6 +29,8 @@
 ### 1.2 Design Style Per Page
 
 - **Home:** Rich glassmorphism, animated hero carousel (5 slides with poetic verses), gradient orbs, timeline layout for AI section, 2×3 pillar grid, community CTA with floating animation. Most polished page.
+- **Reality:** Streamlined page featuring AI Revolution timeline section with journey span "Feel → Understand → UNDERSTAND REALITY". No redundant hero — flows directly into content. CTA links to Rebuild page.
+- **Rebuild:** Six Pillars framework page with journey span "Feel → Understand → REBUILD" above the pillar grid. No redundant hero — flows directly into pillars content. CTA links to Community.
 - **Community:** Centered single-column form with glass card, gradient background, step indicators (non-functional), animated submit. Well-structured.
 - **Contact:** 3-column desktop grid of glass cards with accordion fallback on mobile. Consistent with design system.
 - **Pillars:** Vertical stacked list with alternating slide-in animations. Click-through to Job Cuts and Government Policies.
