@@ -182,24 +182,21 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="mt-7 sm:mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5"
           >
-            <button
-              onClick={() => {
-                const section = document.getElementById("feelings-valid");
-                if (section) section.scrollIntoView({ behavior: "smooth" });
-              }}
+            <Link
+              to="/reality"
               className="group relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.97]"
             >
               <ArrowDown className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-y-0.5" />
-              Start Your Journey
+              Reality
               <span className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent opacity-20 blur-lg transition-opacity group-hover:opacity-35" />
-            </button>
+            </Link>
 
             <Link
-              to="/contact"
+              to="/rebuild"
               className="group inline-flex items-center gap-2 rounded-2xl border border-primary/30 bg-white/10 px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-primary/50 active:scale-[0.97]"
             >
               <PenLine className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-              Share Your Story
+              Rebuild
             </Link>
           </motion.div>
         </div>

@@ -33,7 +33,9 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/mission" element={<Navigate to="/" replace />} />
-              <Route path="/pillars" element={<Pillars />} />
+              <Route path="/pillars" element={<Navigate to="/rebuild" replace />} />
+              <Route path="/reality" element={<Reality />} />
+              <Route path="/rebuild" element={<Rebuild />} />
               <Route path="/community" element={<Community />} />
               <Route path="/government-policies" element={<GovernmentPolicies />} />
               <Route path="/job-cuts" element={<JobCuts />} />
