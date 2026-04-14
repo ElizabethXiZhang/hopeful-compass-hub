@@ -8,21 +8,23 @@
 
 ## 1. CURRENT WEBSITE ANALYSIS
 
-### 1.1 Page Inventory (8 Active Pages + 2 Redirects + 1 Error)
+### 1.1 Page Inventory (10 Active Pages + 2 Redirects + 1 Error)
 
 | # | Route | Page | Purpose | Status |
 |---|-------|------|---------|--------|
 | 1 | `/` | Home (Index) | Landing page — hero, emotional validation, AI revolution timeline, mission, pillars, community CTA | ✅ Complete |
-| 2 | `/community` | Community Signup | Multi-field form to join community (name, gender, age, profession, location, email) | ✅ Complete |
-| 3 | `/contact` | Contact | 6 contact cards (story sharing, coaching, collaboration, sponsorship, info) with mailto links | ✅ Complete |
-| 4 | `/pillars` | Six Pillars (Detail) | Detailed view of the 7 pillars (6 + "Transition in AI Revolution") | ✅ Complete |
-| 5 | `/government-policies` | Government Policies | Policy listings with AI summaries, country filters | ✅ Complete |
-| 6 | `/job-cuts` | Job Cuts News | Aggregated job transition news from external sources | ✅ Complete |
-| 7 | `/forum` | Community Forum | Membership-gated forum with topics & replies | ✅ Complete |
-| 8 | `/book-call` | Book a Call | Calendly embed for $30/1hr support calls | ✅ Complete |
-| 9 | `/mission` | — | Redirects to `/` | Redirect |
-| 10 | `/navigate` | — | Redirects to `/government-policies` | Redirect |
-| 11 | `*` | 404 Not Found | Minimal error page | ⚠️ Basic |
+| 2 | `/reality` | Reality | Dedicated page for AI Revolution timeline with journey span "Feel → Understand → UNDERSTAND REALITY" and CTA to Rebuild | ✅ Complete |
+| 3 | `/rebuild` | Rebuild | Six Pillars framework page with journey span "Feel → Understand → REBUILD" and CTA to join Community | ✅ Complete |
+| 4 | `/community` | Community Signup | Multi-field form to join community (name, gender, age, profession, location, email) | ✅ Complete |
+| 5 | `/contact` | Contact | 6 contact cards (story sharing, coaching, collaboration, sponsorship, info) with mailto links | ✅ Complete |
+| 6 | `/pillars` | Six Pillars (Detail) | Detailed view of the 7 pillars (6 + "Transition in AI Revolution") | ✅ Complete |
+| 7 | `/government-policies` | Government Policies | Policy listings with AI summaries, country filters | ✅ Complete |
+| 8 | `/job-cuts` | Job Cuts News | Aggregated job transition news from external sources | ✅ Complete |
+| 9 | `/forum` | Community Forum | Membership-gated forum with topics & replies | ✅ Complete |
+| 10 | `/book-call` | Book a Call | Calendly embed for $30/1hr support calls | ✅ Complete |
+| 11 | `/mission` | — | Redirects to `/` | Redirect |
+| 12 | `/navigate` | — | Redirects to `/government-policies` | Redirect |
+| 13 | `*` | 404 Not Found | Minimal error page | ⚠️ Basic |
 
 ### 1.2 Design Style Per Page
 
