@@ -67,7 +67,7 @@ const AIRevolutionSection = () => {
             The AI Revolution <span className="gradient-text-calm">Explained Calmly</span>
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground/90">
-            This isn't about doom. It's about understanding where we are and where we're going—together.
+            This isn’t about doom, it’s about understanding where we are, where we’re going, and how the AI revolution is transforming the world of work, so we can navigate it together with clarity and confidence.
           </p>
         </motion.div>
 
