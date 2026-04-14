@@ -146,7 +146,11 @@
 
 ### 3.3 User Journey
 
-**Current flow:** Land on homepage → scroll through emotional content → see pillars → find community CTA → sign up
+**Current flow:** Land on homepage → Reality (understand AI impact) → Rebuild (six pillars framework) → Community signup → engage
+
+**Journey spans:** Each page reinforces the narrative arc with a "Feel → Understand → [ACTION]" span:
+- Reality page: "Feel → Understand → **UNDERSTAND REALITY**"
+- Rebuild page: "Feel → Understand → **REBUILD**"
 
 **Missing:**
 - No onboarding after community signup
