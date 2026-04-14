@@ -8,25 +8,29 @@
 
 ## 1. CURRENT WEBSITE ANALYSIS
 
-### 1.1 Page Inventory (8 Active Pages + 2 Redirects + 1 Error)
+### 1.1 Page Inventory (10 Active Pages + 2 Redirects + 1 Error)
 
 | # | Route | Page | Purpose | Status |
 |---|-------|------|---------|--------|
 | 1 | `/` | Home (Index) | Landing page — hero, emotional validation, AI revolution timeline, mission, pillars, community CTA | ✅ Complete |
-| 2 | `/community` | Community Signup | Multi-field form to join community (name, gender, age, profession, location, email) | ✅ Complete |
-| 3 | `/contact` | Contact | 6 contact cards (story sharing, coaching, collaboration, sponsorship, info) with mailto links | ✅ Complete |
-| 4 | `/pillars` | Six Pillars (Detail) | Detailed view of the 7 pillars (6 + "Transition in AI Revolution") | ✅ Complete |
-| 5 | `/government-policies` | Government Policies | Policy listings with AI summaries, country filters | ✅ Complete |
-| 6 | `/job-cuts` | Job Cuts News | Aggregated job transition news from external sources | ✅ Complete |
-| 7 | `/forum` | Community Forum | Membership-gated forum with topics & replies | ✅ Complete |
-| 8 | `/book-call` | Book a Call | Calendly embed for $30/1hr support calls | ✅ Complete |
-| 9 | `/mission` | — | Redirects to `/` | Redirect |
-| 10 | `/navigate` | — | Redirects to `/government-policies` | Redirect |
-| 11 | `*` | 404 Not Found | Minimal error page | ⚠️ Basic |
+| 2 | `/reality` | Reality | Dedicated page for AI Revolution timeline with journey span "Feel → Understand → UNDERSTAND REALITY" and CTA to Rebuild | ✅ Complete |
+| 3 | `/rebuild` | Rebuild | Six Pillars framework page with journey span "Feel → Understand → REBUILD" and CTA to join Community | ✅ Complete |
+| 4 | `/community` | Community Signup | Multi-field form to join community (name, gender, age, profession, location, email) | ✅ Complete |
+| 5 | `/contact` | Contact | 6 contact cards (story sharing, coaching, collaboration, sponsorship, info) with mailto links | ✅ Complete |
+| 6 | `/pillars` | Six Pillars (Detail) | Detailed view of the 7 pillars (6 + "Transition in AI Revolution") | ✅ Complete |
+| 7 | `/government-policies` | Government Policies | Policy listings with AI summaries, country filters | ✅ Complete |
+| 8 | `/job-cuts` | Job Cuts News | Aggregated job transition news from external sources | ✅ Complete |
+| 9 | `/forum` | Community Forum | Membership-gated forum with topics & replies | ✅ Complete |
+| 10 | `/book-call` | Book a Call | Calendly embed for $30/1hr support calls | ✅ Complete |
+| 11 | `/mission` | — | Redirects to `/` | Redirect |
+| 12 | `/navigate` | — | Redirects to `/government-policies` | Redirect |
+| 13 | `*` | 404 Not Found | Minimal error page | ⚠️ Basic |
 
 ### 1.2 Design Style Per Page
 
 - **Home:** Rich glassmorphism, animated hero carousel (5 slides with poetic verses), gradient orbs, timeline layout for AI section, 2×3 pillar grid, community CTA with floating animation. Most polished page.
+- **Reality:** Streamlined page featuring AI Revolution timeline section with journey span "Feel → Understand → UNDERSTAND REALITY". No redundant hero — flows directly into content. CTA links to Rebuild page.
+- **Rebuild:** Six Pillars framework page with journey span "Feel → Understand → REBUILD" above the pillar grid. No redundant hero — flows directly into pillars content. CTA links to Community.
 - **Community:** Centered single-column form with glass card, gradient background, step indicators (non-functional), animated submit. Well-structured.
 - **Contact:** 3-column desktop grid of glass cards with accordion fallback on mobile. Consistent with design system.
 - **Pillars:** Vertical stacked list with alternating slide-in animations. Click-through to Job Cuts and Government Policies.
@@ -49,10 +53,10 @@
 
 ### 1.4 Navigation Structure
 
-- **Navbar:** Logo (icon) + Home, Community, Contact + Theme Toggle. Clean and minimal.
-- **Footer:** Logo (full) + description + social links + Navigation links (Home, Community, Contact) + copyright.
+- **Navbar:** Logo (icon) + Home, Reality, Rebuild, Community, Contact + Theme Toggle. Clean journey-based structure.
+- **Footer:** Logo (full) + description + social links + Navigation links + copyright.
 - **Missing from nav:** Pillars, Government Policies, Job Cuts, Forum, Book a Call — accessible only via in-page CTAs.
-- **Observation:** Many pages are "hidden" from main navigation. Users cannot discover Forum, Book a Call, Pillars, or Policy pages without scrolling through the homepage first.
+- **Observation:** The main nav now follows the user journey (Home → Reality → Rebuild → Community → Contact). Secondary pages (Forum, Book a Call, Pillars, Policies) are accessible via in-page links.
 
 ### 1.5 Responsiveness Status
 
@@ -142,7 +146,11 @@
 
 ### 3.3 User Journey
 
-**Current flow:** Land on homepage → scroll through emotional content → see pillars → find community CTA → sign up
+**Current flow:** Land on homepage → Reality (understand AI impact) → Rebuild (six pillars framework) → Community signup → engage
+
+**Journey spans:** Each page reinforces the narrative arc with a "Feel → Understand → [ACTION]" span:
+- Reality page: "Feel → Understand → **UNDERSTAND REALITY**"
+- Rebuild page: "Feel → Understand → **REBUILD**"
 
 **Missing:**
 - No onboarding after community signup
@@ -393,6 +401,9 @@ src/
 
 - [ ] Add clear value proposition to hero (what the platform actually does)
 - [ ] Improve navigation — add dropdown or mega-menu for hidden pages (Forum, Pillars, Policies, etc.)
+- [x] Improve navigation — added Reality and Rebuild pages to navbar, creating a journey-based nav structure (Home → Reality → Rebuild → Community → Contact)
+- [x] Add dedicated Reality page (AI Revolution timeline with streamlined layout)
+- [x] Add dedicated Rebuild page (Six Pillars framework with streamlined layout)
 - [ ] Add proper loading/skeleton states for data-driven pages
 - [ ] Implement React Error Boundaries
 - [ ] Add route-level code splitting (`React.lazy`)
