@@ -53,10 +53,10 @@
 
 ### 1.4 Navigation Structure
 
-- **Navbar:** Logo (icon) + Home, Community, Contact + Theme Toggle. Clean and minimal.
-- **Footer:** Logo (full) + description + social links + Navigation links (Home, Community, Contact) + copyright.
+- **Navbar:** Logo (icon) + Home, Reality, Rebuild, Community, Contact + Theme Toggle. Clean journey-based structure.
+- **Footer:** Logo (full) + description + social links + Navigation links + copyright.
 - **Missing from nav:** Pillars, Government Policies, Job Cuts, Forum, Book a Call — accessible only via in-page CTAs.
-- **Observation:** Many pages are "hidden" from main navigation. Users cannot discover Forum, Book a Call, Pillars, or Policy pages without scrolling through the homepage first.
+- **Observation:** The main nav now follows the user journey (Home → Reality → Rebuild → Community → Contact). Secondary pages (Forum, Book a Call, Pillars, Policies) are accessible via in-page links.
 
 ### 1.5 Responsiveness Status
 
