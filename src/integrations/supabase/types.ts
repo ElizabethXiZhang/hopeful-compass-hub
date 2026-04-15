@@ -62,6 +62,45 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_messages: {
+        Row: {
+          company_name: string | null
+          consent: boolean
+          contact_type: string
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string | null
+          project_idea: string | null
+          website: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          consent?: boolean
+          contact_type: string
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name?: string | null
+          project_idea?: string | null
+          website?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          consent?: boolean
+          contact_type?: string
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string | null
+          project_idea?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
       forum_replies: {
         Row: {
           author_email: string

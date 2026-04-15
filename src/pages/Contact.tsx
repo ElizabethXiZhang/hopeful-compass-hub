@@ -1,182 +1,651 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import GlassCard from "@/components/ui/GlassCard";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Mic, EyeOff, GraduationCap, Handshake, Heart, Info, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Mic,
+  EyeOff,
+  GraduationCap,
+  Handshake,
+  Heart,
+  HelpCircle,
+  Mail,
+  Send,
+  CheckCircle2,
+  Shield,
+  ArrowRight,
+  ArrowLeft,
+} from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
 
-const contactCards = [{
-  icon: Mic,
-  title: "Feature Your Story With an Interview",
-  description: "Do you have a special story you think will inspire others and you would like to share with us?\n\nWrite your story and send to the email below.\n If your story is chosen, we will set up an interview with you and podcast your story to the public.",
-  email: "my-story@the-unemployment-pandemic.com",
-  color: "from-rose-500 to-pink-500"
-}, {
-  icon: EyeOff,
-  title: "Anonymously Share Your Story With Us",
-  description: "Do you have a special and inspiring story to share but you would like to share with us anonymously?\n\nYou can write us at the email below. We will publish your story for you, anonymously.",
-  email: "my-story-anonymous@the-unemployment-pandemic.com",
-  color: "from-violet-500 to-purple-500"
-}, {
-  icon: GraduationCap,
-  title: "Coaches or Experts",
-  description: "Are you a career coach or government expert?\n\nWould you like to be on our podcast and contribute to our community?\n\n Send your website to the email below.\nIf you are chosen, we will contact you to record an episode of the podcast.",
-  email: "coach@the-unemployment-pandemic.com",
-  color: "from-cyan-500 to-blue-500"
-}, {
-  icon: Handshake,
-  title: "Collaboration With Us",
-  description: "Would you like to merge discussions and collaborate with us?\n\nContact us at the email below.",
-  email: "collaboration@the-unemployment-pandemic.com",
-  color: "from-emerald-500 to-teal-500"
-}, {
-  icon: Heart,
-  title: "Sponsorship",
-  description: "Would you like to sponsor our channel?\n\nContact us at the email below.",
-  email: "sponsorship@the-unemployment-pandemic.com",
-  color: "from-amber-500 to-orange-500"
-}, {
-  icon: Info,
-  title: "Need Info From Us",
-  description: "Contact us at the email below for any information you need.",
-  email: "info@the-unemployment-pandemic.com",
-  color: "from-indigo-500 to-blue-600"
-}];
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const contactTypes = [
+  {
+    id: "story" as const,
+    icon: Mic,
+    title: "Share Your Story",
+    description:
+      "If you have gone through job loss or a difficult transition, your story can help others feel less alone.",
+    color: "from-rose-500 to-pink-500",
+  },
+  {
+    id: "anonymous" as const,
+    icon: EyeOff,
+    title: "Share Anonymously",
+    description:
+      "You can share your experience privately. We will respect your identity and keep it anonymous.",
+    color: "from-violet-500 to-purple-500",
+  },
+  {
+    id: "expert" as const,
+    icon: GraduationCap,
+    title: "Expert or Coach",
+    description:
+      "If you are a coach, psychologist, or expert and want to contribute or speak with us.",
+    color: "from-cyan-500 to-blue-500",
+  },
+  {
+    id: "collaboration" as const,
+    icon: Handshake,
+    title: "Collaborate With Us",
+    description:
+      "If you want to build something together or collaborate on ideas.",
+    color: "from-emerald-500 to-teal-500",
+  },
+  {
+    id: "sponsorship" as const,
+    icon: Heart,
+    title: "Sponsorship",
+    description:
+      "If you are interested in supporting or partnering with our platform.",
+    color: "from-amber-500 to-orange-500",
+  },
+  {
+    id: "general" as const,
+    icon: HelpCircle,
+    title: "General Inquiry",
+    description:
+      "For any questions or information, feel free to reach out.",
+    color: "from-indigo-500 to-blue-600",
+  },
+];
+
+type ContactType = (typeof contactTypes)[number]["id"];
+
+const formSchema = z.object({
+  name: z.string().max(100).optional(),
+  email: z.string().email("Please enter a valid email"),
+  message: z.string().min(1, "Please enter a message").max(5000),
+  website: z.string().max(500).optional(),
+  companyName: z.string().max(200).optional(),
+  projectIdea: z.string().max(2000).optional(),
+  consent: z.literal(true, {
+    errorMap: () => ({ message: "Please agree to be contacted" }),
+  }),
+});
+
+const FloatingOrbs = () => (
+  <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+    <motion.div
+      animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" as const }}
+      className="absolute left-1/2 -translate-x-1/2 top-1/4 w-[150%] h-[70vh]"
+      style={{
+        background: `radial-gradient(ellipse 60% 50% at 50% 50%, 
+          hsl(270 70% 50% / 0.2) 0%,
+          hsl(190 80% 45% / 0.12) 40%,
+          hsl(30 80% 55% / 0.08) 60%,
+          transparent 70%)`,
+      }}
+    />
+    {[...Array(6)].map((_, i) => (
+      <motion.div
+        key={i}
+        animate={{
+          y: [0, -30 - i * 5, 0],
+          x: [0, i % 2 === 0 ? 20 : -20, 0],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 6 + i * 2,
+          repeat: Infinity,
+          ease: "easeInOut" as const,
+          delay: i * 0.5,
+        }}
+        className="absolute rounded-full"
+        style={{
+          width: `${80 + i * 40}px`,
+          height: `${80 + i * 40}px`,
+          left: `${10 + i * 15}%`,
+          top: `${15 + (i % 3) * 20}%`,
+          background: `radial-gradient(circle, hsl(${
+            [270, 190, 30, 200, 280, 220][i]
+          } 70% 55% / 0.15) 0%, transparent 70%)`,
+          filter: "blur(30px)",
+        }}
+      />
+    ))}
+  </div>
+);
 
 const Contact = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  return <Layout>
-      {/* Page background */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        <motion.div animate={{
-        scale: [1, 1.08, 1],
-        opacity: [0.4, 0.6, 0.4]
-      }} transition={{
-        duration: 14,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }} className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[150%] h-[70vh]" style={{
-        background: `radial-gradient(ellipse 60% 50% at 50% 50%, 
-              hsl(270 70% 50% / 0.25) 0%,
-              hsl(190 80% 45% / 0.15) 40%,
-              transparent 60%
-            )`
-      }} />
-      </div>
+  const [selectedType, setSelectedType] = useState<ContactType | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [projectIdea, setProjectIdea] = useState("");
+  const [consent, setConsent] = useState(false);
+
+  const handleSubmit = async () => {
+    const data = {
+      name: name || undefined,
+      email,
+      message,
+      website: website || undefined,
+      companyName: companyName || undefined,
+      projectIdea: projectIdea || undefined,
+      consent: consent as true,
+    };
+
+    const result = formSchema.safeParse(data);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      const flat = result.error.flatten().fieldErrors;
+      for (const [key, msgs] of Object.entries(flat)) {
+        if (msgs && msgs.length > 0) fieldErrors[key] = msgs[0];
+      }
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setErrors({});
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.functions.invoke("contact-message", {
+        body: {
+          name: name || undefined,
+          email,
+          contact_type: selectedType,
+          message,
+          website: website || undefined,
+          company_name: companyName || undefined,
+          project_idea: projectIdea || undefined,
+          consent,
+        },
+      });
+
+      if (error) throw error;
+      setSubmitted(true);
+    } catch {
+      setErrors({ form: "Something went wrong. Please try again." });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const selectedCard = contactTypes.find((c) => c.id === selectedType);
+
+  return (
+    <Layout>
+      <FloatingOrbs />
 
       <section className="min-h-screen pt-32 pb-24 px-4">
         <div className="mx-auto max-w-6xl">
-          {/* Header */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} className="text-center mb-16">
-            <h1 className="font-display text-5xl font-bold text-foreground sm:text-6xl mb-6 relative inline-block">
-              Contact <span className="gradient-text">Us</span>
-              <motion.span className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full" initial={{
-              width: 0
-            }} animate={{
-              width: "100%"
-            }} transition={{
-              duration: 1,
-              delay: 0.5
-            }} />
+          {/* SECTION 1: Hero */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
+          >
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-primary/80 text-sm tracking-widest uppercase mb-4"
+            >
+              We're here to listen
+            </motion.p>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+              Reach Out in the Way{" "}
+              <span className="gradient-text">That Feels Right</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Choose the best way to reach us based on your needs.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Whether you want to share your story, ask something, or work with
+              us, you can reach out here. We read every message with care.
             </p>
           </motion.div>
 
-          {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {contactCards.map((card, index) => <motion.div key={card.title} initial={{
-            opacity: 0,
-            y: 30
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.5,
-            delay: index * 0.1
-          }} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
-                <a href={`mailto:${card.email}`} className="block h-full">
-                  <GlassCard className="p-6 h-full transition-all duration-300" hover>
-                    <motion.div animate={{
-                  scale: hoveredIndex === index ? 1.1 : 1,
-                  rotate: hoveredIndex === index ? 5 : 0
-                }} transition={{
-                  type: "spring",
-                  stiffness: 300
-                }} className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${card.color} mb-5`}>
-                      <card.icon className="w-7 h-7 text-white" />
+          <AnimatePresence mode="wait">
+            {submitted ? (
+              /* SECTION 4: After Submit */
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="max-w-2xl mx-auto space-y-12"
+              >
+                <GlassCard className="p-10 text-center" variant="strong">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+                    className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 mb-6"
+                  >
+                    <CheckCircle2 className="w-8 h-8 text-white" />
+                  </motion.div>
+                  <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+                    Thank you for reaching out
+                  </h2>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-2">
+                    We usually respond within 24 to 48 hours.
+                  </p>
+                  <p className="text-muted-foreground">
+                    Every message is read carefully.
+                  </p>
+                </GlassCard>
+
+                {/* SECTION 5: Support Notice */}
+                <GlassCard className="p-6 border-amber-500/20" variant="subtle">
+                  <p className="text-foreground/80 text-sm leading-relaxed text-center">
+                    If you are going through intense emotional distress or
+                    crisis, please reach out to a local mental health helpline in
+                    your country. This platform is a support space, but not a
+                    replacement for emergency care.
+                  </p>
+                </GlassCard>
+
+                {/* SECTION 6: Human Touch */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-center space-y-4 py-8"
+                >
+                  <p className="text-xl text-foreground/90 font-display font-semibold">
+                    Your story matters.
+                  </p>
+                  <p className="text-xl text-foreground/90 font-display font-semibold">
+                    Your voice matters.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto">
+                    Whether you share one sentence or your full journey, it can
+                    make someone else feel less alone.
+                  </p>
+                </motion.div>
+              </motion.div>
+            ) : !selectedType ? (
+              /* SECTION 2: Choose Purpose */
+              <motion.div
+                key="choose"
+                initial="hidden"
+                animate="visible"
+                variants={stagger}
+                className="space-y-12"
+              >
+                <motion.div variants={fadeUp} className="text-center">
+                  <h2 className="font-display text-3xl font-bold text-foreground mb-3">
+                    How Would You Like to{" "}
+                    <span className="gradient-text">Connect</span>?
+                  </h2>
+                </motion.div>
+
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {contactTypes.map((card, index) => (
+                    <motion.div
+                      key={card.id}
+                      variants={fadeUp}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                    >
+                      <button
+                        onClick={() => setSelectedType(card.id)}
+                        className="w-full text-left"
+                      >
+                        <GlassCard
+                          className="p-6 h-full transition-all duration-300 group"
+                          hover
+                        >
+                          <div
+                            className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${card.color} mb-4 transition-transform duration-300 group-hover:scale-110`}
+                          >
+                            <card.icon className="w-6 h-6 text-white" />
+                          </div>
+                          <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                            {card.title}
+                          </h3>
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                            {card.description}
+                          </p>
+                          <span className="inline-flex items-center gap-1.5 text-primary text-sm font-medium group-hover:gap-2.5 transition-all">
+                            Get started{" "}
+                            <ArrowRight className="w-4 h-4" />
+                          </span>
+                        </GlassCard>
+                      </button>
                     </motion.div>
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-3">{card.title}</h3>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">{card.description}</p>
-                    <p className="text-primary text-sm font-medium flex items-center gap-2">
-                      <Mail className="w-4 h-4" />
-                      {card.email}
+                  ))}
+                </div>
+
+                {/* SECTION 5: Support Notice */}
+                <motion.div variants={fadeUp}>
+                  <GlassCard
+                    className="p-6 border-amber-500/20 max-w-3xl mx-auto"
+                    variant="subtle"
+                  >
+                    <p className="text-foreground/80 text-sm leading-relaxed text-center">
+                      If you are going through intense emotional distress or
+                      crisis, please reach out to a local mental health helpline
+                      in your country. This platform is a support space, but not
+                      a replacement for emergency care.
                     </p>
                   </GlassCard>
-                </a>
-              </motion.div>)}
-          </div>
+                </motion.div>
 
-          {/* Mobile Accordion */}
-          <div className="md:hidden">
-            <GlassCard className="p-4">
-              <Accordion type="single" collapsible className="w-full">
-                {contactCards.map((card, index) => <AccordionItem key={card.title} value={`item-${index}`} className="border-white/10">
-                    <AccordionTrigger className="hover:no-underline py-4">
-                      <div className="flex items-center gap-4">
-                        <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${card.color}`}>
-                          <card.icon className="w-5 h-5 text-white" />
-                        </div>
-                        <span className="font-display text-lg font-semibold text-foreground">{card.title}</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-4">
-                      <div className="pl-14 space-y-3">
-                        <p className="text-muted-foreground leading-relaxed">{card.description}</p>
-                        <a href={`mailto:${card.email}`} className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
-                          <Mail className="w-4 h-4" />
-                          {card.email}
-                        </a>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>)}
-              </Accordion>
-            </GlassCard>
-          </div>
+                {/* SECTION 6: Human Touch */}
+                <motion.div
+                  variants={fadeUp}
+                  className="text-center space-y-4 py-8"
+                >
+                  <p className="text-xl text-foreground/90 font-display font-semibold">
+                    Your story matters. Your voice matters.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed max-w-lg mx-auto">
+                    Whether you share one sentence or your full journey, it can
+                    make someone else feel less alone.
+                  </p>
+                </motion.div>
+              </motion.div>
+            ) : (
+              /* SECTION 3: Contact Form */
+              <motion.div
+                key="form"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="max-w-2xl mx-auto"
+              >
+                <button
+                  onClick={() => {
+                    setSelectedType(null);
+                    setErrors({});
+                  }}
+                  className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 text-sm"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Back to options
+                </button>
 
-          {/* Bottom message */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 0.8
-        }} className="text-center mt-16">
-            <GlassCard className="p-8 sm:p-10 inline-block max-w-2xl" variant="strong">
-              <p className="text-lg text-foreground/90 leading-relaxed">
-                We typically respond within 24-48 hours. If you're in crisis, please reach out to a local mental health
-                helpline immediately.
-              </p>
-              <p className="text-muted-foreground mt-4 text-sm">
-                Your story matters to us. We appreciate you sharing your experience with us.
-              </p>
-            </GlassCard>
-          </motion.div>
+                <GlassCard className="p-8 sm:p-10" variant="strong">
+                  {/* Selected type indicator */}
+                  {selectedCard && (
+                    <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
+                      <div
+                        className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${selectedCard.color}`}
+                      >
+                        <selectedCard.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-display font-semibold text-foreground">
+                          {selectedCard.title}
+                        </p>
+                        <p className="text-muted-foreground text-xs">
+                          Fill in the details below
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="space-y-5">
+                    {/* Name */}
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="name"
+                        className="text-foreground/80 text-sm"
+                      >
+                        Name{" "}
+                        <span className="text-muted-foreground text-xs">
+                          (optional)
+                        </span>
+                      </Label>
+                      <Input
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="What should we call you?"
+                        className="bg-white/5 border-white/10 focus:border-primary/50"
+                      />
+                    </div>
+
+                    {/* Email */}
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="email"
+                        className="text-foreground/80 text-sm"
+                      >
+                        Email <span className="text-red-400">*</span>
+                      </Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="your@email.com"
+                        className="bg-white/5 border-white/10 focus:border-primary/50"
+                      />
+                      {errors.email && (
+                        <p className="text-red-400 text-xs">{errors.email}</p>
+                      )}
+                    </div>
+
+                    {/* Contact Type (read-only or changeable) */}
+                    <div className="space-y-2">
+                      <Label className="text-foreground/80 text-sm">
+                        Reason for Contact
+                      </Label>
+                      <Select
+                        value={selectedType}
+                        onValueChange={(v) =>
+                          setSelectedType(v as ContactType)
+                        }
+                      >
+                        <SelectTrigger className="bg-white/5 border-white/10">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {contactTypes.map((t) => (
+                            <SelectItem key={t.id} value={t.id}>
+                              {t.title}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Conditional: Expert */}
+                    {selectedType === "expert" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        className="space-y-2"
+                      >
+                        <Label className="text-foreground/80 text-sm">
+                          Website or LinkedIn{" "}
+                          <span className="text-muted-foreground text-xs">
+                            (optional)
+                          </span>
+                        </Label>
+                        <Input
+                          value={website}
+                          onChange={(e) => setWebsite(e.target.value)}
+                          placeholder="https://your-website.com"
+                          className="bg-white/5 border-white/10 focus:border-primary/50"
+                        />
+                      </motion.div>
+                    )}
+
+                    {/* Conditional: Collaboration */}
+                    {selectedType === "collaboration" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        className="space-y-2"
+                      >
+                        <Label className="text-foreground/80 text-sm">
+                          Project Idea{" "}
+                          <span className="text-muted-foreground text-xs">
+                            (optional)
+                          </span>
+                        </Label>
+                        <Textarea
+                          value={projectIdea}
+                          onChange={(e) => setProjectIdea(e.target.value)}
+                          placeholder="Tell us about your idea"
+                          className="bg-white/5 border-white/10 focus:border-primary/50 min-h-[80px]"
+                        />
+                      </motion.div>
+                    )}
+
+                    {/* Conditional: Sponsorship */}
+                    {selectedType === "sponsorship" && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        className="space-y-2"
+                      >
+                        <Label className="text-foreground/80 text-sm">
+                          Company Name{" "}
+                          <span className="text-muted-foreground text-xs">
+                            (optional)
+                          </span>
+                        </Label>
+                        <Input
+                          value={companyName}
+                          onChange={(e) => setCompanyName(e.target.value)}
+                          placeholder="Your company"
+                          className="bg-white/5 border-white/10 focus:border-primary/50"
+                        />
+                      </motion.div>
+                    )}
+
+                    {/* Message */}
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="message"
+                        className="text-foreground/80 text-sm"
+                      >
+                        Message <span className="text-red-400">*</span>
+                      </Label>
+                      <Textarea
+                        id="message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Write your message here. Take your time. You can share as much or as little as you want."
+                        className="bg-white/5 border-white/10 focus:border-primary/50 min-h-[140px]"
+                      />
+                      {errors.message && (
+                        <p className="text-red-400 text-xs">{errors.message}</p>
+                      )}
+                    </div>
+
+                    {/* Consent */}
+                    <div className="flex items-start gap-3 pt-2">
+                      <Checkbox
+                        id="consent"
+                        checked={consent}
+                        onCheckedChange={(checked) =>
+                          setConsent(checked === true)
+                        }
+                        className="mt-0.5"
+                      />
+                      <Label
+                        htmlFor="consent"
+                        className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
+                      >
+                        I agree to be contacted regarding this message
+                      </Label>
+                    </div>
+                    {errors.consent && (
+                      <p className="text-red-400 text-xs">{errors.consent}</p>
+                    )}
+
+                    {errors.form && (
+                      <p className="text-red-400 text-sm text-center">
+                        {errors.form}
+                      </p>
+                    )}
+
+                    {/* Submit */}
+                    <Button
+                      onClick={handleSubmit}
+                      disabled={loading}
+                      className="w-full h-12 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-semibold text-base rounded-xl mt-4"
+                    >
+                      {loading ? (
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{
+                            duration: 1,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                          className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                        />
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Send Message
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </GlassCard>
+
+                {/* Privacy */}
+                <div className="flex items-center justify-center gap-2 mt-6 text-muted-foreground text-xs">
+                  <Shield className="w-3.5 h-3.5" />
+                  <span>
+                    Your information is safe. We respect your privacy. You can
+                    leave anytime.
+                  </span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
-    </Layout>;
+    </Layout>
+  );
 };
 
 export default Contact;
