@@ -164,7 +164,7 @@ const Reality = () => {
             The World Is Changing.
             <br />
             <span className="gradient-text-calm">
-              You're Not Losing — You're Witnessing a Shift.
+              You're Not Losing. You're Witnessing a Shift.
             </span>
           </motion.h1>
 
@@ -174,7 +174,7 @@ const Reality = () => {
             className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground/90 leading-relaxed mb-10"
           >
             This isn't about fear. It's about understanding what's actually
-            happening — so you can move forward with clarity, not confusion.
+            happening, so you can move forward with clarity, not confusion.
           </motion.p>
 
           <motion.a
@@ -218,7 +218,7 @@ const Reality = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mx-auto max-w-2xl text-muted-foreground/90 text-lg"
             >
-              Let's break it down — clearly and calmly.
+              Let's break it down, clearly and calmly.
             </motion.p>
           </motion.div>
 
@@ -233,7 +233,7 @@ const Reality = () => {
               {
                 icon: Bot,
                 title: "Automation Wave",
-                desc: "AI is rapidly taking over repetitive and predictable tasks — not because humans failed, but because machines are becoming more efficient at scale.",
+                desc: "AI is rapidly taking over repetitive and predictable tasks, not because humans failed, but because machines are becoming more efficient at scale.",
                 border: "from-cyan-400 to-blue-500",
               },
               {
@@ -245,19 +245,19 @@ const Reality = () => {
               {
                 icon: Puzzle,
                 title: "Skill Mismatch",
-                desc: "New jobs are emerging, but they require completely different skills — leaving many people stuck in between.",
+                desc: "New jobs are emerging, but they require completely different skills, leaving many people stuck in between.",
                 border: "from-amber-400 to-orange-500",
               },
               {
                 icon: Heart,
                 title: "Identity Disruption",
-                desc: "For many, work was not just income — it was identity. Losing a job now feels like losing a part of yourself.",
+                desc: "For many, work was not just income, it was identity. Losing a job now feels like losing a part of yourself.",
                 border: "from-pink-400 to-rose-500",
               },
               {
                 icon: Globe,
                 title: "Global Impact",
-                desc: "From tech layoffs to automation in every industry — this shift is happening everywhere, not just to you.",
+                desc: "From tech layoffs to automation in every industry, this shift is happening everywhere, not just to you.",
                 border: "from-teal-400 to-emerald-500",
               },
             ].map((card, i) => (
