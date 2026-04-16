@@ -1,18 +1,23 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import BackgroundOrbs from "../ui/BackgroundOrbs";
+import CosmicBackground from "../ui/CosmicBackground";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background">
-      {/* Animated background orbs */}
-      <BackgroundOrbs />
+      {/* Home gets original orbs, other pages get cosmic background */}
+      {isHome ? <BackgroundOrbs /> : <CosmicBackground />}
       
       {/* Navigation */}
       <Navbar />
