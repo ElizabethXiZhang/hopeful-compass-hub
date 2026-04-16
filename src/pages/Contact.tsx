@@ -105,49 +105,6 @@ const formSchema = z.object({
   }),
 });
 
-const FloatingOrbs = () => (
-  <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-    <motion.div
-      animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" as const }}
-      className="absolute left-1/2 -translate-x-1/2 top-1/4 w-[150%] h-[70vh]"
-      style={{
-        background: `radial-gradient(ellipse 60% 50% at 50% 50%, 
-          hsl(270 70% 50% / 0.2) 0%,
-          hsl(190 80% 45% / 0.12) 40%,
-          hsl(30 80% 55% / 0.08) 60%,
-          transparent 70%)`,
-      }}
-    />
-    {[...Array(6)].map((_, i) => (
-      <motion.div
-        key={i}
-        animate={{
-          y: [0, -30 - i * 5, 0],
-          x: [0, i % 2 === 0 ? 20 : -20, 0],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 6 + i * 2,
-          repeat: Infinity,
-          ease: "easeInOut" as const,
-          delay: i * 0.5,
-        }}
-        className="absolute rounded-full"
-        style={{
-          width: `${80 + i * 40}px`,
-          height: `${80 + i * 40}px`,
-          left: `${10 + i * 15}%`,
-          top: `${15 + (i % 3) * 20}%`,
-          background: `radial-gradient(circle, hsl(${
-            [270, 190, 30, 200, 280, 220][i]
-          } 70% 55% / 0.15) 0%, transparent 70%)`,
-          filter: "blur(30px)",
-        }}
-      />
-    ))}
-  </div>
-);
 
 const Contact = () => {
   const [selectedType, setSelectedType] = useState<ContactType | null>(null);
