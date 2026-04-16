@@ -9,7 +9,7 @@ const BackgroundOrbs = () => {
   const o = (darkVal: number) => isDark ? darkVal * 1.4 : darkVal * 0.5;
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden transition-colors duration-500">
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden transition-colors duration-500">
       {/* Main gradient background */}
       <div className="absolute inset-0 bg-background transition-colors duration-500" />
       
