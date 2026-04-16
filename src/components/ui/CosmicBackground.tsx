@@ -9,12 +9,12 @@ const CosmicBackground = () => {
   const o = (val: number) => (isDark ? val : val * 0.35);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden transition-colors duration-500">
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden transition-colors duration-500">
       <div className="absolute inset-0 bg-background transition-colors duration-500" />
 
       {/* Flowing light streaks - inspired by the cosmic wave design */}
       <motion.div
-        animate={{ x: ["-3%", "3%", "-3%"], opacity: [o(0.25), o(0.4), o(0.25)] }}
+        animate={{ x: ["-3%", "3%", "-3%"], opacity: [o(0.35), o(0.55), o(0.35)] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-[15%] left-0 right-0 h-[300px]"
         style={{
@@ -31,7 +31,7 @@ const CosmicBackground = () => {
       />
 
       <motion.div
-        animate={{ x: ["4%", "-4%", "4%"], opacity: [o(0.2), o(0.35), o(0.2)] }}
+        animate={{ x: ["4%", "-4%", "4%"], opacity: [o(0.3), o(0.48), o(0.3)] }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
         className="absolute top-[55%] left-0 right-0 h-[250px]"
         style={{
@@ -59,7 +59,7 @@ const CosmicBackground = () => {
           animate={{
             y: [0, -20, 0],
             scale: [1, 1.08, 1],
-            opacity: [o(0.2), o(0.35), o(0.2)],
+            opacity: [o(0.28), o(0.45), o(0.28)],
           }}
           transition={{
             duration: 8 + i * 2,
@@ -74,8 +74,8 @@ const CosmicBackground = () => {
             right: "right" in orb ? orb.right : undefined,
             width: orb.size,
             height: orb.size,
-            background: `radial-gradient(circle, hsl(var(${orb.color}) / ${o(0.4)}) 0%, transparent 70%)`,
-            filter: "blur(30px)",
+            background: `radial-gradient(circle, hsl(var(${orb.color}) / ${o(0.5)}) 0%, transparent 70%)`,
+            filter: "blur(36px)",
           }}
         />
       ))}

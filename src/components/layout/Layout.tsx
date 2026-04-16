@@ -15,7 +15,7 @@ const Layout = ({ children }: LayoutProps) => {
   const isHome = location.pathname === "/";
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background">
+    <div className="relative isolate min-h-screen overflow-x-hidden bg-background">
       {/* Home gets original orbs, other pages get cosmic background */}
       {isHome ? <BackgroundOrbs /> : <CosmicBackground />}
       
