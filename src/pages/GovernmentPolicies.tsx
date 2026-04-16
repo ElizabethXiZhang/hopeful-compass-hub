@@ -8,9 +8,6 @@ const GovernmentPolicies = () => {
     <Layout>
       {/* Hero Section */}
       <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden pt-24 pb-8">
-        {/* Background elements */}
-        <div className="gradient-orb gradient-orb-1 w-[500px] h-[500px] -top-48 -left-24" />
-        <div className="gradient-orb gradient-orb-2 w-[400px] h-[400px] top-1/4 -right-32" />
         
         <div className="container relative z-10 mx-auto px-4">
           <motion.div

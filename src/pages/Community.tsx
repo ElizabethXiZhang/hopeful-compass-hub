@@ -77,39 +77,6 @@ const fadeUp = {
   }),
 };
 
-const FloatingOrbs = () => (
-  <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-    {[
-      { color: "270 70% 65%", size: 500, x: "15%", y: "20%", dur: 18 },
-      { color: "190 90% 60%", size: 400, x: "75%", y: "40%", dur: 22 },
-      { color: "20 85% 65%", size: 350, x: "50%", y: "70%", dur: 20 },
-      { color: "190 80% 55%", size: 300, x: "85%", y: "80%", dur: 16 },
-    ].map((orb, i) => (
-      <motion.div
-        key={i}
-        className="absolute rounded-full"
-        style={{
-          width: orb.size,
-          height: orb.size,
-          left: orb.x,
-          top: orb.y,
-          background: `radial-gradient(circle, hsl(${orb.color} / 0.12) 0%, transparent 70%)`,
-          filter: "blur(60px)",
-        }}
-        animate={{
-          x: [0, 30, -20, 0],
-          y: [0, -25, 15, 0],
-          scale: [1, 1.05, 0.95, 1],
-        }}
-        transition={{
-          duration: orb.dur,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-    ))}
-  </div>
-);
 
 const Community = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -260,7 +227,7 @@ const Community = () => {
 
   return (
     <Layout>
-      <FloatingOrbs />
+      
 
       {/* SECTION 1 - HERO */}
       <section className="min-h-[85vh] flex items-center justify-center px-4 pt-24 pb-16">
