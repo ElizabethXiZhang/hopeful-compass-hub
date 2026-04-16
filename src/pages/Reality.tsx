@@ -181,7 +181,7 @@ const Reality = () => {
             href="#what-is-happening"
             variants={fadeUp}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30 px-8 py-4 font-semibold text-primary shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:border-primary/50 active:scale-[0.97]"
+            className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent px-8 py-4 font-semibold text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.97]"
           >
             Start Understanding
             <ArrowDown className="h-5 w-5 transition-transform group-hover:translate-y-1" />
