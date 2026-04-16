@@ -261,6 +261,16 @@ const CosmicBackground = () => {
         );
       })}
 
+      {/* Frosted overlay to keep content readable */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `hsl(var(--background) / ${isDark ? 0.38 : 0.45})`,
+          backdropFilter: "blur(1.5px)",
+          WebkitBackdropFilter: "blur(1.5px)",
+        }}
+      />
+
       <div
         className="absolute inset-0"
         style={{
