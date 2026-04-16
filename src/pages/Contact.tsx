@@ -172,7 +172,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <FloatingOrbs />
+      
 
       <section className="min-h-screen pt-32 pb-24 px-4">
         <div className="mx-auto max-w-6xl">
