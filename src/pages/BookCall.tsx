@@ -19,28 +19,6 @@ const BookCall = () => {
 
   return (
     <Layout>
-      {/* Page background */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        <motion.div
-          animate={{
-            scale: [1, 1.08, 1],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{
-            duration: 14,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[150%] h-[70vh]"
-          style={{
-            background: `radial-gradient(ellipse 60% 50% at 50% 50%, 
-              hsl(270 70% 50% / 0.25) 0%,
-              hsl(190 80% 45% / 0.15) 40%,
-              transparent 60%
-            )`,
-          }}
-        />
-      </div>
 
       <section className="min-h-screen pt-32 pb-24 px-4">
         <div className="mx-auto max-w-4xl">

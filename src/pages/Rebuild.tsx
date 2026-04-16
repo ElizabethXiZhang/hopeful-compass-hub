@@ -30,32 +30,6 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 };
 
-/* ─── Floating particles background ─── */
-const FloatingOrbs = () => (
-  <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
-    {/* Warm-toned ambient glows */}
-    <motion.div
-      animate={{ y: [0, -30, 0], x: [0, 15, 0], scale: [1, 1.08, 1] }}
-      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      className="gradient-orb gradient-orb-peach w-[500px] h-[500px] top-[10%] left-[15%] opacity-20"
-    />
-    <motion.div
-      animate={{ y: [0, 25, 0], x: [0, -20, 0], scale: [1, 1.05, 1] }}
-      transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      className="gradient-orb gradient-orb-lavender w-[600px] h-[600px] top-[30%] right-[10%] opacity-15"
-    />
-    <motion.div
-      animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-      className="gradient-orb gradient-orb-cyan w-[400px] h-[400px] bottom-[20%] left-[30%] opacity-15"
-    />
-    <motion.div
-      animate={{ y: [0, 20, 0], scale: [1, 1.1, 1] }}
-      transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-      className="gradient-orb gradient-orb-teal w-[350px] h-[350px] top-[60%] right-[25%] opacity-10"
-    />
-  </div>
-);
 
 /* ─── Section glow helper ─── */
 const SectionGlow = ({ color = "190 80% 55%", position = "50% 40%" }: { color?: string; position?: string }) => (
@@ -186,7 +160,7 @@ const Rebuild = () => {
 
   return (
     <Layout>
-      <FloatingOrbs />
+      
 
       {/* ═══════ SECTION 1 — HERO ═══════ */}
       <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center px-4 overflow-hidden">
