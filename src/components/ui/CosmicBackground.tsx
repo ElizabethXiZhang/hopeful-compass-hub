@@ -192,42 +192,13 @@ const CosmicBackground = () => {
       />
 
       {planetConfigs.map((planet, index) => (
-        <motion.div
+        <Planet
           key={index}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  y: [0, -12, 0],
-                  x: [0, index % 2 === 0 ? 8 : -8, 0],
-                  scale: [1, 1.03, 1],
-                }
-          }
-          transition={
-            reduceMotion
-              ? undefined
-              : {
-                  duration: 10 + index * 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: planet.delay,
-                }
-          }
-          className="absolute rounded-full"
-          style={{
-            top: planet.top,
-            right: planet.right,
-            bottom: planet.bottom,
-            left: planet.left,
-            width: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
-            height: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
-            background: `radial-gradient(circle at 35% 35%,
-              hsl(var(--foreground) / ${intensity(0.9, 0.7)}) 0%,
-              hsl(var(${planet.color}) / ${intensity(0.5, 0.38)}) 52%,
-              hsl(var(${planet.color}) / ${intensity(0.24, 0.18)}) 78%,
-              transparent 100%)`,
-            boxShadow: `0 0 55px hsl(var(${planet.halo}) / ${intensity(0.26, 0.12)})`,
-          }}
+          planet={planet}
+          index={index}
+          reduceMotion={!!reduceMotion}
+          intensity={intensity}
+          smoothScroll={smoothScroll}
         />
       ))}
 
