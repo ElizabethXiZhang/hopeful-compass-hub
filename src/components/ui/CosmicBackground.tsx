@@ -380,12 +380,14 @@ const CosmicBackground = () => {
         }}
       />
 
-      <div
+      <motion.div
         className="absolute inset-0"
         style={{
+          y: reduceMotion ? 0 : gridY,
           opacity: isDark ? 0.028 : 0.018,
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.7) 1px, transparent 0)`,
           backgroundSize: "56px 56px",
+          willChange: "transform",
         }}
       />
     </div>
