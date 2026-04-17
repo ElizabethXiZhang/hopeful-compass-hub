@@ -43,9 +43,10 @@ const planetConfigs = [
     color: "--gradient-lavender",
     halo: "--gradient-lavender",
     delay: 0,
-    parallaxY: -180,
-    parallaxX: 40,
-    drift: { x: [0, 14, -8, 0], y: [0, -10, 12, 0] },
+    orbitRadius: 60,
+    orbitDuration: 38,
+    orbitDirection: 1,
+    orbitPhase: 0,
   },
   {
     size: 150,
@@ -55,9 +56,10 @@ const planetConfigs = [
     color: "--gradient-lavender",
     halo: "--gradient-cyan",
     delay: 1.8,
-    parallaxY: -260,
-    parallaxX: -55,
-    drift: { x: [0, -12, 10, 0], y: [0, 14, -8, 0] },
+    orbitRadius: 80,
+    orbitDuration: 46,
+    orbitDirection: -1,
+    orbitPhase: 90,
   },
   {
     size: 108,
@@ -67,9 +69,10 @@ const planetConfigs = [
     color: "--gradient-cyan",
     halo: "--gradient-teal",
     delay: 0.8,
-    parallaxY: -120,
-    parallaxX: 70,
-    drift: { x: [0, 18, -6, 0], y: [0, -14, 8, 0] },
+    orbitRadius: 70,
+    orbitDuration: 32,
+    orbitDirection: 1,
+    orbitPhase: 180,
   },
   {
     size: 96,
@@ -79,9 +82,10 @@ const planetConfigs = [
     color: "--gradient-cyan",
     halo: "--gradient-cyan",
     delay: 2.6,
-    parallaxY: -340,
-    parallaxX: -32,
-    drift: { x: [0, -16, 12, 0], y: [0, 10, -14, 0] },
+    orbitRadius: 90,
+    orbitDuration: 42,
+    orbitDirection: -1,
+    orbitPhase: 270,
   },
   {
     size: 56,
@@ -91,9 +95,10 @@ const planetConfigs = [
     color: "--gradient-peach",
     halo: "--gradient-lavender",
     delay: 1.2,
-    parallaxY: -440,
-    parallaxX: 90,
-    drift: { x: [0, 22, -14, 0], y: [0, -18, 10, 0] },
+    orbitRadius: 110,
+    orbitDuration: 28,
+    orbitDirection: 1,
+    orbitPhase: 45,
   },
 ];
 
@@ -104,18 +109,23 @@ interface PlanetProps {
   index: number;
   reduceMotion: boolean;
   intensity: (d: number, l: number) => number;
-  smoothScroll: MotionValue<number>;
 }
 
-const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: PlanetProps) => {
-  const y = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxY]);
-  const x = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxX]);
+const Planet = ({ planet, index, reduceMotion, intensity }: PlanetProps) => {
+  // Build smooth circular keyframes so the planet orbits in place forever.
+  const steps = 24;
+  const phaseRad = (planet.orbitPhase * Math.PI) / 180;
+  const orbitX: number[] = [];
+  const orbitY: number[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps) * Math.PI * 2 * planet.orbitDirection;
+    orbitX.push(Math.cos(t + phaseRad) * planet.orbitRadius);
+    orbitY.push(Math.sin(t + phaseRad) * planet.orbitRadius);
+  }
 
   return (
     <motion.div
       style={{
-        y: reduceMotion ? 0 : y,
-        x: reduceMotion ? 0 : x,
         top: planet.top,
         right: planet.right,
         bottom: planet.bottom,
@@ -133,20 +143,36 @@ const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: Planet
         reduceMotion
           ? undefined
           : {
-              scale: [1, 1.04, 1],
+              x: orbitX,
+              y: orbitY,
+              scale: [1, 1.04, 1, 1.04, 1],
             }
       }
       transition={
         reduceMotion
           ? undefined
           : {
-              duration: 9 + index * 1.6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: planet.delay,
+              x: {
+                duration: planet.orbitDuration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: planet.delay,
+              },
+              y: {
+                duration: planet.orbitDuration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: planet.delay,
+              },
+              scale: {
+                duration: 9 + index * 1.6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: planet.delay,
+              },
             }
       }
-      className="absolute rounded-full will-change-transform"
+      className="fixed rounded-full will-change-transform"
     />
   );
 };
@@ -258,7 +284,7 @@ const CosmicBackground = () => {
           index={index}
           reduceMotion={!!reduceMotion}
           intensity={intensity}
-          smoothScroll={smoothScroll}
+          
         />
       ))}
 
