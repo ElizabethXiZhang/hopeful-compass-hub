@@ -86,6 +86,14 @@ const CosmicBackground = () => {
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
   const isDark = theme === "dark";
+  const { scrollY } = useScroll();
+
+  // Parallax scroll layers — each moves at different speeds for depth
+  const ribbonsY = useTransform(scrollY, [0, 3000], ["0%", "-25%"]);
+  const planetsY = useTransform(scrollY, [0, 3000], ["0%", "-15%"]);
+  const starsY = useTransform(scrollY, [0, 3000], ["0%", "-40%"]);
+  const farStarsY = useTransform(scrollY, [0, 3000], ["0%", "-60%"]);
+  const gridY = useTransform(scrollY, [0, 3000], ["0%", "-8%"]);
 
   const intensity = (darkValue: number, lightValue: number) =>
     isDark ? darkValue : lightValue;
