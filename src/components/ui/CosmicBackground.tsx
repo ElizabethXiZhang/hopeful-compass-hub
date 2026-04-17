@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 import { useTheme } from "../theme/ThemeProvider";
 
 const ribbonConfigs = [
@@ -43,6 +43,9 @@ const planetConfigs = [
     color: "--gradient-lavender",
     halo: "--gradient-lavender",
     delay: 0,
+    parallaxY: -180,
+    parallaxX: 40,
+    drift: { x: [0, 14, -8, 0], y: [0, -10, 12, 0] },
   },
   {
     size: 150,
@@ -52,6 +55,9 @@ const planetConfigs = [
     color: "--gradient-lavender",
     halo: "--gradient-cyan",
     delay: 1.8,
+    parallaxY: -260,
+    parallaxX: -55,
+    drift: { x: [0, -12, 10, 0], y: [0, 14, -8, 0] },
   },
   {
     size: 108,
@@ -61,6 +67,9 @@ const planetConfigs = [
     color: "--gradient-cyan",
     halo: "--gradient-teal",
     delay: 0.8,
+    parallaxY: -120,
+    parallaxX: 70,
+    drift: { x: [0, 18, -6, 0], y: [0, -14, 8, 0] },
   },
   {
     size: 96,
@@ -70,6 +79,9 @@ const planetConfigs = [
     color: "--gradient-cyan",
     halo: "--gradient-cyan",
     delay: 2.6,
+    parallaxY: -340,
+    parallaxX: -32,
+    drift: { x: [0, -16, 12, 0], y: [0, 10, -14, 0] },
   },
   {
     size: 56,
@@ -79,13 +91,75 @@ const planetConfigs = [
     color: "--gradient-peach",
     halo: "--gradient-lavender",
     delay: 1.2,
+    parallaxY: -440,
+    parallaxX: 90,
+    drift: { x: [0, 22, -14, 0], y: [0, -18, 10, 0] },
   },
 ];
+
+type PlanetConfig = (typeof planetConfigs)[number];
+
+interface PlanetProps {
+  planet: PlanetConfig;
+  index: number;
+  reduceMotion: boolean;
+  intensity: (d: number, l: number) => number;
+  smoothScroll: MotionValue<number>;
+}
+
+const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: PlanetProps) => {
+  const y = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxY]);
+  const x = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxX]);
+
+  return (
+    <motion.div
+      style={{
+        y: reduceMotion ? 0 : y,
+        x: reduceMotion ? 0 : x,
+        top: planet.top,
+        right: planet.right,
+        bottom: planet.bottom,
+        left: planet.left,
+        width: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
+        height: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
+        background: `radial-gradient(circle at 35% 35%,
+          hsl(var(--foreground) / ${intensity(0.9, 0.7)}) 0%,
+          hsl(var(${planet.color}) / ${intensity(0.5, 0.38)}) 52%,
+          hsl(var(${planet.color}) / ${intensity(0.24, 0.18)}) 78%,
+          transparent 100%)`,
+        boxShadow: `0 0 55px hsl(var(${planet.halo}) / ${intensity(0.26, 0.12)})`,
+      }}
+      animate={
+        reduceMotion
+          ? undefined
+          : {
+              scale: [1, 1.04, 1],
+            }
+      }
+      transition={
+        reduceMotion
+          ? undefined
+          : {
+              duration: 9 + index * 1.6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: planet.delay,
+            }
+      }
+      className="absolute rounded-full will-change-transform"
+    />
+  );
+};
 
 const CosmicBackground = () => {
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
   const isDark = theme === "dark";
+  const { scrollY } = useScroll();
+  const smoothScroll = useSpring(scrollY, { stiffness: 60, damping: 22, mass: 0.6 });
+  const ribbonY = useTransform(smoothScroll, [0, 2000], [0, -120]);
+  const starsY = useTransform(smoothScroll, [0, 2000], [0, -380]);
+  const haloY = useTransform(smoothScroll, [0, 2000], [0, -220]);
 
   const intensity = (darkValue: number, lightValue: number) =>
     isDark ? darkValue : lightValue;
@@ -129,43 +203,46 @@ const CosmicBackground = () => {
         }}
       />
 
-      {ribbonConfigs.map((ribbon, index) => (
-        <motion.div
-          key={index}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  x: ribbon.x,
-                  y: ribbon.y,
-                  scale: [1, 1.035, 1],
-                }
-          }
-          transition={
-            reduceMotion
-              ? undefined
-              : {
-                  duration: ribbon.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.6,
-                }
-          }
-          className={`absolute ${ribbon.className}`}
-          style={{
-            ...ribbonVars,
-            background: ribbon.gradient,
-            filter: ribbon.blur,
-            transform: `rotate(${ribbon.rotate})`,
-            borderRadius: "9999px",
-            opacity: intensity(1, 0.9),
-          }}
-        />
-      ))}
+      <motion.div className="absolute inset-0" style={{ y: reduceMotion ? 0 : ribbonY }}>
+        {ribbonConfigs.map((ribbon, index) => (
+          <motion.div
+            key={index}
+            animate={
+              reduceMotion
+                ? undefined
+                : {
+                    x: ribbon.x,
+                    y: ribbon.y,
+                    scale: [1, 1.035, 1],
+                  }
+            }
+            transition={
+              reduceMotion
+                ? undefined
+                : {
+                    duration: ribbon.duration,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.6,
+                  }
+            }
+            className={`absolute ${ribbon.className}`}
+            style={{
+              ...ribbonVars,
+              background: ribbon.gradient,
+              filter: ribbon.blur,
+              transform: `rotate(${ribbon.rotate})`,
+              borderRadius: "9999px",
+              opacity: intensity(1, 0.9),
+            }}
+          />
+        ))}
+      </motion.div>
 
-      <div
+      <motion.div
         className="absolute left-1/2 top-1/2 h-[62vh] w-[84vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
+          y: reduceMotion ? 0 : haloY,
           background: `radial-gradient(ellipse at center,
             hsl(var(--gradient-cyan) / ${intensity(0.12, 0.06)}) 0%,
             hsl(var(--gradient-lavender) / ${intensity(0.1, 0.05)}) 28%,
@@ -175,91 +252,64 @@ const CosmicBackground = () => {
       />
 
       {planetConfigs.map((planet, index) => (
-        <motion.div
+        <Planet
           key={index}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  y: [0, -12, 0],
-                  x: [0, index % 2 === 0 ? 8 : -8, 0],
-                  scale: [1, 1.03, 1],
-                }
-          }
-          transition={
-            reduceMotion
-              ? undefined
-              : {
-                  duration: 10 + index * 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: planet.delay,
-                }
-          }
-          className="absolute rounded-full"
-          style={{
-            top: planet.top,
-            right: planet.right,
-            bottom: planet.bottom,
-            left: planet.left,
-            width: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
-            height: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
-            background: `radial-gradient(circle at 35% 35%,
-              hsl(var(--foreground) / ${intensity(0.9, 0.7)}) 0%,
-              hsl(var(${planet.color}) / ${intensity(0.5, 0.38)}) 52%,
-              hsl(var(${planet.color}) / ${intensity(0.24, 0.18)}) 78%,
-              transparent 100%)`,
-            boxShadow: `0 0 55px hsl(var(${planet.halo}) / ${intensity(0.26, 0.12)})`,
-          }}
+          planet={planet}
+          index={index}
+          reduceMotion={!!reduceMotion}
+          intensity={intensity}
+          smoothScroll={smoothScroll}
         />
       ))}
 
-      {[...Array(44)].map((_, index) => {
-        const size = (index % 3) + 1;
-        const x = 4 + ((index * 11.7) % 92);
-        const y = 6 + ((index * 7.9) % 88);
-        const color =
-          index % 4 === 0
-            ? "--gradient-lavender"
-            : index % 4 === 1
-            ? "--gradient-cyan"
-            : index % 4 === 2
-            ? "--gradient-peach"
-            : "--foreground";
+      <motion.div className="absolute inset-0" style={{ y: reduceMotion ? 0 : starsY }}>
+        {[...Array(44)].map((_, index) => {
+          const size = (index % 3) + 1;
+          const x = 4 + ((index * 11.7) % 92);
+          const y = 6 + ((index * 7.9) % 88);
+          const color =
+            index % 4 === 0
+              ? "--gradient-lavender"
+              : index % 4 === 1
+              ? "--gradient-cyan"
+              : index % 4 === 2
+              ? "--gradient-peach"
+              : "--foreground";
 
-        return (
-          <motion.div
-            key={`star-${index}`}
-            animate={
-              reduceMotion
-                ? undefined
-                : {
-                    opacity: [intensity(0.18, 0.14), intensity(0.82, 0.5), intensity(0.18, 0.14)],
-                    scale: [1, 1.18, 1],
-                  }
-            }
-            transition={
-              reduceMotion
-                ? undefined
-                : {
-                    duration: 2.6 + (index % 5),
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.18,
-                  }
-            }
-            className="absolute rounded-full"
-            style={{
-              top: `${y}%`,
-              left: `${x}%`,
-              width: `${size * 2}px`,
-              height: `${size * 2}px`,
-              background: `hsl(var(${color}) / ${intensity(0.9, 0.55)})`,
-              boxShadow: `0 0 ${size * 10}px hsl(var(${color}) / ${intensity(0.35, 0.16)})`,
-            }}
-          />
-        );
-      })}
+          return (
+            <motion.div
+              key={`star-${index}`}
+              animate={
+                reduceMotion
+                  ? undefined
+                  : {
+                      opacity: [intensity(0.18, 0.14), intensity(0.82, 0.5), intensity(0.18, 0.14)],
+                      scale: [1, 1.18, 1],
+                    }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : {
+                      duration: 2.6 + (index % 5),
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.18,
+                    }
+              }
+              className="absolute rounded-full"
+              style={{
+                top: `${y}%`,
+                left: `${x}%`,
+                width: `${size * 2}px`,
+                height: `${size * 2}px`,
+                background: `hsl(var(${color}) / ${intensity(0.9, 0.55)})`,
+                boxShadow: `0 0 ${size * 10}px hsl(var(${color}) / ${intensity(0.35, 0.16)})`,
+              }}
+            />
+          );
+        })}
+      </motion.div>
 
       {/* Frosted overlay to keep content readable */}
       <div
