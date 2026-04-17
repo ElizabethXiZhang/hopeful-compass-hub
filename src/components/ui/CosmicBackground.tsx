@@ -109,18 +109,23 @@ interface PlanetProps {
   index: number;
   reduceMotion: boolean;
   intensity: (d: number, l: number) => number;
-  smoothScroll: MotionValue<number>;
 }
 
-const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: PlanetProps) => {
-  const y = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxY]);
-  const x = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxX]);
+const Planet = ({ planet, index, reduceMotion, intensity }: PlanetProps) => {
+  // Build smooth circular keyframes so the planet orbits in place forever.
+  const steps = 24;
+  const phaseRad = (planet.orbitPhase * Math.PI) / 180;
+  const orbitX: number[] = [];
+  const orbitY: number[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps) * Math.PI * 2 * planet.orbitDirection;
+    orbitX.push(Math.cos(t + phaseRad) * planet.orbitRadius);
+    orbitY.push(Math.sin(t + phaseRad) * planet.orbitRadius);
+  }
 
   return (
     <motion.div
       style={{
-        y: reduceMotion ? 0 : y,
-        x: reduceMotion ? 0 : x,
         top: planet.top,
         right: planet.right,
         bottom: planet.bottom,
@@ -138,20 +143,36 @@ const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: Planet
         reduceMotion
           ? undefined
           : {
-              scale: [1, 1.04, 1],
+              x: orbitX,
+              y: orbitY,
+              scale: [1, 1.04, 1, 1.04, 1],
             }
       }
       transition={
         reduceMotion
           ? undefined
           : {
-              duration: 9 + index * 1.6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: planet.delay,
+              x: {
+                duration: planet.orbitDuration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: planet.delay,
+              },
+              y: {
+                duration: planet.orbitDuration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: planet.delay,
+              },
+              scale: {
+                duration: 9 + index * 1.6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: planet.delay,
+              },
             }
       }
-      className="absolute rounded-full will-change-transform"
+      className="fixed rounded-full will-change-transform"
     />
   );
 };
