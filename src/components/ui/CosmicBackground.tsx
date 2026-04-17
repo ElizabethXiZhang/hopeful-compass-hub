@@ -97,6 +97,60 @@ const planetConfigs = [
   },
 ];
 
+type PlanetConfig = (typeof planetConfigs)[number];
+
+interface PlanetProps {
+  planet: PlanetConfig;
+  index: number;
+  reduceMotion: boolean;
+  intensity: (d: number, l: number) => number;
+  smoothScroll: MotionValue<number>;
+}
+
+const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: PlanetProps) => {
+  const y = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxY]);
+  const x = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxX]);
+
+  return (
+    <motion.div
+      style={{
+        y: reduceMotion ? 0 : y,
+        x: reduceMotion ? 0 : x,
+        top: planet.top,
+        right: planet.right,
+        bottom: planet.bottom,
+        left: planet.left,
+        width: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
+        height: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
+        background: `radial-gradient(circle at 35% 35%,
+          hsl(var(--foreground) / ${intensity(0.9, 0.7)}) 0%,
+          hsl(var(${planet.color}) / ${intensity(0.5, 0.38)}) 52%,
+          hsl(var(${planet.color}) / ${intensity(0.24, 0.18)}) 78%,
+          transparent 100%)`,
+        boxShadow: `0 0 55px hsl(var(${planet.halo}) / ${intensity(0.26, 0.12)})`,
+      }}
+      animate={
+        reduceMotion
+          ? undefined
+          : {
+              scale: [1, 1.04, 1],
+            }
+      }
+      transition={
+        reduceMotion
+          ? undefined
+          : {
+              duration: 9 + index * 1.6,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: planet.delay,
+            }
+      }
+      className="absolute rounded-full will-change-transform"
+    />
+  );
+};
+
 const CosmicBackground = () => {
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
