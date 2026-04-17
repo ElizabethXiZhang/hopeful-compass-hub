@@ -1,4 +1,5 @@
 import { motion, useReducedMotion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "../theme/ThemeProvider";
 
 const ribbonConfigs = [
@@ -34,66 +35,63 @@ const ribbonConfigs = [
   },
 ];
 
+// Planets orbit around the viewport center. Each has its own radius, speed,
+// starting angle and direction so the motion feels organic, not synchronised.
 const planetConfigs = [
   {
     size: 180,
     mobileSize: 104,
-    top: "18%",
-    left: "10%",
     color: "--gradient-lavender",
     halo: "--gradient-lavender",
-    delay: 0,
-    parallaxY: -180,
-    parallaxX: 40,
-    drift: { x: [0, 14, -8, 0], y: [0, -10, 12, 0] },
+    radiusX: 38, // % of viewport width
+    radiusY: 32, // % of viewport height
+    duration: 48,
+    startAngle: 200,
+    direction: 1,
   },
   {
     size: 150,
     mobileSize: 88,
-    top: "12%",
-    right: "8%",
     color: "--gradient-lavender",
     halo: "--gradient-cyan",
-    delay: 1.8,
-    parallaxY: -260,
-    parallaxX: -55,
-    drift: { x: [0, -12, 10, 0], y: [0, 14, -8, 0] },
+    radiusX: 42,
+    radiusY: 36,
+    duration: 56,
+    startAngle: 20,
+    direction: -1,
   },
   {
     size: 108,
     mobileSize: 72,
-    bottom: "11%",
-    left: "18%",
     color: "--gradient-cyan",
     halo: "--gradient-teal",
-    delay: 0.8,
-    parallaxY: -120,
-    parallaxX: 70,
-    drift: { x: [0, 18, -6, 0], y: [0, -14, 8, 0] },
+    radiusX: 30,
+    radiusY: 38,
+    duration: 64,
+    startAngle: 130,
+    direction: 1,
   },
   {
     size: 96,
     mobileSize: 68,
-    bottom: "8%",
-    right: "12%",
     color: "--gradient-cyan",
     halo: "--gradient-cyan",
-    delay: 2.6,
-    parallaxY: -340,
-    parallaxX: -32,
-    drift: { x: [0, -16, 12, 0], y: [0, 10, -14, 0] },
+    radiusX: 44,
+    radiusY: 30,
+    duration: 72,
+    startAngle: 300,
+    direction: -1,
   },
   {
     size: 56,
     mobileSize: 42,
-    top: "47%",
-    right: "22%",
     color: "--gradient-peach",
     halo: "--gradient-lavender",
-    delay: 1.2,
-    parallaxY: -440,
-    parallaxX: 90,
-    drift: { x: [0, 22, -14, 0], y: [0, -18, 10, 0] },
+    radiusX: 26,
+    radiusY: 24,
+    duration: 40,
+    startAngle: 80,
+    direction: 1,
   },
 ];
 
@@ -104,22 +102,38 @@ interface PlanetProps {
   index: number;
   reduceMotion: boolean;
   intensity: (d: number, l: number) => number;
-  smoothScroll: MotionValue<number>;
 }
 
-const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: PlanetProps) => {
-  const y = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxY]);
-  const x = useTransform(smoothScroll, [0, 2000], [0, planet.parallaxX]);
+const Planet = ({ planet, index, reduceMotion, intensity }: PlanetProps) => {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const startRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    let raf = 0;
+    const tick = (t: number) => {
+      if (startRef.current === null) startRef.current = t;
+      const elapsed = (t - startRef.current) / 1000;
+      const angle =
+        (planet.startAngle * Math.PI) / 180 +
+        planet.direction * (elapsed / planet.duration) * Math.PI * 2;
+      setPos({
+        x: Math.cos(angle) * planet.radiusX,
+        y: Math.sin(angle) * planet.radiusY,
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [planet, reduceMotion]);
 
   return (
     <motion.div
       style={{
-        y: reduceMotion ? 0 : y,
-        x: reduceMotion ? 0 : x,
-        top: planet.top,
-        right: planet.right,
-        bottom: planet.bottom,
-        left: planet.left,
+        // Anchor at viewport center, then offset along the orbit.
+        top: "50%",
+        left: "50%",
+        transform: `translate(calc(-50% + ${pos.x}vw), calc(-50% + ${pos.y}vh))`,
         width: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
         height: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
         background: `radial-gradient(circle at 35% 35%,
@@ -143,10 +157,9 @@ const Planet = ({ planet, index, reduceMotion, intensity, smoothScroll }: Planet
               duration: 9 + index * 1.6,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: planet.delay,
             }
       }
-      className="absolute rounded-full will-change-transform"
+      className="fixed rounded-full will-change-transform"
     />
   );
 };
@@ -258,7 +271,6 @@ const CosmicBackground = () => {
           index={index}
           reduceMotion={!!reduceMotion}
           intensity={intensity}
-          smoothScroll={smoothScroll}
         />
       ))}
 
