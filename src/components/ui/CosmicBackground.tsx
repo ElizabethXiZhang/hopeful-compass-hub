@@ -101,6 +101,8 @@ const CosmicBackground = () => {
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
   const isDark = theme === "dark";
+  const { scrollY } = useScroll();
+  const smoothScroll = useSpring(scrollY, { stiffness: 60, damping: 22, mass: 0.6 });
 
   const intensity = (darkValue: number, lightValue: number) =>
     isDark ? darkValue : lightValue;
