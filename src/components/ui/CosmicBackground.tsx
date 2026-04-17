@@ -43,6 +43,9 @@ const planetConfigs = [
     color: "--gradient-lavender",
     halo: "--gradient-lavender",
     delay: 0,
+    parallaxY: -180,
+    parallaxX: 40,
+    drift: { x: [0, 14, -8, 0], y: [0, -10, 12, 0] },
   },
   {
     size: 150,
@@ -52,6 +55,9 @@ const planetConfigs = [
     color: "--gradient-lavender",
     halo: "--gradient-cyan",
     delay: 1.8,
+    parallaxY: -260,
+    parallaxX: -55,
+    drift: { x: [0, -12, 10, 0], y: [0, 14, -8, 0] },
   },
   {
     size: 108,
@@ -61,6 +67,9 @@ const planetConfigs = [
     color: "--gradient-cyan",
     halo: "--gradient-teal",
     delay: 0.8,
+    parallaxY: -120,
+    parallaxX: 70,
+    drift: { x: [0, 18, -6, 0], y: [0, -14, 8, 0] },
   },
   {
     size: 96,
@@ -70,6 +79,9 @@ const planetConfigs = [
     color: "--gradient-cyan",
     halo: "--gradient-cyan",
     delay: 2.6,
+    parallaxY: -340,
+    parallaxX: -32,
+    drift: { x: [0, -16, 12, 0], y: [0, 10, -14, 0] },
   },
   {
     size: 56,
@@ -79,6 +91,9 @@ const planetConfigs = [
     color: "--gradient-peach",
     halo: "--gradient-lavender",
     delay: 1.2,
+    parallaxY: -440,
+    parallaxX: 90,
+    drift: { x: [0, 22, -14, 0], y: [0, -18, 10, 0] },
   },
 ];
 
