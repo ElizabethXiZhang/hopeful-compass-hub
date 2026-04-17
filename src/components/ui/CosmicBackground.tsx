@@ -262,52 +262,54 @@ const CosmicBackground = () => {
         />
       ))}
 
-      {[...Array(44)].map((_, index) => {
-        const size = (index % 3) + 1;
-        const x = 4 + ((index * 11.7) % 92);
-        const y = 6 + ((index * 7.9) % 88);
-        const color =
-          index % 4 === 0
-            ? "--gradient-lavender"
-            : index % 4 === 1
-            ? "--gradient-cyan"
-            : index % 4 === 2
-            ? "--gradient-peach"
-            : "--foreground";
+      <motion.div className="absolute inset-0" style={{ y: reduceMotion ? 0 : starsY }}>
+        {[...Array(44)].map((_, index) => {
+          const size = (index % 3) + 1;
+          const x = 4 + ((index * 11.7) % 92);
+          const y = 6 + ((index * 7.9) % 88);
+          const color =
+            index % 4 === 0
+              ? "--gradient-lavender"
+              : index % 4 === 1
+              ? "--gradient-cyan"
+              : index % 4 === 2
+              ? "--gradient-peach"
+              : "--foreground";
 
-        return (
-          <motion.div
-            key={`star-${index}`}
-            animate={
-              reduceMotion
-                ? undefined
-                : {
-                    opacity: [intensity(0.18, 0.14), intensity(0.82, 0.5), intensity(0.18, 0.14)],
-                    scale: [1, 1.18, 1],
-                  }
-            }
-            transition={
-              reduceMotion
-                ? undefined
-                : {
-                    duration: 2.6 + (index % 5),
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: index * 0.18,
-                  }
-            }
-            className="absolute rounded-full"
-            style={{
-              top: `${y}%`,
-              left: `${x}%`,
-              width: `${size * 2}px`,
-              height: `${size * 2}px`,
-              background: `hsl(var(${color}) / ${intensity(0.9, 0.55)})`,
-              boxShadow: `0 0 ${size * 10}px hsl(var(${color}) / ${intensity(0.35, 0.16)})`,
-            }}
-          />
-        );
-      })}
+          return (
+            <motion.div
+              key={`star-${index}`}
+              animate={
+                reduceMotion
+                  ? undefined
+                  : {
+                      opacity: [intensity(0.18, 0.14), intensity(0.82, 0.5), intensity(0.18, 0.14)],
+                      scale: [1, 1.18, 1],
+                    }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : {
+                      duration: 2.6 + (index % 5),
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.18,
+                    }
+              }
+              className="absolute rounded-full"
+              style={{
+                top: `${y}%`,
+                left: `${x}%`,
+                width: `${size * 2}px`,
+                height: `${size * 2}px`,
+                background: `hsl(var(${color}) / ${intensity(0.9, 0.55)})`,
+                boxShadow: `0 0 ${size * 10}px hsl(var(${color}) / ${intensity(0.35, 0.16)})`,
+              }}
+            />
+          );
+        })}
+      </motion.div>
 
       {/* Frosted overlay to keep content readable */}
       <div
