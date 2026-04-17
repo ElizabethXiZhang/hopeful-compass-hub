@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 import { useTheme } from "../theme/ThemeProvider";
 
 const ribbonConfigs = [
