@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useTheme } from "../theme/ThemeProvider";
 
 const ribbonConfigs = [
@@ -86,6 +86,14 @@ const CosmicBackground = () => {
   const { theme } = useTheme();
   const reduceMotion = useReducedMotion();
   const isDark = theme === "dark";
+  const { scrollY } = useScroll();
+
+  // Parallax scroll layers — each moves at different speeds for depth
+  const ribbonsY = useTransform(scrollY, [0, 3000], ["0%", "-25%"]);
+  const planetsY = useTransform(scrollY, [0, 3000], ["0%", "-15%"]);
+  const starsY = useTransform(scrollY, [0, 3000], ["0%", "-40%"]);
+  const farStarsY = useTransform(scrollY, [0, 3000], ["0%", "-60%"]);
+  const gridY = useTransform(scrollY, [0, 3000], ["0%", "-8%"]);
 
   const intensity = (darkValue: number, lightValue: number) =>
     isDark ? darkValue : lightValue;
@@ -129,39 +137,44 @@ const CosmicBackground = () => {
         }}
       />
 
-      {ribbonConfigs.map((ribbon, index) => (
-        <motion.div
-          key={index}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  x: ribbon.x,
-                  y: ribbon.y,
-                  scale: [1, 1.035, 1],
-                }
-          }
-          transition={
-            reduceMotion
-              ? undefined
-              : {
-                  duration: ribbon.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.6,
-                }
-          }
-          className={`absolute ${ribbon.className}`}
-          style={{
-            ...ribbonVars,
-            background: ribbon.gradient,
-            filter: ribbon.blur,
-            transform: `rotate(${ribbon.rotate})`,
-            borderRadius: "9999px",
-            opacity: intensity(1, 0.9),
-          }}
-        />
-      ))}
+      <motion.div
+        className="absolute inset-0"
+        style={{ y: reduceMotion ? 0 : ribbonsY, willChange: "transform" }}
+      >
+        {ribbonConfigs.map((ribbon, index) => (
+          <motion.div
+            key={index}
+            animate={
+              reduceMotion
+                ? undefined
+                : {
+                    x: ribbon.x,
+                    y: ribbon.y,
+                    scale: [1, 1.035, 1],
+                  }
+            }
+            transition={
+              reduceMotion
+                ? undefined
+                : {
+                    duration: ribbon.duration,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.6,
+                  }
+            }
+            className={`absolute ${ribbon.className}`}
+            style={{
+              ...ribbonVars,
+              background: ribbon.gradient,
+              filter: ribbon.blur,
+              transform: `rotate(${ribbon.rotate})`,
+              borderRadius: "9999px",
+              opacity: intensity(1, 0.9),
+            }}
+          />
+        ))}
+      </motion.div>
 
       <div
         className="absolute left-1/2 top-1/2 h-[62vh] w-[84vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -174,92 +187,188 @@ const CosmicBackground = () => {
         }}
       />
 
-      {planetConfigs.map((planet, index) => (
-        <motion.div
-          key={index}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  y: [0, -12, 0],
-                  x: [0, index % 2 === 0 ? 8 : -8, 0],
-                  scale: [1, 1.03, 1],
-                }
-          }
-          transition={
-            reduceMotion
-              ? undefined
-              : {
-                  duration: 10 + index * 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: planet.delay,
-                }
-          }
-          className="absolute rounded-full"
-          style={{
-            top: planet.top,
-            right: planet.right,
-            bottom: planet.bottom,
-            left: planet.left,
-            width: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
-            height: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
-            background: `radial-gradient(circle at 35% 35%,
-              hsl(var(--foreground) / ${intensity(0.9, 0.7)}) 0%,
-              hsl(var(${planet.color}) / ${intensity(0.5, 0.38)}) 52%,
-              hsl(var(${planet.color}) / ${intensity(0.24, 0.18)}) 78%,
-              transparent 100%)`,
-            boxShadow: `0 0 55px hsl(var(${planet.halo}) / ${intensity(0.26, 0.12)})`,
-          }}
-        />
-      ))}
-
-      {[...Array(44)].map((_, index) => {
-        const size = (index % 3) + 1;
-        const x = 4 + ((index * 11.7) % 92);
-        const y = 6 + ((index * 7.9) % 88);
-        const color =
-          index % 4 === 0
-            ? "--gradient-lavender"
-            : index % 4 === 1
-            ? "--gradient-cyan"
-            : index % 4 === 2
-            ? "--gradient-peach"
-            : "--foreground";
-
-        return (
+      <motion.div
+        className="absolute inset-0"
+        style={{ y: reduceMotion ? 0 : planetsY, willChange: "transform" }}
+      >
+        {planetConfigs.map((planet, index) => (
           <motion.div
-            key={`star-${index}`}
+            key={index}
             animate={
               reduceMotion
                 ? undefined
                 : {
-                    opacity: [intensity(0.18, 0.14), intensity(0.82, 0.5), intensity(0.18, 0.14)],
-                    scale: [1, 1.18, 1],
+                    y: [0, -12, 0],
+                    x: [0, index % 2 === 0 ? 8 : -8, 0],
+                    scale: [1, 1.03, 1],
                   }
             }
             transition={
               reduceMotion
                 ? undefined
                 : {
-                    duration: 2.6 + (index % 5),
+                    duration: 10 + index * 1.8,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: index * 0.18,
+                    delay: planet.delay,
                   }
             }
             className="absolute rounded-full"
             style={{
-              top: `${y}%`,
-              left: `${x}%`,
-              width: `${size * 2}px`,
-              height: `${size * 2}px`,
-              background: `hsl(var(${color}) / ${intensity(0.9, 0.55)})`,
-              boxShadow: `0 0 ${size * 10}px hsl(var(${color}) / ${intensity(0.35, 0.16)})`,
+              top: planet.top,
+              right: planet.right,
+              bottom: planet.bottom,
+              left: planet.left,
+              width: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
+              height: `clamp(${planet.mobileSize}px, 9vw, ${planet.size}px)`,
+              background: `radial-gradient(circle at 35% 35%,
+                hsl(var(--foreground) / ${intensity(0.9, 0.7)}) 0%,
+                hsl(var(${planet.color}) / ${intensity(0.5, 0.38)}) 52%,
+                hsl(var(${planet.color}) / ${intensity(0.24, 0.18)}) 78%,
+                transparent 100%)`,
+              boxShadow: `0 0 55px hsl(var(${planet.halo}) / ${intensity(0.26, 0.12)})`,
             }}
           />
-        );
-      })}
+        ))}
+      </motion.div>
+
+      {/* Far star layer — moves fastest with scroll, drifts slowly */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ y: reduceMotion ? 0 : farStarsY, willChange: "transform" }}
+        animate={reduceMotion ? undefined : { x: [0, -20, 0] }}
+        transition={
+          reduceMotion
+            ? undefined
+            : { duration: 60, repeat: Infinity, ease: "linear" }
+        }
+      >
+        {[...Array(60)].map((_, index) => {
+          const x = 2 + ((index * 13.3) % 96);
+          const y = 3 + ((index * 9.1) % 94);
+          return (
+            <motion.div
+              key={`far-star-${index}`}
+              animate={
+                reduceMotion
+                  ? undefined
+                  : { opacity: [intensity(0.1, 0.08), intensity(0.45, 0.28), intensity(0.1, 0.08)] }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : {
+                      duration: 3 + (index % 4),
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.12,
+                    }
+              }
+              className="absolute rounded-full"
+              style={{
+                top: `${y}%`,
+                left: `${x}%`,
+                width: "1px",
+                height: "1px",
+                background: `hsl(var(--foreground) / ${intensity(0.7, 0.45)})`,
+                boxShadow: `0 0 4px hsl(var(--foreground) / ${intensity(0.3, 0.18)})`,
+              }}
+            />
+          );
+        })}
+      </motion.div>
+
+      {/* Near star layer — colored, larger, parallax mid-speed */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ y: reduceMotion ? 0 : starsY, willChange: "transform" }}
+        animate={reduceMotion ? undefined : { x: [0, 15, 0] }}
+        transition={
+          reduceMotion
+            ? undefined
+            : { duration: 45, repeat: Infinity, ease: "linear" }
+        }
+      >
+        {[...Array(44)].map((_, index) => {
+          const size = (index % 3) + 1;
+          const x = 4 + ((index * 11.7) % 92);
+          const y = 6 + ((index * 7.9) % 88);
+          const color =
+            index % 4 === 0
+              ? "--gradient-lavender"
+              : index % 4 === 1
+              ? "--gradient-cyan"
+              : index % 4 === 2
+              ? "--gradient-peach"
+              : "--foreground";
+
+          return (
+            <motion.div
+              key={`star-${index}`}
+              animate={
+                reduceMotion
+                  ? undefined
+                  : {
+                      opacity: [intensity(0.18, 0.14), intensity(0.82, 0.5), intensity(0.18, 0.14)],
+                      scale: [1, 1.18, 1],
+                    }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : {
+                      duration: 2.6 + (index % 5),
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: index * 0.18,
+                    }
+              }
+              className="absolute rounded-full"
+              style={{
+                top: `${y}%`,
+                left: `${x}%`,
+                width: `${size * 2}px`,
+                height: `${size * 2}px`,
+                background: `hsl(var(${color}) / ${intensity(0.9, 0.55)})`,
+                boxShadow: `0 0 ${size * 10}px hsl(var(${color}) / ${intensity(0.35, 0.16)})`,
+              }}
+            />
+          );
+        })}
+      </motion.div>
+
+      {/* Floating dust particles — continuous upward drift for "infinite" feel */}
+      {!reduceMotion &&
+        [...Array(14)].map((_, index) => {
+          const startX = 5 + ((index * 17.3) % 90);
+          const duration = 18 + (index % 6) * 4;
+          const size = 1 + (index % 3);
+          return (
+            <motion.div
+              key={`dust-${index}`}
+              initial={{ y: "110vh", x: 0, opacity: 0 }}
+              animate={{
+                y: "-10vh",
+                x: [0, index % 2 === 0 ? 30 : -30, 0],
+                opacity: [0, intensity(0.5, 0.3), intensity(0.5, 0.3), 0],
+              }}
+              transition={{
+                duration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: index * 1.4,
+              }}
+              className="absolute rounded-full"
+              style={{
+                left: `${startX}%`,
+                width: `${size}px`,
+                height: `${size}px`,
+                background: `hsl(var(--gradient-cyan) / ${intensity(0.7, 0.4)})`,
+                boxShadow: `0 0 ${size * 4}px hsl(var(--gradient-lavender) / ${intensity(0.4, 0.2)})`,
+              }}
+            />
+          );
+        })}
 
       {/* Frosted overlay to keep content readable */}
       <div
@@ -271,12 +380,14 @@ const CosmicBackground = () => {
         }}
       />
 
-      <div
+      <motion.div
         className="absolute inset-0"
         style={{
+          y: reduceMotion ? 0 : gridY,
           opacity: isDark ? 0.028 : 0.018,
           backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.7) 1px, transparent 0)`,
           backgroundSize: "56px 56px",
+          willChange: "transform",
         }}
       />
     </div>
