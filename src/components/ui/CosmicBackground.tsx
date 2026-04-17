@@ -157,6 +157,9 @@ const CosmicBackground = () => {
   const isDark = theme === "dark";
   const { scrollY } = useScroll();
   const smoothScroll = useSpring(scrollY, { stiffness: 60, damping: 22, mass: 0.6 });
+  const ribbonY = useTransform(smoothScroll, [0, 2000], [0, -120]);
+  const starsY = useTransform(smoothScroll, [0, 2000], [0, -380]);
+  const haloY = useTransform(smoothScroll, [0, 2000], [0, -220]);
 
   const intensity = (darkValue: number, lightValue: number) =>
     isDark ? darkValue : lightValue;
