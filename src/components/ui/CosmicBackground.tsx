@@ -203,43 +203,46 @@ const CosmicBackground = () => {
         }}
       />
 
-      {ribbonConfigs.map((ribbon, index) => (
-        <motion.div
-          key={index}
-          animate={
-            reduceMotion
-              ? undefined
-              : {
-                  x: ribbon.x,
-                  y: ribbon.y,
-                  scale: [1, 1.035, 1],
-                }
-          }
-          transition={
-            reduceMotion
-              ? undefined
-              : {
-                  duration: ribbon.duration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.6,
-                }
-          }
-          className={`absolute ${ribbon.className}`}
-          style={{
-            ...ribbonVars,
-            background: ribbon.gradient,
-            filter: ribbon.blur,
-            transform: `rotate(${ribbon.rotate})`,
-            borderRadius: "9999px",
-            opacity: intensity(1, 0.9),
-          }}
-        />
-      ))}
+      <motion.div className="absolute inset-0" style={{ y: reduceMotion ? 0 : ribbonY }}>
+        {ribbonConfigs.map((ribbon, index) => (
+          <motion.div
+            key={index}
+            animate={
+              reduceMotion
+                ? undefined
+                : {
+                    x: ribbon.x,
+                    y: ribbon.y,
+                    scale: [1, 1.035, 1],
+                  }
+            }
+            transition={
+              reduceMotion
+                ? undefined
+                : {
+                    duration: ribbon.duration,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.6,
+                  }
+            }
+            className={`absolute ${ribbon.className}`}
+            style={{
+              ...ribbonVars,
+              background: ribbon.gradient,
+              filter: ribbon.blur,
+              transform: `rotate(${ribbon.rotate})`,
+              borderRadius: "9999px",
+              opacity: intensity(1, 0.9),
+            }}
+          />
+        ))}
+      </motion.div>
 
-      <div
+      <motion.div
         className="absolute left-1/2 top-1/2 h-[62vh] w-[84vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
+          y: reduceMotion ? 0 : haloY,
           background: `radial-gradient(ellipse at center,
             hsl(var(--gradient-cyan) / ${intensity(0.12, 0.06)}) 0%,
             hsl(var(--gradient-lavender) / ${intensity(0.1, 0.05)}) 28%,
