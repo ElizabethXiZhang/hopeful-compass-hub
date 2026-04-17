@@ -284,7 +284,7 @@ const CosmicBackground = () => {
           index={index}
           reduceMotion={!!reduceMotion}
           intensity={intensity}
-          smoothScroll={smoothScroll}
+          
         />
       ))}
 
