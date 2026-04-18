@@ -62,7 +62,7 @@ const Footer = () => {
                 className="h-24 w-auto object-contain drop-shadow-[0_0_10px_hsla(270,60%,70%,0.2)]"
               />
             </Link>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-slate-300/90">
               Navigating meaning, stability, and peace in the AI era. We support people through the challenges of changes. You are not alone in this journey. Together, we find new paths forward.
             </p>
 
