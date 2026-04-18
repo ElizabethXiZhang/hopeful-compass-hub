@@ -52,6 +52,7 @@ const pillars = [
     color: "from-rose-500 to-pink-500",
     borderColor: "border-rose-500/30",
     glowColor: "rose",
+    link: "/rebuild/mental-health",
   },
   {
     icon: Leaf,
@@ -62,6 +63,7 @@ const pillars = [
     color: "from-lime-500 to-green-500",
     borderColor: "border-lime-500/30",
     glowColor: "lime",
+    link: "/rebuild/lifestyle",
   },
   {
     icon: Compass,
@@ -72,6 +74,7 @@ const pillars = [
     color: "from-violet-500 to-purple-500",
     borderColor: "border-violet-500/30",
     glowColor: "violet",
+    link: "/rebuild/purpose",
   },
   {
     icon: Users,
@@ -82,6 +85,7 @@ const pillars = [
     color: "from-cyan-500 to-blue-500",
     borderColor: "border-cyan-500/30",
     glowColor: "cyan",
+    link: "/rebuild/community",
   },
   {
     icon: Wallet,
@@ -92,6 +96,7 @@ const pillars = [
     color: "from-emerald-500 to-teal-500",
     borderColor: "border-emerald-500/30",
     glowColor: "emerald",
+    link: "/rebuild/financial-survival",
   },
   {
     icon: Globe,
