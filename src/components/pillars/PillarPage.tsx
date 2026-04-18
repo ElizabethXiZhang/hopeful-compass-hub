@@ -26,11 +26,19 @@ export const SectionGlow = ({
   />
 );
 
-export const Divider = ({ via = "primary" }: { via?: "primary" | "secondary" | "accent" }) => (
-  <div
-    className={`absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent via-${via}/30 to-transparent`}
-  />
-);
+export const Divider = ({ via = "primary" }: { via?: "primary" | "secondary" | "accent" }) => {
+  const cls =
+    via === "primary"
+      ? "via-primary/30"
+      : via === "secondary"
+        ? "via-secondary/30"
+        : "via-accent/30";
+  return (
+    <div
+      className={`absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px bg-gradient-to-r from-transparent ${cls} to-transparent`}
+    />
+  );
+};
 
 export interface PillarSection {
   id?: string;
