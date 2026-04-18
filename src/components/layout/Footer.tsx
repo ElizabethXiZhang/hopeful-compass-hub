@@ -72,7 +72,7 @@ const Footer = () => {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/50 text-muted-foreground transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-slate-300 transition-all hover:border-primary/60 hover:bg-primary/15 hover:text-primary"
                   aria-label={social.name}
                 >
                   <social.icon size={18} />
@@ -88,11 +88,11 @@ const Footer = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="mb-4 font-display text-sm font-semibold text-foreground">Navigation</h4>
+            <h4 className="mb-4 font-display text-sm font-semibold text-white">Navigation</h4>
             <ul className="space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className="text-sm text-muted-foreground transition-colors hover:text-primary">
+                  <Link to={link.path} className="text-sm text-slate-300 transition-colors hover:text-primary">
                     {link.name}
                   </Link>
                 </li>
@@ -107,12 +107,12 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/30 pt-8 md:flex-row"
+          className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row"
         >
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-slate-400">
             © 2025 The Unemployment Pandemic. All rights reserved.
           </p>
-          <p className="flex items-center gap-1 text-sm text-muted-foreground">
+          <p className="flex items-center gap-1 text-sm text-slate-400">
             Made with <Heart size={14} className="text-accent" /> for humanity
           </p>
         </motion.div>
