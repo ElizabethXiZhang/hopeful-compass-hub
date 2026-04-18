@@ -17,6 +17,12 @@ import GovernmentPolicies from "./pages/GovernmentPolicies";
 import JobCuts from "./pages/JobCuts";
 import Forum from "./pages/Forum";
 import BookCall from "./pages/BookCall";
+import MentalHealth from "./pages/pillars/MentalHealth";
+import Lifestyle from "./pages/pillars/Lifestyle";
+import FinancialSurvival from "./pages/pillars/FinancialSurvival";
+import Purpose from "./pages/pillars/Purpose";
+import CommunityPillar from "./pages/pillars/Community";
+import FutureDirection from "./pages/pillars/FutureDirection";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +42,12 @@ const App = () => (
               <Route path="/pillars" element={<Navigate to="/rebuild" replace />} />
               <Route path="/reality" element={<Reality />} />
               <Route path="/rebuild" element={<Rebuild />} />
+              <Route path="/rebuild/mental-health" element={<MentalHealth />} />
+              <Route path="/rebuild/lifestyle" element={<Lifestyle />} />
+              <Route path="/rebuild/financial-survival" element={<FinancialSurvival />} />
+              <Route path="/rebuild/purpose" element={<Purpose />} />
+              <Route path="/rebuild/community" element={<CommunityPillar />} />
+              <Route path="/rebuild/future-direction" element={<FutureDirection />} />
               <Route path="/community" element={<Community />} />
               <Route path="/government-policies" element={<GovernmentPolicies />} />
               <Route path="/job-cuts" element={<JobCuts />} />
