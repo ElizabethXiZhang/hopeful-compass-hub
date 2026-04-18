@@ -183,22 +183,21 @@ const PillarPage = ({
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center justify-center mb-6"
+              className="flex items-center justify-center gap-3 mb-5"
             >
-              <div
-                className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${accentGradient} shadow-lg`}
+              <span
+                className={`inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br ${accentGradient} shadow-sm ring-1 ring-white/10`}
               >
-                <HeroIcon className="h-8 w-8 text-white" />
-              </div>
+                <HeroIcon className="h-4 w-4 text-white" strokeWidth={2.25} />
+              </span>
+              <motion.span
+                variants={fadeUp}
+                transition={{ duration: 0.6 }}
+                className="text-xs sm:text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground"
+              >
+                {eyebrow}
+              </motion.span>
             </motion.div>
-
-            <motion.span
-              variants={fadeUp}
-              transition={{ duration: 0.6 }}
-              className="inline-block mb-4 text-xs sm:text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground"
-            >
-              {eyebrow}
-            </motion.span>
 
             <motion.h1
               variants={fadeUp}
