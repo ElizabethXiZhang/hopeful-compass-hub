@@ -17,12 +17,35 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="relative mt-20 overflow-hidden border-t border-border/30">
-      {/* Background orbs */}
-      <div className="gradient-orb gradient-orb-cyan absolute -bottom-40 -left-40 h-80 w-80 opacity-20" />
-      <div className="gradient-orb gradient-orb-lavender absolute -bottom-40 -right-40 h-80 w-80 opacity-20" />
+    <footer className="relative isolate mt-20 overflow-hidden border-t border-border/40">
+      {/* Dedicated dark footer background — sits above the global cosmic bg */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          background: `
+            radial-gradient(ellipse at 20% 0%, hsl(var(--gradient-lavender) / 0.18) 0%, transparent 55%),
+            radial-gradient(ellipse at 80% 100%, hsl(var(--gradient-cyan) / 0.16) 0%, transparent 55%),
+            linear-gradient(180deg, hsl(240 30% 6% / 0.96) 0%, hsl(240 35% 4% / 0.98) 100%)
+          `,
+        }}
+      />
+      {/* Subtle noise / grid texture for depth */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 opacity-[0.05]"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(0 0% 100% / 0.6) 1px, transparent 0)`,
+          backgroundSize: "40px 40px",
+        }}
+      />
+      {/* Soft glow accents */}
+      <div className="absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-[hsl(var(--gradient-cyan)/0.12)] blur-3xl" />
+      <div className="absolute -bottom-32 -right-32 h-72 w-72 rounded-full bg-[hsl(var(--gradient-lavender)/0.14)] blur-3xl" />
+      {/* Top edge highlight */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-      <div className="container relative mx-auto max-w-6xl px-4 py-16">
+      <div className="container relative mx-auto max-w-6xl px-4 py-16 text-slate-200">
         <div className="grid gap-12 md:grid-cols-3">
           {/* Brand with Full Logo */}
           <motion.div
