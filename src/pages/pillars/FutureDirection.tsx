@@ -4,7 +4,7 @@ import PillarPage from "@/components/pillars/PillarPage";
 const FutureDirection = () => (
   <PillarPage
     metaTitle="Future Direction Without Panic | Next Step After Unemployment"
-    metaDescription="Plan your next career move calmly. A 30-day direction framework to choose between job search, freelancing, business, or reskilling — without panic."
+    metaDescription="Plan your next career move calmly. A 30-day direction framework to choose between job search, freelancing, business, or reskilling, without panic."
     canonicalPath="/rebuild/future-direction"
     keywords="what to do after layoff, career direction after AI, next step after unemployment"
     HeroIcon={Rocket}
@@ -35,12 +35,12 @@ const FutureDirection = () => (
         highlight: "Approach",
         intro: "Choose direction based on inputs you actually control.",
         bullets: [
-          "Strengths — what you do better than most",
-          "Energy — what doesn't drain you",
-          "Lifestyle goals — what kind of life you want",
-          "Market reality — where money actually moves",
-          "Curiosity — what you'd explore for free",
-          "Risk capacity — runway and dependents",
+          "Strengths, what you do better than most",
+          "Energy, what doesn't drain you",
+          "Lifestyle goals, what kind of life you want",
+          "Market reality, where money actually moves",
+          "Curiosity, what you'd explore for free",
+          "Risk capacity, runway and dependents",
         ],
         glowColor: "190 80% 55%",
       },
@@ -49,12 +49,12 @@ const FutureDirection = () => (
         highlight: "Paths",
         intro: "These aren't ranked. The right one depends on you, not the trend cycle.",
         bullets: [
-          "Job search — same field, better fit",
-          "Freelancing — sell skills you already have",
-          "Business — solve a problem you understand",
-          "Reskilling — invest 3–12 months in a pivot",
-          "Portfolio career — multiple income streams",
-          "Simpler lifestyle — lower spend, lower pressure",
+          "Job search, same field, better fit",
+          "Freelancing, sell skills you already have",
+          "Business, solve a problem you understand",
+          "Reskilling, invest 3-12 months in a pivot",
+          "Portfolio career, multiple income streams",
+          "Simpler lifestyle, lower spend, lower pressure",
         ],
         glowColor: "270 70% 65%",
       },
@@ -69,7 +69,7 @@ const FutureDirection = () => (
         ],
       },
       {
-        title: "Weeks 2–3 · Test",
+        title: "Weeks 2-3 · Test",
         items: [
           { label: "Pick 2 directions to explore", description: "Not 7. Two." },
           { label: "Run a tiny experiment in each", description: "Conversation, project, or course." },
@@ -89,7 +89,7 @@ const FutureDirection = () => (
       {
         question: "What should I do in the first month after a layoff?",
         answer:
-          "Stabilize before you strategize. Sleep, runway, and one honest conversation matter more in week 1 than a perfect application. From week 2, start small experiments toward direction — not commitments.",
+          "Stabilize before you strategize. Sleep, runway, and one honest conversation matter more in week 1 than a perfect application. From week 2, start small experiments toward direction, not commitments.",
       },
       {
         question: "Should I switch careers or look for the same role?",
