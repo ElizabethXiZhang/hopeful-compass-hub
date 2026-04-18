@@ -88,7 +88,7 @@ const CommunityPillar = () => (
       {
         question: "How do I deal with comparison on social media?",
         answer:
-          "Mute or unfollow accounts that consistently leave you feeling worse. This isn't avoidance — it's protecting your nervous system while you rebuild. You can always re-follow later.",
+          "Mute or unfollow accounts that consistently leave you feeling worse. This isn't avoidance, it's protecting your nervous system while you rebuild. You can always re-follow later.",
       },
       {
         question: "Where can I find a real community for people in this situation?",

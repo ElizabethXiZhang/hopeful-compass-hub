@@ -4,7 +4,7 @@ import PillarPage from "@/components/pillars/PillarPage";
 const Lifestyle = () => (
   <PillarPage
     metaTitle="Healthy Lifestyle During Unemployment | Routine & Habits"
-    metaDescription="Rebuild routine, sleep, and healthy habits after job loss. A simple daily structure and 7-day reset to feel stable again without a 9–5."
+    metaDescription="Rebuild routine, sleep, and healthy habits after job loss. A simple daily structure and 7-day reset to feel stable again without a 9-5."
     canonicalPath="/rebuild/lifestyle"
     keywords="routine after job loss, healthy habits unemployed, structure without work"
     HeroIcon={Leaf}
@@ -20,7 +20,7 @@ const Lifestyle = () => (
         title: "What Usually",
         highlight: "Slips First",
         intro:
-          "Notice these early. They're not character flaws — they're signals that structure has left the building.",
+          "Notice these early. They're not character flaws, they're signals that structure has left the building.",
         bullets: [
           "Sleeping later and waking later",
           "Skipping meals or grazing on snacks",
@@ -36,12 +36,12 @@ const Lifestyle = () => (
         highlight: "Systems",
         intro: "Six anchors that hold a day together when there's no boss or office to do it for you.",
         bullets: [
-          "Sleep rhythm — fixed wake time",
+          "Sleep rhythm, fixed wake time",
           "Sunlight within 30 min of waking",
           "Movement most days, even small",
           "Real meals at roughly the same times",
-          "Focus blocks — 60–90 min, no phone",
-          "Digital boundaries — apps off after dark",
+          "Focus blocks, 60-90 min, no phone",
+          "Digital boundaries, apps off after dark",
         ],
         glowColor: "190 80% 55%",
       },
@@ -58,7 +58,7 @@ const Lifestyle = () => (
       {
         title: "Midday",
         items: [
-          { label: "60–90 min focus block", description: "Job search, learning, or building." },
+          { label: "60-90 min focus block", description: "Job search, learning, or building." },
           { label: "Real lunch, away from screen", description: "Resets attention." },
           { label: "Walk or short workout", description: "20 minutes is plenty." },
         ],
@@ -86,12 +86,12 @@ const Lifestyle = () => (
       {
         question: "How long does the 7-day reset take to feel different?",
         answer:
-          "Most people feel calmer and clearer within 3–5 days of consistent sleep, daylight, and movement. Energy continues to rise across the second and third week.",
+          "Most people feel calmer and clearer within 3-5 days of consistent sleep, daylight, and movement. Energy continues to rise across the second and third week.",
       },
       {
         question: "Is it okay to rest a lot in the first weeks?",
         answer:
-          "Yes — intentional rest is part of recovery. The goal is rest with rhythm, not collapse without structure. Keep wake time fixed even on slow days.",
+          "Yes, intentional rest is part of recovery. The goal is rest with rhythm, not collapse without structure. Keep wake time fixed even on slow days.",
       },
     ]}
     ctaTitle="Consistency creates confidence."

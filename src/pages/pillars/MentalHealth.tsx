@@ -51,12 +51,12 @@ const MentalHealth = () => (
         highlight: "Help",
         intro: "Small, repeatable actions that calm the nervous system and rebuild stability.",
         bullets: [
-          "Regulate sleep — same wake time daily",
+          "Regulate sleep, same wake time daily",
           "Reduce doom scrolling and news binges",
           "Journal for 5 minutes, no rules",
-          "Move your body — walks count",
+          "Move your body, walks count",
           "Talk to one safe person this week",
-          "Reduce self-judgment — you're adapting",
+          "Reduce self-judgment, you're adapting",
         ],
         glowColor: "190 80% 55%",
       },
@@ -98,22 +98,22 @@ const MentalHealth = () => (
       {
         question: "Is it normal to feel depressed after losing my job?",
         answer:
-          "Yes. Job loss is consistently ranked among the most stressful life events. Sadness, anxiety, and low motivation are normal initial responses. They become a concern when they last many weeks without lifting at all — that's when professional support helps most.",
+          "Yes. Job loss is consistently ranked among the most stressful life events. Sadness, anxiety, and low motivation are normal initial responses. They become a concern when they last many weeks without lifting at all, that's when professional support helps most.",
       },
       {
         question: "How long does emotional recovery take after a layoff?",
         answer:
-          "There's no fixed timeline. Most people see early stabilization within 4–8 weeks if they protect sleep, structure, and connection. Deeper identity recovery often takes longer and runs in parallel with the practical rebuild.",
+          "There's no fixed timeline. Most people see early stabilization within 4-8 weeks if they protect sleep, structure, and connection. Deeper identity recovery often takes longer and runs in parallel with the practical rebuild.",
       },
       {
         question: "Should I take time off before job hunting again?",
         answer:
-          "If you can afford even a short pause, it usually helps. Even 1–2 weeks of intentional rest before applying tends to produce clearer thinking and stronger applications than panic-applying from day one.",
+          "If you can afford even a short pause, it usually helps. Even 1-2 weeks of intentional rest before applying tends to produce clearer thinking and stronger applications than panic-applying from day one.",
       },
       {
         question: "How do I deal with shame about being unemployed?",
         answer:
-          "Shame shrinks in conversation. Tell one trusted person honestly. Layoffs are happening at scale across industries — your situation is shared by millions, even if your social feed hides it.",
+          "Shame shrinks in conversation. Tell one trusted person honestly. Layoffs are happening at scale across industries, your situation is shared by millions, even if your social feed hides it.",
       },
     ]}
     ctaTitle="Healing first is progress."
@@ -128,7 +128,7 @@ const MentalHealth = () => (
       {
         title: "Community Support",
         href: "/rebuild/community",
-        description: "Reconnect with others — isolation makes everything heavier.",
+        description: "Reconnect with others, isolation makes everything heavier.",
       },
       {
         title: "Purpose Beyond Work",

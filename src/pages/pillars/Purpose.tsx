@@ -14,7 +14,7 @@ const Purpose = () => (
     eyebrow="Pillar 4 · Purpose & Meaning"
     h1="Your job was a role,"
     heroHighlight="not your entire identity."
-    heroSubtitle="Modern culture quietly teaches us that worth equals productivity. When work disappears, that belief is exposed — and that's actually an invitation to rebuild a deeper foundation."
+    heroSubtitle="Modern culture quietly teaches us that worth equals productivity. When work disappears, that belief is exposed, and that's actually an invitation to rebuild a deeper foundation."
     sections={[
       {
         title: "Why It",
@@ -39,7 +39,7 @@ const Purpose = () => (
         bullets: [
           "Learning something hard",
           "Helping one person this week",
-          "Creating — writing, art, building",
+          "Creating, writing, art, building",
           "Caring for family or partner",
           "Health and physical mastery",
           "Faith, service, or community",
@@ -64,7 +64,7 @@ const Purpose = () => (
         title: "Stories of",
         highlight: "Reinvention",
         intro:
-          "Across history and today, the most grounded second chapters rarely come from chasing the old role harder. They come from people who used the gap to listen — and then rebuilt slowly around what they actually valued.",
+          "Across history and today, the most grounded second chapters rarely come from chasing the old role harder. They come from people who used the gap to listen, and then rebuilt slowly around what they actually valued.",
         glowColor: "190 80% 55%",
       },
     ]}
@@ -72,22 +72,22 @@ const Purpose = () => (
       {
         question: "How do I find purpose when I feel completely lost?",
         answer:
-          "Start microscopic. Pick one small act of contribution this week — helping a friend, learning something, finishing a creative project. Purpose is built through action, not discovered through thinking.",
+          "Start microscopic. Pick one small act of contribution this week, helping a friend, learning something, finishing a creative project. Purpose is built through action, not discovered through thinking.",
       },
       {
         question: "Is it normal to feel like nothing matters after a layoff?",
         answer:
-          "Very common, especially in the first weeks. It's often grief, not nihilism. As routine and connection return, meaning usually does too — sometimes in unexpected places.",
+          "Very common, especially in the first weeks. It's often grief, not nihilism. As routine and connection return, meaning usually does too, sometimes in unexpected places.",
       },
       {
         question: "How do I separate my self-worth from my job title?",
         answer:
-          "Notice the language you use about yourself. Replace 'I am a [job title]' with 'I do [job title]'. Then deliberately spend time on identities that aren't work — family member, friend, learner, creator.",
+          "Notice the language you use about yourself. Replace 'I am a [job title]' with 'I do [job title]'. Then deliberately spend time on identities that aren't work, family member, friend, learner, creator.",
       },
       {
         question: "What if I find a new purpose that pays less?",
         answer:
-          "That's a real choice many people make. The key is making it consciously, with clear numbers and a workable plan — not as an escape from a hard job search.",
+          "That's a real choice many people make. The key is making it consciously, with clear numbers and a workable plan, not as an escape from a hard job search.",
       },
     ]}
     ctaTitle="You are more than employment status."

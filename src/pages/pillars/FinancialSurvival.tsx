@@ -14,7 +14,7 @@ const FinancialSurvival = () => (
     eyebrow="Pillar 3 · Financial Survival"
     h1="Money stress feels heavy."
     heroHighlight="Clarity reduces the pressure."
-    heroSubtitle="Most financial fear comes from unclear numbers. The moment you see your real picture, the panic starts to shrink — even if the numbers aren't great."
+    heroSubtitle="Most financial fear comes from unclear numbers. The moment you see your real picture, the panic starts to shrink, even if the numbers aren't great."
     sections={[
       {
         title: "Why Money Feels",
@@ -41,7 +41,7 @@ const FinancialSurvival = () => (
           "Rank debts by interest, not size",
           "Brainstorm temporary income ideas",
           "Build a 60-day emergency budget",
-          "Negotiate bills — call, don't email",
+          "Negotiate bills, call, don't email",
         ],
         glowColor: "160 70% 45%",
       },
@@ -62,7 +62,7 @@ const FinancialSurvival = () => (
     ]}
     checklists={[
       {
-        title: "Days 1–10 · See It",
+        title: "Days 1-10 · See It",
         items: [
           { label: "List every account & balance", description: "One simple sheet." },
           { label: "Calculate monthly essentials", description: "Rent, food, utilities, debt min." },
@@ -70,7 +70,7 @@ const FinancialSurvival = () => (
         ],
       },
       {
-        title: "Days 11–20 · Stretch It",
+        title: "Days 11-20 · Stretch It",
         items: [
           { label: "Negotiate 2 bills", description: "Internet, insurance, phone." },
           { label: "Pause non-essentials", description: "Eating out, premium plans." },
@@ -78,7 +78,7 @@ const FinancialSurvival = () => (
         ],
       },
       {
-        title: "Days 21–30 · Plan It",
+        title: "Days 21-30 · Plan It",
         items: [
           { label: "Set a weekly spend cap", description: "One number to track." },
           { label: "Pick a debt strategy", description: "Highest interest first." },
@@ -95,7 +95,7 @@ const FinancialSurvival = () => (
       {
         question: "Should I pay off debt or save cash during unemployment?",
         answer:
-          "During active unemployment, prioritize cash buffer over extra debt payments — keep paying minimums on time, but liquidity protects you from worse decisions later. Resume aggressive payoff once income stabilizes.",
+          "During active unemployment, prioritize cash buffer over extra debt payments, keep paying minimums on time, but liquidity protects you from worse decisions later. Resume aggressive payoff once income stabilizes.",
       },
       {
         question: "Is it okay to take a lower-paid job to stabilize?",
@@ -115,7 +115,7 @@ const FinancialSurvival = () => (
       {
         title: "Mental Health Support",
         href: "/rebuild/mental-health",
-        description: "Money stress and anxiety feed each other — work both at once.",
+        description: "Money stress and anxiety feed each other, work both at once.",
       },
       {
         title: "Future Direction",
