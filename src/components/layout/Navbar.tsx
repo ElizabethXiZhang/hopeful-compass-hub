@@ -7,6 +7,7 @@ import logoIcon from "@/assets/logo-icon.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
   { name: "Reality", path: "/reality" },
   { name: "Rebuild", path: "/rebuild" },
   { name: "Community", path: "/community" },

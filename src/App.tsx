@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Index from "./pages/Index";
 import Mission from "./pages/Mission";
+import About from "./pages/About";
 import Pillars from "./pages/Pillars";
 import Reality from "./pages/Reality";
 import Rebuild from "./pages/Rebuild";
@@ -38,7 +39,8 @@ const App = () => (
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/mission" element={<Navigate to="/" replace />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/mission" element={<Navigate to="/about" replace />} />
               <Route path="/pillars" element={<Navigate to="/rebuild" replace />} />
               <Route path="/reality" element={<Reality />} />
               <Route path="/rebuild" element={<Rebuild />} />
