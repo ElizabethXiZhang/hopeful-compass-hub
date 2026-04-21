@@ -22,6 +22,7 @@ import GovernmentPolicies from "./pages/GovernmentPolicies";
 import JobCuts from "./pages/JobCuts";
 import Forum from "./pages/Forum";
 import BookCall from "./pages/BookCall";
+import Privacy from "./pages/Privacy";
 import MentalHealth from "./pages/pillars/MentalHealth";
 import Lifestyle from "./pages/pillars/Lifestyle";
 import FinancialSurvival from "./pages/pillars/FinancialSurvival";
@@ -64,6 +65,7 @@ const App = () => (
               <Route path="/forum" element={<Forum />} />
               <Route path="/book-call" element={<BookCall />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
               <Route path="/navigate" element={<Navigate to="/government-policies" replace />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
