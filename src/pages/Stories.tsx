@@ -40,7 +40,7 @@ interface Story {
   takeaway: string;
 }
 
-// Globally inclusive sample stories — placeholders, easy to replace.
+// Globally inclusive sample stories: placeholders, easy to replace.
 const stories: Story[] = [
   {
     name: "Anonymous",
@@ -55,7 +55,7 @@ const stories: Story[] = [
     country: "Asia",
     category: "AI Anxiety",
     preview:
-      "I kept reading about AI replacing my role. Talking with others in the same field helped me see what was actually changing — and what wasn't.",
+      "I kept reading about AI replacing my role. Talking with others in the same field helped me see what was actually changing, and what wasn't.",
     takeaway: "Clarity calms what fear amplifies.",
   },
   {
@@ -71,7 +71,7 @@ const stories: Story[] = [
     country: "Europe",
     category: "Career Change",
     preview:
-      "After years in one industry, switching felt like starting over. The pillars helped me see I wasn't starting from zero — I was starting from experience.",
+      "After years in one industry, switching felt like starting over. The pillars helped me see I wasn't starting from zero. I was starting from experience.",
     takeaway: "You carry your skills. Only the context changes.",
   },
   {
@@ -95,7 +95,7 @@ const stories: Story[] = [
     country: "Asia",
     category: "Job Loss",
     preview:
-      "Severance ran out before the next offer came. Honest guidance on stability — not motivational quotes — kept me grounded.",
+      "Severance ran out before the next offer came. Honest guidance on stability, not motivational quotes, kept me grounded.",
     takeaway: "Practical steps beat empty hype.",
   },
   {
@@ -138,7 +138,7 @@ const Stories = () => {
       <title>Stories of Resilience | Unemployment Reboot</title>
       <meta
         name="description"
-        content="Real, global stories of people navigating job loss, burnout, AI anxiety, and career change — and rebuilding confidence through community."
+        content="Real, global stories of people navigating job loss, burnout, AI anxiety, and career change, and rebuilding confidence through community."
       />
       <link rel="canonical" href="/stories" />
 
@@ -173,7 +173,7 @@ const Stories = () => {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
               Real people navigating uncertainty, rebuilding confidence, and
-              moving forward — across countries, industries, and life stages.
+              moving forward across countries, industries, and life stages.
             </p>
           </motion.div>
         </div>
@@ -273,7 +273,7 @@ const Stories = () => {
         </div>
       </section>
 
-      {/* What People Say — Marquee */}
+      {/* What People Say Marquee */}
       <section className="px-4 py-16 overflow-hidden">
         <div className="mx-auto max-w-6xl">
           <motion.div
@@ -315,7 +315,7 @@ const Stories = () => {
                     “{t.quote}”
                   </p>
                   <p className="mt-3 text-xs text-muted-foreground">
-                    — {t.author}
+                    {t.author}
                   </p>
                 </div>
               ))}
@@ -340,7 +340,7 @@ const Stories = () => {
               </h2>
               <p className="mt-4 text-muted-foreground leading-relaxed">
                 Your story may help someone feel less alone. Share it
-                anonymously or with your name — in your own words, on your own
+                anonymously or with your name, in your own words, on your own
                 terms.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

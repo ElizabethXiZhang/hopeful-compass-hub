@@ -303,7 +303,7 @@ const Advisors = () => {
                 <p>
                   Unemployment is not only an economic event. It affects
                   emotional health, financial stability, family life, identity,
-                  and social belonging — often all at once.
+                  and social belonging, often all at once.
                 </p>
                 <p>
                   No single perspective covers all of that. A psychologist sees
