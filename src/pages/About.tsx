@@ -96,28 +96,13 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm">
-              <Sparkles className="h-3.5 w-3.5 text-primary" />
-              About Unemployment Reboot
-            </span>
-            <h1 className="font-display mt-6 text-5xl font-bold text-foreground sm:text-6xl md:text-7xl">
+            <h1 className="font-display text-5xl font-bold text-foreground sm:text-6xl md:text-7xl">
               About <span className="gradient-text">Unemployment Reboot</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
               We are building support systems for people navigating job loss,
               career disruption, and identity change in the AI era.
             </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Button asChild size="lg" className="gap-2">
-                <Link to="/rebuild">
-                  Explore Our Mission
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link to="/community">Join Community</Link>
-              </Button>
-            </div>
           </motion.div>
         </div>
       </section>
