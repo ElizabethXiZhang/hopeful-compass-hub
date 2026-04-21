@@ -10,6 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import LegalToc from "@/components/legal/LegalToc";
 import {
   ScrollText,
   CheckCircle2,
