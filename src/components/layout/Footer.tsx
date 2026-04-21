@@ -6,6 +6,7 @@ import logoFull from "@/assets/logo-full.png";
 const footerLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
+  { name: "Founder Story", path: "/founder" },
   { name: "Community", path: "/community" },
   { name: "Contact", path: "/contact" },
 ];
