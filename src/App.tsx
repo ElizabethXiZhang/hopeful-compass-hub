@@ -25,6 +25,7 @@ import BookCall from "./pages/BookCall";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
+import Guidelines from "./pages/Guidelines";
 import MentalHealth from "./pages/pillars/MentalHealth";
 import Lifestyle from "./pages/pillars/Lifestyle";
 import FinancialSurvival from "./pages/pillars/FinancialSurvival";
@@ -70,6 +71,7 @@ const App = () => (
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/cookies" element={<Cookies />} />
+              <Route path="/guidelines" element={<Guidelines />} />
               <Route path="/navigate" element={<Navigate to="/government-policies" replace />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
