@@ -10,6 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import LegalToc from "@/components/legal/LegalToc";
 import {
   Cookie,
   Settings,
@@ -337,7 +338,7 @@ const Cookies = () => {
 
       {/* Full Sections */}
       <section className="relative py-12 md:py-20">
-        <div className="container mx-auto max-w-4xl px-4">
+        <div className="container mx-auto max-w-6xl px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -354,32 +355,37 @@ const Cookies = () => {
             </p>
           </motion.div>
 
-          <GlassCard className="p-2 md:p-4">
-            <Accordion type="multiple" className="w-full">
-              {sections.map((section) => (
-                <AccordionItem
-                  key={section.id}
-                  value={section.id}
-                  id={section.id}
-                  className="border-border/40 px-4 last:border-b-0"
-                >
-                  <AccordionTrigger className="py-5 text-left hover:no-underline">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <section.icon className="h-4 w-4" />
-                      </div>
-                      <span className="font-display text-base font-medium text-foreground md:text-lg">
-                        {section.title}
-                      </span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-6 pl-12 pr-2 text-sm leading-relaxed text-muted-foreground">
-                    {section.body}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </GlassCard>
+          <div className="flex gap-10">
+            <LegalToc items={sections.map((s) => ({ id: s.id, title: s.title }))} />
+            <div className="min-w-0 flex-1">
+              <GlassCard className="p-2 md:p-4">
+                <Accordion type="multiple" className="w-full">
+                  {sections.map((section) => (
+                    <AccordionItem
+                      key={section.id}
+                      value={section.id}
+                      id={section.id}
+                      className="scroll-mt-28 border-border/40 px-4 last:border-b-0"
+                    >
+                      <AccordionTrigger className="py-5 text-left hover:no-underline">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                            <section.icon className="h-4 w-4" />
+                          </div>
+                          <span className="font-display text-base font-medium text-foreground md:text-lg">
+                            {section.title}
+                          </span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="pb-6 pl-12 pr-2 text-sm leading-relaxed text-muted-foreground">
+                        {section.body}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </GlassCard>
+            </div>
+          </div>
         </div>
       </section>
 

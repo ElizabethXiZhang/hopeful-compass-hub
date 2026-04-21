@@ -262,11 +262,29 @@
   }
 }
 
-@keyframes breathe {
-  0%, 100% {
-    box-shadow: 0 0 20px hsl(var(--glow-primary)), 0 4px 15px rgba(0,0,0,0.2);
+@keyframes breathe-end-placeholder {}
+
+/* Print-friendly styles for legal/guideline pages */
+@media print {
+  nav, footer, .no-print { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .glass-card,
+  [class*="bg-background"],
+  [class*="bg-card"] {
+    background: #fff !important;
+    box-shadow: none !important;
+    border-color: #e5e5e5 !important;
   }
-  50% {
-    box-shadow: 0 0 35px hsl(var(--glow-primary)), 0 0 60px hsl(var(--glow-primary)), 0 4px 20px rgba(0,0,0,0.3);
+  h1, h2, h3, h4, p, li, span { color: #111 !important; }
+  .text-muted-foreground { color: #444 !important; }
+  /* Force-open Radix accordions when printing */
+  [data-state="closed"] > [data-radix-collapsible-content],
+  [data-radix-collapsible-content] {
+    display: block !important;
+    height: auto !important;
+    animation: none !important;
   }
+  a { color: #000 !important; text-decoration: underline; }
+  section { page-break-inside: avoid; }
 }
+
