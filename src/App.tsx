@@ -12,6 +12,7 @@ import About from "./pages/About";
 import FounderStory from "./pages/FounderStory";
 import Team from "./pages/Team";
 import Advisors from "./pages/Advisors";
+import Stories from "./pages/Stories";
 import Pillars from "./pages/Pillars";
 import Reality from "./pages/Reality";
 import Rebuild from "./pages/Rebuild";
@@ -46,6 +47,7 @@ const App = () => (
               <Route path="/founder" element={<FounderStory />} />
               <Route path="/team" element={<Team />} />
               <Route path="/advisors" element={<Advisors />} />
+              <Route path="/stories" element={<Stories />} />
               <Route path="/mission" element={<Navigate to="/about" replace />} />
               <Route path="/pillars" element={<Navigate to="/rebuild" replace />} />
               <Route path="/reality" element={<Reality />} />
