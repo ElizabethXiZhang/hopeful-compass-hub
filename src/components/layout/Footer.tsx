@@ -13,6 +13,7 @@ const footerLinks = [
   { name: "Community", path: "/community" },
   { name: "Contact", path: "/contact" },
   { name: "Privacy", path: "/privacy" },
+  { name: "Terms", path: "/terms" },
 ];
 
 const socialLinks = [
