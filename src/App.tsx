@@ -9,6 +9,7 @@ import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Index from "./pages/Index";
 import Mission from "./pages/Mission";
 import About from "./pages/About";
+import FounderStory from "./pages/FounderStory";
 import Pillars from "./pages/Pillars";
 import Reality from "./pages/Reality";
 import Rebuild from "./pages/Rebuild";
@@ -40,6 +41,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
+              <Route path="/founder" element={<FounderStory />} />
               <Route path="/mission" element={<Navigate to="/about" replace />} />
               <Route path="/pillars" element={<Navigate to="/rebuild" replace />} />
               <Route path="/reality" element={<Reality />} />
