@@ -96,11 +96,6 @@ const NotFound = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mx-auto max-w-2xl space-y-5"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--surface-border))] bg-[hsl(var(--surface-overlay))] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]" />
-                Off the path
-              </span>
-
               <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl">
                 This page is missing,
                 <br className="hidden sm:block" />
