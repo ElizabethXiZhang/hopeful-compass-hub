@@ -8,11 +8,6 @@ import { AnimatePresence } from "framer-motion";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Index from "./pages/Index";
 import Mission from "./pages/Mission";
-import About from "./pages/About";
-import FounderStory from "./pages/FounderStory";
-import Team from "./pages/Team";
-import Advisors from "./pages/Advisors";
-import Stories from "./pages/Stories";
 import Pillars from "./pages/Pillars";
 import Reality from "./pages/Reality";
 import Rebuild from "./pages/Rebuild";
@@ -22,10 +17,6 @@ import GovernmentPolicies from "./pages/GovernmentPolicies";
 import JobCuts from "./pages/JobCuts";
 import Forum from "./pages/Forum";
 import BookCall from "./pages/BookCall";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Cookies from "./pages/Cookies";
-import Guidelines from "./pages/Guidelines";
 import MentalHealth from "./pages/pillars/MentalHealth";
 import Lifestyle from "./pages/pillars/Lifestyle";
 import FinancialSurvival from "./pages/pillars/FinancialSurvival";
@@ -47,12 +38,7 @@ const App = () => (
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/founder" element={<FounderStory />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/advisors" element={<Advisors />} />
-              <Route path="/stories" element={<Stories />} />
-              <Route path="/mission" element={<Navigate to="/about" replace />} />
+              <Route path="/mission" element={<Navigate to="/" replace />} />
               <Route path="/pillars" element={<Navigate to="/rebuild" replace />} />
               <Route path="/reality" element={<Reality />} />
               <Route path="/rebuild" element={<Rebuild />} />
@@ -68,10 +54,6 @@ const App = () => (
               <Route path="/forum" element={<Forum />} />
               <Route path="/book-call" element={<BookCall />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/cookies" element={<Cookies />} />
-              <Route path="/guidelines" element={<Guidelines />} />
               <Route path="/navigate" element={<Navigate to="/government-policies" replace />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
