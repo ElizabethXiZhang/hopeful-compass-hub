@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import CosmicBackground from "../ui/CosmicBackground";
+import BackgroundOrbs from "../ui/BackgroundOrbs";
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,8 +10,9 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="relative isolate min-h-screen overflow-x-hidden bg-background">
-      <CosmicBackground />
+    <div className="relative min-h-screen overflow-x-hidden bg-background">
+      {/* Animated background orbs */}
+      <BackgroundOrbs />
       
       {/* Navigation */}
       <Navbar />
